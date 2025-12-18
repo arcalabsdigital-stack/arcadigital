@@ -8,51 +8,95 @@
     <meta name="description" content="Arca Digital: Transformando ideias em realidade digital. Estratégia, UX/UI, Front-End, Otimização de Conversão e Copywriting para o seu negócio. Impulsione sua presença online com soluções inovadoras e resultados tangíveis.">
     <!-- Canonical Tag para SEO -->
     <link rel="canonical" href="https://arcalabsdigital-stack-github-io-arcadigital/">
+
+    <!-- Integração Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Integração de Fontes: Plus Jakarta Sans, Instrument Sans e Satoshi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary-bg: #111111;
             --secondary-bg: #1a1a1a;
-            --accent: #00bfff; /* Neon azul mais puro */
+            --accent: #1686cf;
             --text-light: #ffffff;
             --text-dark: #cccccc;
+            /* Definição das famílias de fontes */
+            --font-main: 'Satoshi', sans-serif;
+            --font-title: 'Plus Jakarta Sans', sans-serif;
+            --font-button: 'Instrument Sans', sans-serif;
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--font-main);
             background-color: var(--primary-bg);
             color: var(--text-light);
             line-height: 1.6;
             scroll-behavior: smooth;
         }
 
+        /* Títulos e Headlines */
+        h1, h2, h3, .logo-text-html, summary {
+            font-family: var(--font-title);
+        }
+
         header {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1rem 2rem;
-            background-color: var(--secondary-bg);
+            padding: 0.6rem 2rem;
+            background-color: transparent;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .header-content {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             width: 100%;
             max-width: 1200px;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--accent);
-            text-shadow: 0 0 8px var(--accent);
+        .logo-combined {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0px;
+        }
+
+        .logo-arc-image {
+            max-height: 42px;
+            width: auto;
+        }
+
+        .logo-text-html {
+            font-size: 0.88rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-top: 3px;
+            text-align: center;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #f0f0f0 0%, #c0c0c0 25%, #f0f0f0 50%, #a0a0a0 75%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         nav ul {
@@ -91,8 +135,53 @@
             text-shadow: 0 0 5px var(--accent);
         }
 
+        /* Botão "Receber Orçamento" no cabeçalho */
+        .header-cta-button {
+            font-family: var(--font-button);
+            background-color: #f1f1f1;
+            color: var(--primary-bg);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: box-shadow 0.3s, transform 0.3s, background-color 0.3s;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: capitalize; 
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin-left: 1rem;
+        }
+
+        .header-cta-button:hover {
+            box-shadow: 0 0 15px var(--accent), 0 0 25px rgba(22, 134, 207, 0.7);
+            transform: translateY(-2px) scale(1.01);
+            background-color: #e0e0e0;
+        }
+
+        /* Efeito de reflexo cinza intensificado */
+        .header-cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(169, 169, 169, 0) 0%, rgba(169, 169, 169, 0.6) 50%, rgba(169, 169, 169, 0) 100%);
+            transform: skewX(-20deg);
+            animation: slideReflection 2s infinite;
+            z-index: 2;
+        }
+
+        @keyframes slideReflection {
+            0% { left: -75%; }
+            100% { left: 125%; }
+        }
+
         main {
-            margin-top: 90px;
+            margin-top: 65px;
         }
 
         .hero {
@@ -125,20 +214,19 @@
             border-radius: 10px;
         }
 
-        /* Gradient para títulos e agora para as perguntas do FAQ */
         .gradient-text {
             background: linear-gradient(to right, #e0e0e0, #ffffff, #c0c0c0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent; /* Fallback */
-            text-shadow: none; /* Remove shadows that might conflict */
+            color: transparent;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
             line-height: 1.2;
+            font-weight: 800;
         }
 
         .hero p {
@@ -147,26 +235,27 @@
             color: var(--text-light);
         }
 
+        /* Botão principal de CTA */
         .cta-button {
+            font-family: var(--font-button);
             background-color: var(--accent);
             color: var(--primary-bg);
             border: none;
-            padding: 1.2rem 2.5rem;
+            padding: 0.6rem 1.25rem;
             font-size: 1.3rem;
             cursor: pointer;
             transition: box-shadow 0.3s, transform 0.3s, background-color 0.3s;
-            border-radius: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: capitalize;
         }
 
         .cta-button:hover {
-            box-shadow: 0 0 25px var(--accent), 0 0 40px rgba(0, 191, 255, 0.7);
+            box-shadow: 0 0 25px var(--accent), 0 0 40px rgba(22, 134, 207, 0.7);
             transform: translateY(-3px) scale(1.02);
-            background-color: #00e0ff;
+            background-color: #1a94e0;
         }
 
-        /* Seções de Conteúdo */
         section {
             padding: 80px 2rem;
             max-width: 1200px;
@@ -183,6 +272,7 @@
             font-size: 2.8rem;
             text-align: center;
             margin-bottom: 3rem;
+            font-weight: 700;
         }
 
         .services-grid, .portfolio-grid {
@@ -203,12 +293,13 @@
 
         .service-item:hover, .portfolio-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
+            box-shadow: 0 10px 25px rgba(22, 134, 207, 0.3);
         }
 
         .service-item h3, .portfolio-item h3 {
             font-size: 1.8rem;
             margin-bottom: 1rem;
+            font-weight: 700;
         }
 
         .service-item p, .portfolio-item p {
@@ -218,12 +309,11 @@
 
         .portfolio-item img {
             max-width: 100%;
-            height: auto; /* Garante que a altura se ajuste proporcionalmente */
+            height: auto;
             border-radius: 8px;
             margin-bottom: 1rem;
         }
 
-        /* Clientes Satisfeitos */
         .client-logos {
             display: flex;
             flex-wrap: wrap;
@@ -246,7 +336,6 @@
             transform: scale(1.05);
         }
 
-        /* FAQ Section */
         .faq-container {
             max-width: 900px;
             margin: 3rem auto 0;
@@ -266,37 +355,26 @@
             align-items: center;
             padding: 1.5rem 2rem;
             font-size: 1.3rem;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
             outline: none;
             transition: background-color 0.3s;
-            /* Aplicando o gradient-text aqui */
             background: linear-gradient(to right, #e0e0e0, #ffffff, #c0c0c0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent; /* Fallback */
-            text-shadow: none; /* Remove shadows that might conflict */
+            color: transparent;
         }
 
         .faq-item summary:hover {
             background-color: #2a2a2a;
-            /* Mantém o gradient-text no hover */
-        }
-
-        .faq-item summary::marker {
-            content: ''; /* Remove default marker */
-        }
-
-        .faq-item summary::-webkit-details-marker {
-            display: none; /* For Webkit browsers */
         }
 
         .faq-item summary::after {
             content: '+';
             font-size: 1.5rem;
             transition: transform 0.3s;
-            color: var(--accent); /* Cor do ícone + - em neon azul */
+            color: var(--accent);
             text-shadow: 0 0 5px var(--accent);
         }
 
@@ -310,157 +388,148 @@
             margin: 0;
             font-size: 1.1rem;
             color: var(--text-dark);
-            border-top: 1px solid rgba(0, 191, 255, 0.2);
+            border-top: 1px solid rgba(22, 134, 207, 0.2);
             padding-top: 1.5rem;
         }
 
-        .contact-info, .contact-form {
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-details, .contact-form-container {
             background-color: var(--secondary-bg);
             padding: 3rem;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            max-width: 800px;
-            margin: 0 auto;
         }
 
-        .contact-info p {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
+        .contact-details .logo-combined {
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details .logo-arc-image {
+            max-height: 35px;
+        }
+
+        .contact-details .logo-text-html {
+            font-size: 0.75rem;
+            text-align: left;
+        }
+
+        .contact-description {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .contact-details > p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
             color: var(--text-light);
-            text-align: center;
+            text-align: left;
         }
 
-        .contact-info a {
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-right: 1rem;
+        }
+
+        .contact-item p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            text-align: left;
+        }
+
+        .contact-item a {
             color: var(--accent);
             text-decoration: none;
             transition: color 0.3s, text-shadow 0.3s;
         }
 
-        .contact-info a:hover {
-            color: #00e0ff;
-            text-shadow: 0 0 8px #00e0ff;
+        .contact-item a:hover {
+            color: #1a94e0;
+            text-shadow: 0 0 8px #1a94e0;
         }
 
-        .contact-form form {
+        .contact-form-container form {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
 
-        .contact-form label {
-            font-size: 1.1rem;
-            color: var(--text-light);
-        }
-
-        .contact-form input,
-        .contact-form textarea {
+        .contact-form-container input {
             background-color: var(--primary-bg);
             border: 1px solid var(--accent);
             padding: 1rem;
             border-radius: 5px;
             color: var(--text-light);
             font-size: 1rem;
+            font-family: var(--font-main);
             transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .contact-form input:focus,
-        .contact-form textarea:focus {
+        .contact-form-container input::placeholder {
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        .contact-form-container input:focus {
             outline: none;
-            border-color: #00e0ff;
-            box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(22, 134, 207, 0.5);
         }
 
-        .contact-form textarea {
-            min-height: 120px;
-            resize: vertical;
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-dark);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--primary-bg);
         }
 
-        .contact-form button {
-            align-self: flex-start;
-            margin-top: 1rem;
+        footer .copyright {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            margin-top: 0;
         }
 
-        /* Responsive */
+        @media (max-width: 992px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav ul {
-                gap: 1.5rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.3rem;
-            }
-
-            section {
-                padding: 60px 1rem;
-            }
-
-            section h2 {
-                font-size: 2rem;
-            }
-
-            .client-logos {
-                gap: 20px;
-            }
-
-            .client-logos img {
-                max-height: 50px;
-                max-width: 120px;
-            }
-
-            .faq-item summary {
-                font-size: 1.1rem;
-                padding: 1rem 1.5rem;
-            }
-
-            .faq-item p {
-                font-size: 1rem;
-                padding: 0 1.5rem 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            nav a {
-                font-size: 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .cta-button {
-                padding: 1rem 2rem;
-                font-size: 1.1rem;
-            }
-
-            .services-grid, .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
+            .header-content { flex-direction: column; gap: 1rem; }
+            nav ul { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+            .logo-combined { justify-content: center; }
+            .header-cta-button { margin-left: 0; margin-top: 1rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.3rem; }
+            section { padding: 60px 1rem; }
+            section h2 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-content">
-            <div class="logo">Arca Digital</div>
+            <div class="logo-combined">
+                <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766070173/logomarca_arca_semtexto_b8uddv.png" alt="Símbolo da Arca Digital" class="logo-arc-image" width="70" height="70">
+                <span class="logo-text-html">Arca Digital</span>
+            </div>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -471,14 +540,13 @@
                     <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
+            <a href="https://wa.me/5547992291756" target="_blank" class="header-cta-button">Receber Orçamento</a>
         </div>
     </header>
     <main>
         <section class="hero" id="home">
-            <video autoplay muted loop poster="https://via.placeholder.com/1920x1080/00bfff/000000?text=Arca+Digital+Video+Poster">
-                <!-- Substitua 'background-video.mp4' pelo caminho do seu vídeo -->
+            <video autoplay muted loop poster="https://via.placeholder.com/1920x1080/1686cf/000000?text=Arca+Digital+Video+Poster">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-light-movement-1022-large.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
             <div class="overlay">
                 <h1 id="headline" class="gradient-text"></h1>
@@ -492,27 +560,15 @@
             <div class="services-grid">
                 <div class="service-item">
                     <h3 class="gradient-text">Estratégia Digital Personalizada</h3>
-                    <p>Analisamos suas necessidades para criar um plano de design e marketing que gera resultados, focando em personas, jornada do usuário e arquitetura de informação.</p>
+                    <p>Analisamos suas necessidades para criar um plano de design e marketing que gera resultados.</p>
                 </div>
                 <div class="service-item">
                     <h3 class="gradient-text">Design UX/UI Premium</h3>
-                    <p>Desenvolvemos interfaces intuitivas e visualmente deslumbrantes, com wireframes, protótipos interativos e mockups detalhados para uma experiência de usuário impecável.</p>
+                    <p>Desenvolvemos interfaces intuitivas e visualmente deslumbrantes.</p>
                 </div>
                 <div class="service-item">
                     <h3 class="gradient-text">Desenvolvimento Front-End Avançado</h3>
-                    <p>Codificamos sites com HTML semântico, CSS moderno (Flexbox, Grid) e JavaScript interativo, garantindo performance e otimização em todos os dispositivos.</p>
-                </div>
-                <div class="service-item">
-                    <h3 class="gradient-text">Otimização de Conversão</h3>
-                    <p>Criamos landing pages de alta performance, com CTAs estratégicos, formulários otimizados e social proof, aplicando testes A/B para maximizar seus leads e vendas.</p>
-                </div>
-                <div class="service-item">
-                    <h3 class="gradient-text">Copywriting Persuasivo</h3>
-                    <p>Elaboramos textos que vendem, com headlines magnéticas, storytelling envolvente e calls-to-action irresistíveis, aplicando princípios de psicologia da persuasão.</p>
-                </div>
-                <div class="service-item">
-                    <h3 class="gradient-text">Soluções para Infoprodutos e Mentorias</h3>
-                    <p>Desenvolvemos páginas de vendas para infoprodutos low-ticket, plataformas online, dashboards de controle e funis de conversão multi-etapa para o seu negócio.</p>
+                    <p>Codificamos sites com HTML semântico, CSS moderno e JavaScript interativo.</p>
                 </div>
             </div>
         </section>
@@ -521,22 +577,19 @@
             <h2 class="gradient-text">Nosso Portfólio</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <!-- Lembre-se de substituir esta imagem placeholder por uma imagem real e otimizada do seu projeto de Automação -->
-                    <img src="https://via.placeholder.com/300x200/00bfff/000000?text=Projeto+Automação" alt="Projeto Automação" width="300" height="200">
+                    <img src="https://via.placeholder.com/300x200/1686cf/000000?text=Projeto+Automação" alt="Projeto Automação" width="300" height="200">
                     <h3 class="gradient-text">Automação</h3>
-                    <p>Transforme seu atendimento via WhatsApp e otimize processos com automações personalizadas, liberando seu tempo para o que realmente importa.</p>
+                    <p>Transforme seu atendimento via WhatsApp e otimize processos com automações personalizadas.</p>
                 </div>
                 <div class="portfolio-item">
-                    <!-- Lembre-se de substituir esta imagem placeholder por uma imagem real e otimizada do seu projeto de Landing Page -->
-                    <img src="https://via.placeholder.com/300x200/00bfff/000000?text=Projeto+Landing+Page" alt="Landing Page" width="300" height="200">
+                    <img src="https://via.placeholder.com/300x200/1686cf/000000?text=Projeto+Landing+Page" alt="Landing Page" width="300" height="200">
                     <h3 class="gradient-text">Landing Page</h3>
-                    <p>Páginas de alta conversão, projetadas para capturar leads e impulsionar vendas com design estratégico e copy persuasiva.</p>
+                    <p>Páginas de alta conversão, projetadas para capturar leads e impulsionar vendas.</p>
                 </div>
                 <div class="portfolio-item">
-                    <!-- Lembre-se de substituir esta imagem placeholder por uma imagem real e otimizada do seu projeto de Site Institucional -->
-                    <img src="https://via.placeholder.com/300x200/00bfff/000000?text=Projeto+Site+Institucional" alt="Site Institucional" width="300" height="200">
+                    <img src="https://via.placeholder.com/300x200/1686cf/000000?text=Projeto+Site+Institucional" alt="Site Institucional" width="300" height="200">
                     <h3 class="gradient-text">Site Institucional Inovador</h3>
-                    <p>Presença digital marcante para uma empresa de tecnologia, com animações sutis e navegação intuitiva.</p>
+                    <p>Presença digital marcante para uma empresa de tecnologia, com animações sutis.</p>
                 </div>
             </div>
         </section>
@@ -555,19 +608,19 @@
             <h2 class="gradient-text">Perguntas Frequentes</h2>
             <div class="faq-container">
                 <details class="faq-item">
-                    <summary class="gradient-text">1. O site tem custos de manutenção contínuos após o lançamento?</summary>
-                    <p>Em nossa abordagem transparente, a Arca Digital não impõe mensalidades fixas para a hospedagem do seu site. Custos adicionais surgem exclusivamente se você desejar expandir funcionalidades ou solicitar manutenções pontuais, garantindo total controle sobre seus investimentos e a longevidade da sua presença digital.</p>
+                    <summary class="gradient-text">1. O site tem custos de manutenção contínuos?</summary>
+                    <p>Não impomos mensalidades fixas para a hospedagem do seu site. Custos adicionais surgem exclusivamente para expansões.</p>
                 </details>
                 <details class="faq-item">
-                    <summary class="gradient-text">2. A Arca Digital oferece suporte após a entrega final do projeto?</summary>
-                    <p>Absolutamente! Nosso compromisso com o seu sucesso se estende muito além do lançamento. A Arca Digital oferece um período de suporte dedicado para ajustes finos e otimizações, assegurando que sua plataforma opere com excelência e performance contínua, adaptando-se às suas necessidades emergentes.</p>
+                    <summary class="gradient-text">2. A Arca Digital oferece suporte após a entrega?</summary>
+                    <p>Absolutamente! Oferecemos um período de suporte dedicado para ajustes finos e otimizações.</p>
                 </details>
                 <details class="faq-item">
-                    <summary class="gradient-text">3. Posso participar ativamente do processo de criação e desenvolvimento do meu projeto?</summary>
-                    <p>Sua visão é fundamental e valorizada. Na Arca Digital, cada etapa do projeto é construída em parceria. Desde as primeiras revisões do wireframe até os detalhes finais do design, nosso processo colaborativo e flexível garante que o produto final não apenas atenda, mas supere suas expectativas, refletindo sua identidade e objetivos.</p>
+                    <summary class="gradient-text">3. Posso participar do processo de criação?</summary>
+                    <p>Sua visão é fundamental. Cada etapa do projeto é construída em parceria colaborativa.</p>
                 </details>
                 <details class="faq-item">
-                    <summary class="gradient-text">4. Como a Arca Digital garante que o design e as soluções são eficazes e focadas em resultados?</summary>
+                    <summary class="gradient-text">4. Como a Arca Digital garante que o design e as soluções são eficazes?</summary>
                     <p>Nossa excelência em design é fundamentada em metodologias de ponta, como UI/UX Design Thinking e abordagens rigorosamente centradas no usuário. Isso nos permite conceber soluções não apenas intuitivas e escaláveis, mas estrategicamente desenhadas para gerar resultados de negócios tangíveis e impactantes, convertendo visitantes em clientes.</p>
                 </details>
             </div>
@@ -575,35 +628,48 @@
 
         <section id="contato">
             <h2 class="gradient-text">Fale Conosco</h2>
-            <div class="contact-info">
-                <p>Estamos prontos para transformar sua visão em realidade digital. Entre em contato!</p>
-                <p>WhatsApp: <a href="https://wa.wa.me/5547992291756">(47) 99229-1756</a></p>
-                <p>Localização: Joinville-SC</p>
-            </div>
-            <div class="contact-form">
-                <!-- ATENÇÃO: Configure o atributo 'action' para o endpoint do seu servidor que processará o formulário. -->
-                <!-- Se você não tiver um backend, pode usar serviços como Formspree, Netlify Forms, Getform, etc. -->
-                <form action="#" method="POST">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="email">E-mail:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="message">Mensagem:</label>
-                    <textarea id="message" name="message" required></textarea>
-
-                    <button type="submit" class="cta-button">Enviar Mensagem</button>
-                </form>
+            <div class="contact-grid">
+                <div class="contact-details">
+                    <div class="logo-combined">
+                        <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766070173/logomarca_arca_semtexto_b8uddv.png" alt="Símbolo da Arca Digital" class="logo-arc-image" width="70" height="70">
+                        <span class="logo-text-html">Arca Digital</span>
+                    </div>
+                    <p class="contact-description">
+                        Criamos presença digital e interfaces de alta performance<br>
+                        para empresas nos mais diversos segmentos.<br>
+                        Utilizamos tecnologia imersiva e metodologia PVA (Performance Visual Auditiva)<br>
+                        com objetivo único de atração de clientes.
+                    </p>
+                    <p>Estamos prontos para transformar sua visão em realidade digital. Entre em contato!</p>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <p>Rua Itaiopolis 695 Bairro Saguaçu <br> CEP 89.221-155 Joinville-SC</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp contact-icon"></i>
+                        <p>WhatsApp: <a href="https://wa.me/5547992291756" target="_blank">(47) 99229-1756</a></p>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <form action="#" method="POST">
+                        <input type="text" id="name" name="name" placeholder="Nome" required>
+                        <input type="tel" id="phone" name="phone" placeholder="Telefone">
+                        <input type="email" id="email" name="email" placeholder="E-mail" required>
+                        <input type="text" id="company" name="company" placeholder="Nome da Empresa">
+                        <input type="text" id="segment" name="segment" placeholder="Segmento">
+                        <button type="submit" class="cta-button">Enviar</button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
+    <footer>
+        <p class="copyright">© 2025 Arca Digital. Todos os direitos reservados.</p>
+    </footer>
     <script>
-        // Typing effect for headline
         const headline = document.getElementById('headline');
         const text = "Sua Visão Digital, Nossa Especialidade.";
         let index = 0;
-
         function typeWriter() {
             if (index < text.length) {
                 headline.innerHTML += text.charAt(index);
@@ -611,7 +677,6 @@
                 setTimeout(typeWriter, 80);
             }
         }
-
         window.onload = typeWriter;
     </script>
 </body>
