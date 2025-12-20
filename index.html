@@ -314,6 +314,7 @@
             font-weight: 700;
         }
 
+        /* CARROSSEL DE CLIENTES - OTIMIZAÇÃO DE PERFORMANCE */
         .client-carousel-container {
             overflow: hidden;
             width: 100%;
@@ -327,8 +328,10 @@
         .client-carousel-track {
             display: flex;
             width: max-content;
-            animation: scrollCarousel 40s linear infinite;
+            /* Velocidade Otimizada: 25s Desktop / 12s Mobile */
+            animation: scrollCarousel 25s linear infinite;
             align-items: center;
+            will-change: transform; /* Aceleração de Hardware */
         }
 
         @keyframes scrollCarousel {
@@ -339,20 +342,17 @@
         .client-carousel-track img {
             object-fit: contain;
             margin: 0 60px;
-            transition: filter 0.3s, opacity 0.3s, transform 0.3s;
+            /* Transição mais rápida (0.2s) para evitar sensação de atraso */
+            transition: filter 0.2s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
             height: 100px;
             width: auto;
+            will-change: filter, transform;
         }
 
         .logo-devorare { height: 140px !important; }
         .logo-marcio { height: 140px !important; }
         .logo-multia { height: 130px !important; }
-        
-        .logo-curados { 
-            height: 210px !important; 
-            filter: grayscale(100%) brightness(150%);
-            opacity: 0.8;
-        }
+        .logo-curados { height: 210px !important; filter: grayscale(100%) brightness(150%); opacity: 0.8; }
         
         .logo-curados:hover {
             filter: grayscale(0%) brightness(100%) !important;
@@ -360,29 +360,16 @@
             transform: scale(1.05) !important;
         }
 
-        .logo-haus { height: 100px !important; }
-        .logo-lia { height: 100px !important; }
+        .logo-haus { height: 110px !important; }
+        .logo-lia { height: 110px !important; }
 
-        .logo-colored {
-            filter: grayscale(100%) brightness(150%);
-            opacity: 0.8;
-        }
+        .logo-colored { filter: grayscale(100%) brightness(150%); opacity: 0.8; }
+        .logo-colored:hover { filter: grayscale(0%) brightness(100%); opacity: 1; transform: scale(1.05); }
 
-        .logo-colored:hover {
-            filter: grayscale(0%) brightness(100%);
-            opacity: 1;
-            transform: scale(1.05);
-        }
+        .logo-white { filter: brightness(0) invert(1); opacity: 0.6; }
+        .logo-white:hover { opacity: 1; transform: scale(1.05); }
 
-        .logo-white {
-            filter: brightness(0) invert(1);
-            opacity: 0.6;
-        }
-
-        .logo-white:hover {
-            opacity: 1;
-            transform: scale(1.05);
-        }
+        /* Fim Otimização Carrossel */
 
         .services-grid, .portfolio-grid {
             display: grid;
@@ -491,9 +478,7 @@
             color: transparent;
         }
 
-        .faq-item summary:hover {
-            background-color: #2a2a2a;
-        }
+        .faq-item summary:hover { background-color: #2a2a2a; }
 
         .faq-item summary::after {
             content: '+';
@@ -536,9 +521,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .contact-details .logo-arc-image {
-            max-height: 35px;
-        }
+        .contact-details .logo-arc-image { max-height: 35px; }
 
         .contact-details .logo-text-html {
             font-size: 0.75rem;
@@ -550,13 +533,6 @@
             color: var(--text-dark);
             margin-bottom: 1.5rem;
             line-height: 1.4;
-            text-align: left;
-        }
-
-        .contact-details > p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            color: var(--text-light);
             text-align: left;
         }
 
@@ -605,11 +581,6 @@
             font-size: 1rem;
             font-family: var(--font-main);
             transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .contact-form-container input::placeholder {
-            color: var(--text-dark);
-            opacity: 0.7;
         }
 
         .contact-form-container input:focus {
@@ -668,8 +639,8 @@
             .cta-button .desktop-text { display: none; }
             .cta-button .mobile-text { display: inline; }
             
-            /* Ajuste Mobile: Velocidade 2x mais rápida */
-            .client-carousel-track { animation-duration: 20s; }
+            /* Aceleração Mobile: 12s para loop total */
+            .client-carousel-track { animation-duration: 12s; }
             .client-carousel-track img { margin: 0 30px; height: 80px; }
             
             .contact-grid { grid-template-columns: 1fr; }
@@ -824,6 +795,20 @@
             </div>
         </section>
 
+        <!-- SEÇÃO CTA VÍDEO -->
+        <section class="cta-video-section">
+            <video id="ctaVideo" autoplay muted loop playsinline>
+                <source src="https://res.cloudinary.com/dtgcobo29/video/upload/v1766171505/7020079_Wave_Comb_1280x720_-_Trim_ktudvd.mp4" type="video/mp4">
+            </video>
+            <div class="cta-video-overlay">
+                <div class="cta-video-content">
+                    <h2 class="gradient-text">Eleve o patamar do seu negócio e supere a concorrência!!</h2>
+                    <p>Esqueça as experiências frustrantes com entregas genéricas e fora do prazo. Descubra o valor de uma consultoria estratégica desenhada sob medida para as suas metas.</p>
+                    <a href="https://wa.me/5547992291756" target="_blank" class="white-cta-button">Falar com Especialista</a>
+                </div>
+            </div>
+        </section>
+
         <section id="faq">
             <h2 class="gradient-text">Perguntas Frequentes</h2>
             <div class="faq-container">
@@ -878,7 +863,8 @@
                     </div>
                 </div>
                 <div class="contact-form-container">
-                    <form action="#" method="POST">
+                    <form action="https://formspree.io/f/arcalabs.digital@gmail.com" method="POST">
+                        <input type="hidden" name="_subject" value="Novo Contato via Site Arca Digital">
                         <input type="text" id="name" name="name" placeholder="Nome" required>
                         <input type="tel" id="phone" name="phone" placeholder="Telefone">
                         <input type="email" id="email" name="email" placeholder="E-mail" required>
@@ -895,7 +881,6 @@
     </footer>
 
     <script>
-        // Lógica do Menu Hambúrguer
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
         const navLinks = document.querySelectorAll('nav a');
@@ -912,7 +897,6 @@
             });
         });
 
-        // Lógica do Carrossel de Headlines
         const headlines = document.querySelectorAll('.headline-carousel h1');
         let currentHeadline = 0;
 
@@ -924,7 +908,6 @@
 
         setInterval(cycleHeadlines, 4000);
 
-        // Controle de Som
         const heroVideo = document.getElementById('heroVideo');
         const soundToggle = document.getElementById('soundToggle');
         const soundIcon = soundToggle.querySelector('i');
