@@ -25,10 +25,12 @@
             --accent: #1686cf;
             --text-light: #ffffff;
             --text-dark: #cccccc;
-            /* Definição das famílias de fontes */
             --font-main: 'Satoshi', sans-serif;
             --font-title: 'Plus Jakarta Sans', sans-serif;
             --font-button: 'Instrument Sans', sans-serif;
+            --btn-bg: #f1f1f1;
+            --btn-text: #111111;
+            --btn-hover: #e0e0e0;
         }
 
         body {
@@ -41,7 +43,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Títulos e Headlines */
         h1, h2, h3, .logo-text-html, summary {
             font-family: var(--font-title);
         }
@@ -51,7 +52,8 @@
             justify-content: center;
             align-items: center;
             padding: 0.6rem 2rem;
-            background-color: transparent;
+            background-color: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             top: 0;
@@ -135,16 +137,37 @@
             text-shadow: 0 0 5px var(--accent);
         }
 
-        /* Botão "Receber Orçamento" no cabeçalho */
-        .header-cta-button {
-            font-family: var(--font-button);
-            background-color: #f1f1f1;
-            color: var(--primary-bg);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            font-size: 0.9rem;
+        .sound-toggle {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             cursor: pointer;
-            transition: box-shadow 0.3s, transform 0.3s, background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-family: var(--font-button);
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+
+        .sound-toggle:hover {
+            border-color: var(--accent);
+            background-color: rgba(22, 134, 207, 0.1);
+        }
+
+        /* ESTILO UNIFICADO DE BOTÕES */
+        .header-cta-button, .cta-button, .white-cta-button, .contact-form-container button {
+            font-family: var(--font-button);
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            border: none;
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
             border-radius: 8px;
             font-weight: 700;
             text-transform: capitalize; 
@@ -152,66 +175,90 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-            margin-left: 1rem;
+            display: inline-block;
+            text-align: center;
         }
 
-        .header-cta-button:hover {
-            box-shadow: 0 0 15px var(--accent), 0 0 25px rgba(22, 134, 207, 0.7);
-            transform: translateY(-2px) scale(1.01);
-            background-color: #e0e0e0;
+        .header-cta-button:active, .cta-button:active, .white-cta-button:active, .contact-form-container button:active {
+            transform: scale(0.96) translateY(0);
         }
 
-        /* Efeito de reflexo cinza intensificado */
-        .header-cta-button::before {
+        .header-cta-button:hover, .cta-button:hover, .white-cta-button:hover, .contact-form-container button:hover {
+            box-shadow: 0 0 15px var(--accent), 0 0 25px rgba(22, 134, 207, 0.5);
+            transform: translateY(-2px);
+            background-color: var(--btn-hover);
+        }
+
+        .header-cta-button::before, .cta-button::before, .white-cta-button::before, .contact-form-container button::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -75%;
-            width: 50%;
+            left: -100%;
+            width: 60%;
             height: 100%;
-            background: linear-gradient(to right, rgba(169, 169, 169, 0) 0%, rgba(169, 169, 169, 0.6) 50%, rgba(169, 169, 169, 0) 100%);
-            transform: skewX(-20deg);
-            animation: slideReflection 2s infinite;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            animation: slideReflection 2.5s infinite;
             z-index: 2;
+            pointer-events: none;
         }
 
         @keyframes slideReflection {
-            0% { left: -75%; }
-            100% { left: 125%; }
+            0% { left: -100%; }
+            100% { left: 150%; }
         }
 
-        main {
-            margin-top: 65px;
-        }
-
+        /* Hero Section */
         .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 90px 2rem 2rem 2rem; 
+            background-color: var(--primary-bg);
+        }
+
+        .hero-card {
             position: relative;
-            height: 100vh;
+            width: 100%;
+            max-width: 1300px;
+            height: 78vh; 
+            border-radius: 32px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(22, 134, 207, 0.2);
         }
 
-        .hero video {
+        .hero-card video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1;
+            z-index: 0;
             filter: brightness(0.6);
         }
 
-        .overlay {
-            text-align: center;
+        .hero-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
             z-index: 1;
-            max-width: 900px;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 950px;
+            padding: 0 2rem;
         }
 
         .gradient-text {
@@ -222,39 +269,34 @@
             color: transparent;
         }
 
+        .headline-carousel {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+            font-size: 3rem;
             line-height: 1.2;
             font-weight: 800;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            position: absolute;
+            width: 100%;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
 
-        .hero p {
-            font-size: 1.6rem;
-            margin-bottom: 2.5rem;
-            color: var(--text-light);
+        .hero h1.active {
+            opacity: 1;
+            transform: translateY(0);
+            position: relative;
         }
 
-        /* Botão principal de CTA */
-        .cta-button {
-            font-family: var(--font-button);
-            background-color: var(--accent);
-            color: var(--primary-bg);
-            border: none;
-            padding: 0.6rem 1.25rem;
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: box-shadow 0.3s, transform 0.3s, background-color 0.3s;
-            border-radius: 8px;
-            font-weight: 700;
-            text-transform: capitalize;
-        }
-
-        .cta-button:hover {
-            box-shadow: 0 0 25px var(--accent), 0 0 40px rgba(22, 134, 207, 0.7);
-            transform: translateY(-3px) scale(1.02);
-            background-color: #1a94e0;
-        }
+        .cta-button .mobile-text { display: none; }
 
         section {
             padding: 80px 2rem;
@@ -264,15 +306,72 @@
             border-bottom: 1px solid var(--secondary-bg);
         }
 
-        section:last-of-type {
-            border-bottom: none;
-        }
-
         section h2 {
             font-size: 2.8rem;
             text-align: center;
             margin-bottom: 3rem;
             font-weight: 700;
+        }
+
+        /* Carrossel de Clientes Otimizado (Loop Infinito Sem Buracos) */
+        .client-carousel-container {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            padding: 4rem 0;
+            background: var(--primary-bg);
+            /* Gradientes laterais para suavizar entrada/saída */
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
+        .client-carousel-track {
+            display: flex;
+            width: max-content; /* Ajusta à largura real dos itens */
+            animation: scrollCarousel 40s linear infinite;
+            align-items: center;
+        }
+
+        @keyframes scrollCarousel {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Move exatamente metade do conteúdo duplicado */
+        }
+
+        .client-carousel-track img {
+            object-fit: contain;
+            margin: 0 60px; /* Aumento do espaçamento lateral solicitado */
+            transition: filter 0.3s, opacity 0.3s, transform 0.3s;
+            height: 100px; /* Base de normalização */
+            width: auto;
+        }
+
+        /* Calibração de Tamanho Baseada na Percepção Visual do Símbolo */
+        .logo-devorare { height: 140px !important; }
+        .logo-marcio { height: 140px !important; }
+        .logo-multia { height: 130px !important; }
+        .logo-curados { height: 150px !important; transform: scale(1.2); } /* 39.90 / Curados */
+        .logo-haus { height: 100px !important; }
+        .logo-lia { height: 100px !important; }
+
+        .logo-colored {
+            filter: grayscale(100%) brightness(150%);
+            opacity: 0.8;
+        }
+
+        .logo-colored:hover {
+            filter: grayscale(0%) brightness(100%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .logo-white {
+            filter: brightness(0) invert(1);
+            opacity: 0.6;
+        }
+
+        .logo-white:hover {
+            opacity: 1;
+            transform: scale(1.05);
         }
 
         .services-grid, .portfolio-grid {
@@ -296,44 +395,60 @@
             box-shadow: 0 10px 25px rgba(22, 134, 207, 0.3);
         }
 
-        .service-item h3, .portfolio-item h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .service-item p, .portfolio-item p {
-            color: var(--text-dark);
-            font-size: 1.1rem;
+        .service-video {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            background-color: #000;
         }
 
         .portfolio-item img {
-            max-width: 100%;
-            height: auto;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            object-position: top;
             border-radius: 8px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .client-logos {
+        .cta-video-section {
+            position: relative;
+            max-width: 1100px;
+            margin: 4rem auto;
+            border-radius: 24px;
+            overflow: hidden;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             align-items: center;
-            gap: 40px;
-            margin-top: 3rem;
+            justify-content: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            background-color: var(--secondary-bg);
         }
 
-        .client-logos img {
-            max-height: 70px;
-            max-width: 180px;
-            object-fit: contain;
-            filter: grayscale(100%) brightness(150%);
-            transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+        .cta-video-section video {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: calc(100% - 10px);
+            height: calc(100% - 10px);
+            object-fit: cover;
+            z-index: 0;
+            filter: brightness(0.9);
+            border-radius: 20px;
         }
 
-        .client-logos img:hover {
-            filter: grayscale(0%) brightness(100%);
-            transform: scale(1.05);
+        .cta-video-overlay {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            z-index: 1;
+            position: relative;
+            border-radius: 20px;
         }
 
         .faq-container {
@@ -513,13 +628,16 @@
 
         @media (max-width: 768px) {
             .header-content { flex-direction: column; gap: 1rem; }
-            nav ul { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+            nav ul { display: none; }
             .logo-combined { justify-content: center; }
-            .header-cta-button { margin-left: 0; margin-top: 1rem; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.3rem; }
-            section { padding: 60px 1rem; }
-            section h2 { font-size: 2rem; }
+            .header-cta-button { display: none !important; }
+            .cta-button .desktop-text { display: none; }
+            .cta-button .mobile-text { display: inline; }
+            .hero h1 { font-size: 2rem; }
+            .hero-card { height: 65vh; border-radius: 20px; }
+            .headline-carousel { height: 180px; }
+            .hero { padding-top: 100px; }
+            .client-carousel-track img { margin: 0 30px; height: 80px; }
         }
     </style>
 </head>
@@ -540,18 +658,55 @@
                     <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
+            <button id="soundToggle" class="sound-toggle">
+                <i class="fas fa-volume-mute"></i>
+                <span>Ligue o Som</span>
+            </button>
             <a href="https://wa.me/5547992291756" target="_blank" class="header-cta-button">Receber Orçamento</a>
         </div>
     </header>
     <main>
         <section class="hero" id="home">
-            <video autoplay muted loop poster="https://via.placeholder.com/1920x1080/1686cf/000000?text=Arca+Digital+Video+Poster">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-light-movement-1022-large.mp4" type="video/mp4">
-            </video>
-            <div class="overlay">
-                <h1 id="headline" class="gradient-text"></h1>
-                <p>Transformando ideias em realidade digital</p>
-                <button class="cta-button">Impulsione Seu Negócio</button>
+            <div class="hero-card">
+                <video id="heroVideo" autoplay muted loop playsinline>
+                    <source src="https://res.cloudinary.com/dtgcobo29/video/upload/v1766233332/hero_z3iife.mp4" type="video/mp4">
+                </video>
+                <div class="hero-card-overlay"></div>
+                <div class="hero-content">
+                    <div class="headline-carousel">
+                        <h1 class="gradient-text active">Sua Visão, Nossa Especialidade</h1>
+                        <h1 class="gradient-text">Transformando ideias em realidade no digital</h1>
+                        <h1 class="gradient-text">Criamos conexão através de interfaces Premium</h1>
+                        <h1 class="gradient-text">Para Empresas que buscam se posicionar na internet</h1>
+                    </div>
+                    <a href="https://wa.me/5547992291756" target="_blank" class="cta-button">
+                        <span class="desktop-text">Eu Quero um Site Premium para o meu Negócio</span>
+                        <span class="mobile-text">Quero um Site Premium</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="clientes">
+            <h2 class="gradient-text">Clientes Satisfeitos</h2>
+            <div class="client-carousel-container">
+                <div class="client-carousel-track">
+                    <!-- Lista Original -->
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1764385311/Design_sem_nome_8_rplrtq.png" alt="Devorare" class="logo-colored logo-devorare">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765711661/Haus_Climatiza%C3%A7%C3%A3o_lilbyy.png" alt="Haus Climatização" class="logo-white logo-haus">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765411342/logocompleta_transp_w7xlok.png" alt="Marcio Morais" class="logo-colored logo-marcio">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765137026/logoMultiAeletric-transp_wjbkot.png" alt="MultiA" class="logo-colored logo-multia">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766241369/39_90_500_x_800_px_kkc6w6.png" alt="Curados para Sempre" class="logo-colored logo-curados">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766241536/LIA_FUNDO_TRANSPARENTE_ncmieo.png" alt="LIA" class="logo-colored logo-lia">
+                    
+                    <!-- Duplicação para Loop Perfeito -->
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1764385311/Design_sem_nome_8_rplrtq.png" alt="Devorare" class="logo-colored logo-devorare">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765711661/Haus_Climatiza%C3%A7%C3%A3o_lilbyy.png" alt="Haus Climatização" class="logo-white logo-haus">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765411342/logocompleta_transp_w7xlok.png" alt="Marcio Morais" class="logo-colored logo-marcio">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765137026/logoMultiAeletric-transp_wjbkot.png" alt="MultiA" class="logo-colored logo-multia">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766241369/39_90_500_x_800_px_kkc6w6.png" alt="Curados para Sempre" class="logo-colored logo-curados">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766241536/LIA_FUNDO_TRANSPARENTE_ncmieo.png" alt="LIA" class="logo-colored logo-lia">
+                </div>
             </div>
         </section>
 
@@ -559,16 +714,46 @@
             <h2 class="gradient-text">Nossos Serviços</h2>
             <div class="services-grid">
                 <div class="service-item">
+                    <video class="service-video" autoplay muted loop playsinline>
+                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/v1766136797/Estrat%C3%A9gia-Digital-Personalizada_nvtav9.mp4" type="video/mp4">
+                    </video>
                     <h3 class="gradient-text">Estratégia Digital Personalizada</h3>
                     <p>Analisamos suas necessidades para criar um plano de design e marketing que gera resultados.</p>
                 </div>
                 <div class="service-item">
+                    <video class="service-video" autoplay muted loop playsinline>
+                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/v1766136791/Design_UXUI_-_Trim_z4swmn.mp4" type="video/mp4">
+                    </video>
                     <h3 class="gradient-text">Design UX/UI Premium</h3>
                     <p>Desenvolvemos interfaces intuitivas e visualmente deslumbrantes.</p>
                 </div>
                 <div class="service-item">
+                    <video class="service-video" autoplay muted loop playsinline>
+                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/v1766136785/Desenvolvimento_Front-End_-_Trim_kgx6dv.mp4" type="video/mp4">
+                    </video>
                     <h3 class="gradient-text">Desenvolvimento Front-End Avançado</h3>
                     <p>Codificamos sites com HTML semântico, CSS moderno e JavaScript interativo.</p>
+                </div>
+                <div class="service-item">
+                    <video class="service-video" autoplay muted loop playsinline>
+                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/v1766166782/otimizacao-conversao_-_Trim_zyhoor.mp4" type="video/mp4">
+                    </video>
+                    <h3 class="gradient-text">Otimização de Conversão</h3>
+                    <p>Criamos landing pages de alta performance, com CTAs estratégicos e formulários otimizados.</p>
+                </div>
+                <div class="service-item">
+                    <video id="copywritingVideo" class="service-video" autoplay muted loop playsinline>
+                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/v1766166772/copy_f62tau.mp4" type="video/mp4">
+                    </video>
+                    <h3 class="gradient-text">Copywriting Persuasivo</h3>
+                    <p>Elaboramos textos que vendem, com headlines magnéticas e storytelling envolvente.</p>
+                </div>
+                <div class="service-item">
+                    <video id="infoprodutosVideo" class="service-video" autoplay muted loop playsinline>
+                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/v1766166777/landingpage_o8cti5.mp4" type="video/mp4">
+                    </video>
+                    <h3 class="gradient-text">Soluções para Infoprodutos</h3>
+                    <p>Desenvolvemos páginas de vendas e plataformas online para o seu negócio digital.</p>
                 </div>
             </div>
         </section>
@@ -577,30 +762,33 @@
             <h2 class="gradient-text">Nosso Portfólio</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/300x200/1686cf/000000?text=Projeto+Automação" alt="Projeto Automação" width="300" height="200">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766169672/automacao_1_xenizb.webp" alt="Projeto Automação">
                     <h3 class="gradient-text">Automação</h3>
                     <p>Transforme seu atendimento via WhatsApp e otimize processos com automações personalizadas.</p>
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/300x200/1686cf/000000?text=Projeto+Landing+Page" alt="Landing Page" width="300" height="200">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766169673/landingpage_1_ybjwmw.webp" alt="Landing Page">
                     <h3 class="gradient-text">Landing Page</h3>
                     <p>Páginas de alta conversão, projetadas para capturar leads e impulsionar vendas.</p>
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/300x200/1686cf/000000?text=Projeto+Site+Institucional" alt="Site Institucional" width="300" height="200">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766169673/siteinstitucional_1_dyamkz.webp" alt="Site Institucional">
                     <h3 class="gradient-text">Site Institucional Inovador</h3>
-                    <p>Presença digital marcante para uma empresa de tecnologia, com animações sutis.</p>
+                    <p>Presença digital marcante para empresas que buscam posicionamento de mercado, com animações sutis.</p>
                 </div>
             </div>
         </section>
 
-        <section id="clientes">
-            <h2 class="gradient-text">Clientes Satisfeitos</h2>
-            <div class="client-logos">
-                <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1764385311/Design_sem_nome_8_rplrtq.png" alt="Logo Cliente 1" width="180" height="70">
-                <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765659704/logohaus_nsdvwg.png" alt="Logo Cliente 2" width="180" height="70">
-                <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765411342/logocompleta_transp_w7xlok.png" alt="Logo Cliente 3" width="180" height="70">
-                <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765137026/logoMultiAeletric-transp_wjbkot.png" alt="Logo Cliente 4" width="180" height="70">
+        <section class="cta-video-section">
+            <video id="ctaVideo" autoplay muted loop playsinline>
+                <source src="https://res.cloudinary.com/dtgcobo29/video/upload/v1766171505/7020079_Wave_Comb_1280x720_-_Trim_ktudvd.mp4" type="video/mp4">
+            </video>
+            <div class="cta-video-overlay">
+                <div class="cta-video-content">
+                    <h2 class="gradient-text">Eleve o patamar do seu negócio e supere a concorrência!!</h2>
+                    <p>Esqueça as experiências frustrantes com entregas genéricas e fora do prazo. Descubra o valor de uma consultoria estratégica desenhada sob medida para as suas metas.</p>
+                    <a href="https://wa.me/5547992291756" target="_blank" class="white-cta-button">Falar com Especialista</a>
+                </div>
             </div>
         </section>
 
@@ -621,7 +809,7 @@
                 </details>
                 <details class="faq-item">
                     <summary class="gradient-text">4. Como a Arca Digital garante que o design e as soluções são eficazes?</summary>
-                    <p>Nossa excelência em design é fundamentada em metodologias de ponta, como UI/UX Design Thinking e abordagens rigorosamente centradas no usuário. Isso nos permite conceber soluções não apenas intuitivas e escaláveis, mas estrategicamente desenhadas para gerar resultados de negócios tangíveis e impactantes, convertendo visitantes em clientes.</p>
+                    <p>Aplicamos metodologias de UI/UX focadas no usuário para criar soluções intuitivas e escaláveis. Nosso design estratégico é desenhado para converter visitantes em resultados reais para seu negócio.</p>
                 </details>
             </div>
         </section>
@@ -641,13 +829,20 @@
                         com objetivo único de atração de clientes.
                     </p>
                     <p>Estamos prontos para transformar sua visão em realidade digital. Entre em contato!</p>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt contact-icon"></i>
-                        <p>Rua Itaiopolis 695 Bairro Saguaçu <br> CEP 89.221-155 Joinville-SC</p>
-                    </div>
+                    
                     <div class="contact-item">
                         <i class="fab fa-whatsapp contact-icon"></i>
                         <p>WhatsApp: <a href="https://wa.me/5547992291756" target="_blank">(47) 99229-1756</a></p>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fab fa-instagram contact-icon"></i>
+                        <p>Instagram: <a href="https://www.instagram.com/arca.labs/" target="_blank">@arca.labs</a></p>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <p>Rua Itaiópolis, 695 - Bairro Saguaçu <br> CEP 89221-155 - Joinville - SC</p>
                     </div>
                 </div>
                 <div class="contact-form-container">
@@ -657,7 +852,7 @@
                         <input type="email" id="email" name="email" placeholder="E-mail" required>
                         <input type="text" id="company" name="company" placeholder="Nome da Empresa">
                         <input type="text" id="segment" name="segment" placeholder="Segmento">
-                        <button type="submit" class="cta-button">Enviar</button>
+                        <button type="submit">Enviar Mensagem</button>
                     </form>
                 </div>
             </div>
@@ -667,17 +862,47 @@
         <p class="copyright">© 2025 Arca Digital. Todos os direitos reservados.</p>
     </footer>
     <script>
-        const headline = document.getElementById('headline');
-        const text = "Sua Visão Digital, Nossa Especialidade.";
-        let index = 0;
-        function typeWriter() {
-            if (index < text.length) {
-                headline.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, 80);
-            }
+        // Lógica do Carrossel de Headlines
+        const headlines = document.querySelectorAll('.headline-carousel h1');
+        let currentHeadline = 0;
+
+        function cycleHeadlines() {
+            headlines[currentHeadline].classList.remove('active');
+            currentHeadline = (currentHeadline + 1) % headlines.length;
+            headlines[currentHeadline].classList.add('active');
         }
-        window.onload = typeWriter;
+
+        setInterval(cycleHeadlines, 4000);
+
+        // Controle de Som
+        const heroVideo = document.getElementById('heroVideo');
+        const soundToggle = document.getElementById('soundToggle');
+        const soundIcon = soundToggle.querySelector('i');
+        const soundText = soundToggle.querySelector('span');
+
+        soundToggle.addEventListener('click', () => {
+            if (heroVideo.muted) {
+                heroVideo.muted = false;
+                soundIcon.className = 'fas fa-volume-up';
+                soundText.innerText = 'Desligue o Som';
+            } else {
+                heroVideo.muted = true;
+                soundIcon.className = 'fas fa-volume-mute';
+                soundText.innerText = 'Ligue o Som';
+            }
+        });
+
+        window.onload = function() {
+            // Ajuste de velocidades
+            const ctaVideo = document.getElementById('ctaVideo');
+            if (ctaVideo) ctaVideo.playbackRate = 0.33;
+
+            const infoprodutosVideo = document.getElementById('infoprodutosVideo');
+            if (infoprodutosVideo) infoprodutosVideo.playbackRate = 0.25;
+
+            const copywritingVideo = document.getElementById('copywritingVideo');
+            if (copywritingVideo) copywritingVideo.playbackRate = 0.25;
+        };
     </script>
 </body>
 </html>
