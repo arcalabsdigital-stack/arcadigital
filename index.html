@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arca Digital</title>
     <!-- Meta Description para SEO -->
-    <meta name="description" content="Arca Digital: Transformando ideias em realidade digital. Estratégia, UX/UI, Front-End, Otimização de Conversão e Copywriting para o seu negócio. Impulsione sua presença online com soluções inovadoras e resultados tangíveis.">
+    <meta name="description" content="Arca Digital: Transformando idéias em realidade digital. Estratégia, UX/UI, Front-End, Otimização de Conversão e Copywriting para o seu negócio. Impulsione sua presença online com soluções inovadoras e resultados tangíveis.">
     <!-- Canonical Tag para SEO -->
     <link rel="canonical" href="https://arcalabsdigital-stack-github-io-arcadigital/">
 
@@ -41,6 +41,7 @@
             color: var(--text-light);
             line-height: 1.6;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, .logo-text-html, summary {
@@ -52,20 +53,22 @@
             justify-content: center;
             align-items: center;
             padding: 0.6rem 2rem;
-            background-color: rgba(17, 17, 17, 0.8);
-            backdrop-filter: blur(10px);
+            background-color: rgba(17, 17, 17, 0.9);
+            backdrop-filter: blur(15px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
         }
 
         .header-content {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
         }
 
         .logo-combined {
@@ -73,6 +76,7 @@
             flex-direction: column;
             align-items: center;
             gap: 0px;
+            flex-shrink: 0;
         }
 
         .logo-arc-image {
@@ -104,7 +108,7 @@
         nav ul {
             list-style: none;
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             margin: 0;
             padding: 0;
         }
@@ -112,24 +116,10 @@
         nav a {
             color: var(--text-light);
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: color 0.3s, text-shadow 0.3s;
             position: relative;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--accent);
-            transition: width 0.3s ease-out;
-        }
-
-        nav a:hover::after {
-            width: 100%;
+            white-space: nowrap;
         }
 
         nav a:hover {
@@ -137,35 +127,52 @@
             text-shadow: 0 0 5px var(--accent);
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
         .sound-toggle {
             background: none;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--text-light);
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.8rem;
             border-radius: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            gap: 5px;
+            font-size: 0.75rem;
             font-family: var(--font-button);
             transition: all 0.3s ease;
-            margin-right: 1rem;
         }
 
-        .sound-toggle:hover {
-            border-color: var(--accent);
-            background-color: rgba(22, 134, 207, 0.1);
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1100;
+            padding: 10px;
         }
 
-        /* ESTILO UNIFICADO DE BOTÕES */
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: var(--text-light);
+            transition: 0.3s;
+        }
+
         .header-cta-button, .cta-button, .white-cta-button, .contact-form-container button {
             font-family: var(--font-button);
             background-color: var(--btn-bg);
             color: var(--btn-text);
             border: none;
-            padding: 0.8rem 1.8rem;
-            font-size: 1rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
             border-radius: 8px;
@@ -177,10 +184,7 @@
             z-index: 1;
             display: inline-block;
             text-align: center;
-        }
-
-        .header-cta-button:active, .cta-button:active, .white-cta-button:active, .contact-form-container button:active {
-            transform: scale(0.96) translateY(0);
+            white-space: nowrap;
         }
 
         .header-cta-button:hover, .cta-button:hover, .white-cta-button:hover, .contact-form-container button:hover {
@@ -208,13 +212,12 @@
             100% { left: 150%; }
         }
 
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 90px 2rem 2rem 2rem; 
+            padding: 100px 2rem 2rem 2rem; 
             background-color: var(--primary-bg);
         }
 
@@ -229,7 +232,7 @@
             align-items: center;
             justify-content: center;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(22, 134, 207, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
         }
 
         .hero-card video {
@@ -239,7 +242,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 0;
             filter: brightness(0.6);
         }
 
@@ -303,7 +305,6 @@
             max-width: 1200px;
             margin: 0 auto;
             background-color: var(--primary-bg);
-            border-bottom: 1px solid var(--secondary-bg);
         }
 
         section h2 {
@@ -313,43 +314,52 @@
             font-weight: 700;
         }
 
-        /* Carrossel de Clientes Otimizado (Loop Infinito Sem Buracos) */
         .client-carousel-container {
             overflow: hidden;
             width: 100%;
             position: relative;
             padding: 4rem 0;
             background: var(--primary-bg);
-            /* Gradientes laterais para suavizar entrada/saída */
             mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
         }
 
         .client-carousel-track {
             display: flex;
-            width: max-content; /* Ajusta à largura real dos itens */
+            width: max-content;
             animation: scrollCarousel 40s linear infinite;
             align-items: center;
         }
 
         @keyframes scrollCarousel {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Move exatamente metade do conteúdo duplicado */
+            100% { transform: translateX(-50%); }
         }
 
         .client-carousel-track img {
             object-fit: contain;
-            margin: 0 60px; /* Aumento do espaçamento lateral solicitado */
+            margin: 0 60px;
             transition: filter 0.3s, opacity 0.3s, transform 0.3s;
-            height: 100px; /* Base de normalização */
+            height: 100px;
             width: auto;
         }
 
-        /* Calibração de Tamanho Baseada na Percepção Visual do Símbolo */
         .logo-devorare { height: 140px !important; }
         .logo-marcio { height: 140px !important; }
         .logo-multia { height: 130px !important; }
-        .logo-curados { height: 150px !important; transform: scale(1.2); } /* 39.90 / Curados */
+        
+        .logo-curados { 
+            height: 210px !important; 
+            filter: grayscale(100%) brightness(150%);
+            opacity: 0.8;
+        }
+        
+        .logo-curados:hover {
+            filter: grayscale(0%) brightness(100%) !important;
+            opacity: 1 !important;
+            transform: scale(1.05) !important;
+        }
+
         .logo-haus { height: 100px !important; }
         .logo-lia { height: 100px !important; }
 
@@ -622,22 +632,47 @@
             margin-top: 0;
         }
 
-        @media (max-width: 992px) {
-            .contact-grid { grid-template-columns: 1fr; }
+        /* RESPONSIVIDADE COMPLETA */
+        @media (max-width: 1400px) {
+            nav ul { gap: 1.2rem; }
+            nav a { font-size: 0.9rem; }
+            .header-cta-button { padding: 0.7rem 1.2rem; font-size: 0.85rem; }
+        }
+
+        @media (max-width: 1100px) {
+            .hamburger { display: flex; }
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--secondary-bg);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.4s;
+                z-index: 1050;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            }
+            nav.active { right: 0; }
+            nav ul { flex-direction: column; gap: 2.5rem; align-items: center; }
+            nav a { font-size: 1.5rem; }
+            .header-actions { margin-right: 40px; }
         }
 
         @media (max-width: 768px) {
-            .header-content { flex-direction: column; gap: 1rem; }
-            nav ul { display: none; }
-            .logo-combined { justify-content: center; }
-            .header-cta-button { display: none !important; }
-            .cta-button .desktop-text { display: none; }
-            .cta-button .mobile-text { display: inline; }
+            .header-actions { display: none; }
             .hero h1 { font-size: 2rem; }
             .hero-card { height: 65vh; border-radius: 20px; }
             .headline-carousel { height: 180px; }
-            .hero { padding-top: 100px; }
+            .cta-button .desktop-text { display: none; }
+            .cta-button .mobile-text { display: inline; }
+            
+            /* Ajuste Mobile: Velocidade 2x mais rápida */
+            .client-carousel-track { animation-duration: 20s; }
             .client-carousel-track img { margin: 0 30px; height: 80px; }
+            
+            .contact-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -648,7 +683,8 @@
                 <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766070173/logomarca_arca_semtexto_b8uddv.png" alt="Símbolo da Arca Digital" class="logo-arc-image" width="70" height="70">
                 <span class="logo-text-html">Arca Digital</span>
             </div>
-            <nav>
+            
+            <nav id="nav-menu">
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#servicos">Serviços</a></li>
@@ -658,13 +694,23 @@
                     <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
-            <button id="soundToggle" class="sound-toggle">
-                <i class="fas fa-volume-mute"></i>
-                <span>Ligue o Som</span>
-            </button>
-            <a href="https://wa.me/5547992291756" target="_blank" class="header-cta-button">Receber Orçamento</a>
+
+            <div class="header-actions">
+                <button id="soundToggle" class="sound-toggle">
+                    <i class="fas fa-volume-mute"></i>
+                    <span>Som</span>
+                </button>
+                <a href="https://wa.me/5547992291756" target="_blank" class="header-cta-button">Receber Orçamento</a>
+            </div>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
+
     <main>
         <section class="hero" id="home">
             <div class="hero-card">
@@ -675,7 +721,7 @@
                 <div class="hero-content">
                     <div class="headline-carousel">
                         <h1 class="gradient-text active">Sua Visão, Nossa Especialidade</h1>
-                        <h1 class="gradient-text">Transformando ideias em realidade no digital</h1>
+                        <h1 class="gradient-text">Transformando idéias em realidade no digital</h1>
                         <h1 class="gradient-text">Criamos conexão através de interfaces Premium</h1>
                         <h1 class="gradient-text">Para Empresas que buscam se posicionar na internet</h1>
                     </div>
@@ -691,20 +737,19 @@
             <h2 class="gradient-text">Clientes Satisfeitos</h2>
             <div class="client-carousel-container">
                 <div class="client-carousel-track">
-                    <!-- Lista Original -->
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1764385311/Design_sem_nome_8_rplrtq.png" alt="Devorare" class="logo-colored logo-devorare">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765711661/Haus_Climatiza%C3%A7%C3%A3o_lilbyy.png" alt="Haus Climatização" class="logo-white logo-haus">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765411342/logocompleta_transp_w7xlok.png" alt="Marcio Morais" class="logo-colored logo-marcio">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765137026/logoMultiAeletric-transp_wjbkot.png" alt="MultiA" class="logo-colored logo-multia">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766241369/39_90_500_x_800_px_kkc6w6.png" alt="Curados para Sempre" class="logo-colored logo-curados">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766241369/39_90_500_x_800_px_kkc6w6.png" alt="Curados para Vencer" class="logo-curados">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766241536/LIA_FUNDO_TRANSPARENTE_ncmieo.png" alt="LIA" class="logo-colored logo-lia">
                     
-                    <!-- Duplicação para Loop Perfeito -->
+                    <!-- Duplicação para Loop -->
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1764385311/Design_sem_nome_8_rplrtq.png" alt="Devorare" class="logo-colored logo-devorare">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765711661/Haus_Climatiza%C3%A7%C3%A3o_lilbyy.png" alt="Haus Climatização" class="logo-white logo-haus">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765411342/logocompleta_transp_w7xlok.png" alt="Marcio Morais" class="logo-colored logo-marcio">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1765137026/logoMultiAeletric-transp_wjbkot.png" alt="MultiA" class="logo-colored logo-multia">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766241369/39_90_500_x_800_px_kkc6w6.png" alt="Curados para Sempre" class="logo-colored logo-curados">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766241369/39_90_500_x_800_px_kkc6w6.png" alt="Curados para Vencer" class="logo-curados">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1766241536/LIA_FUNDO_TRANSPARENTE_ncmieo.png" alt="LIA" class="logo-colored logo-lia">
                 </div>
             </div>
@@ -779,19 +824,6 @@
             </div>
         </section>
 
-        <section class="cta-video-section">
-            <video id="ctaVideo" autoplay muted loop playsinline>
-                <source src="https://res.cloudinary.com/dtgcobo29/video/upload/v1766171505/7020079_Wave_Comb_1280x720_-_Trim_ktudvd.mp4" type="video/mp4">
-            </video>
-            <div class="cta-video-overlay">
-                <div class="cta-video-content">
-                    <h2 class="gradient-text">Eleve o patamar do seu negócio e supere a concorrência!!</h2>
-                    <p>Esqueça as experiências frustrantes com entregas genéricas e fora do prazo. Descubra o valor de uma consultoria estratégica desenhada sob medida para as suas metas.</p>
-                    <a href="https://wa.me/5547992291756" target="_blank" class="white-cta-button">Falar com Especialista</a>
-                </div>
-            </div>
-        </section>
-
         <section id="faq">
             <h2 class="gradient-text">Perguntas Frequentes</h2>
             <div class="faq-container">
@@ -861,7 +893,25 @@
     <footer>
         <p class="copyright">© 2025 Arca Digital. Todos os direitos reservados.</p>
     </footer>
+
     <script>
+        // Lógica do Menu Hambúrguer
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('nav a');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
         // Lógica do Carrossel de Headlines
         const headlines = document.querySelectorAll('.headline-carousel h1');
         let currentHeadline = 0;
@@ -884,16 +934,15 @@
             if (heroVideo.muted) {
                 heroVideo.muted = false;
                 soundIcon.className = 'fas fa-volume-up';
-                soundText.innerText = 'Desligue o Som';
+                soundText.innerText = 'Som On';
             } else {
                 heroVideo.muted = true;
                 soundIcon.className = 'fas fa-volume-mute';
-                soundText.innerText = 'Ligue o Som';
+                soundText.innerText = 'Som Off';
             }
         });
 
         window.onload = function() {
-            // Ajuste de velocidades
             const ctaVideo = document.getElementById('ctaVideo');
             if (ctaVideo) ctaVideo.playbackRate = 0.33;
 
