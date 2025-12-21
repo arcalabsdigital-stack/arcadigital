@@ -589,6 +589,63 @@
             box-shadow: 0 0 10px rgba(22, 134, 207, 0.5);
         }
 
+        /* ESTILOS DA PÁGINA DE OBRIGADO INTEGRADA */
+        #thank-you-message {
+            display: none; /* Oculto por padrão */
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .thank-you-card-integrated {
+            padding: 1rem;
+        }
+
+        .icon-check {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            animation: scaleUp 0.5s ease-out;
+        }
+
+        .thank-you-card-integrated h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(to right, #e0e0e0, #ffffff, #c0c0c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .thank-you-card-integrated p {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .reset-button {
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        @keyframes scaleUp {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         footer {
             background-color: var(--secondary-bg);
             color: var(--text-dark);
@@ -863,15 +920,26 @@
                     </div>
                 </div>
                 <div class="contact-form-container">
-                    <form action="https://formspree.io/f/arcalabs.digital@gmail.com" method="POST">
+                    <!-- FORMULÁRIO COM ID PARA O SCRIPT -->
+                    <form id="contact-form" action="https://formspree.io/f/mdangzek" method="POST">
                         <input type="hidden" name="_subject" value="Novo Contato via Site Arca Digital">
                         <input type="text" id="name" name="name" placeholder="Nome" required>
                         <input type="tel" id="phone" name="phone" placeholder="Telefone">
                         <input type="email" id="email" name="email" placeholder="E-mail" required>
                         <input type="text" id="company" name="company" placeholder="Nome da Empresa">
                         <input type="text" id="segment" name="segment" placeholder="Segmento">
-                        <button type="submit">Enviar Mensagem</button>
+                        <button type="submit" id="submit-btn">Enviar Mensagem</button>
                     </form>
+
+                    <!-- MENSAGEM DE OBRIGADO INTEGRADA (OCULTA POR PADRÃO) -->
+                    <div id="thank-you-message">
+                        <div class="thank-you-card-integrated">
+                            <i class="fas fa-check-circle icon-check"></i>
+                            <h3>Mensagem Recebida!</h3>
+                            <p>Já estamos com seus dados. Nossa equipe analisará e entrará em contato em breve para darmos o próximo passo na sua jornada.</p>
+                            <button onclick="resetForm()" class="reset-button">Enviar outra mensagem</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -935,6 +1003,53 @@
             const copywritingVideo = document.getElementById('copywritingVideo');
             if (copywritingVideo) copywritingVideo.playbackRate = 0.25;
         };
+
+        // LÓGICA DE ENVIO ASSÍNCRONO (AJAX/FETCH)
+        const contactForm = document.getElementById('contact-form');
+        const thankYouMessage = document.getElementById('thank-you-message');
+        const submitBtn = document.getElementById('submit-btn');
+
+        contactForm.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Impede o redirecionamento padrão
+            
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Enviando...";
+
+            const formData = new FormData(contactForm);
+            
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Sucesso: Oculta formulário e mostra mensagem de obrigado
+                    contactForm.style.display = 'none';
+                    thankYouMessage.style.display = 'block';
+                } else {
+                    alert("Ocorreu um erro ao enviar. Por favor, tente novamente.");
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Enviar Mensagem";
+                }
+            } catch (error) {
+                alert("Erro de conexão. Verifique sua internet.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Enviar Mensagem";
+            }
+        });
+
+        // Função para voltar ao formulário caso o usuário precise
+        function resetForm() {
+            contactForm.reset();
+            contactForm.style.display = 'flex';
+            thankYouMessage.style.display = 'none';
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Enviar Mensagem";
+        }
     </script>
 </body>
 </html>
