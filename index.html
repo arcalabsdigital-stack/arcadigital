@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <!-- SEO 100: Meta descrição e Canonical -->
-    <title>Arca Digital | Estratégia, Design UX/UI e Performance Digital</title>
-    <meta name="description" content="A Arca Digital transforma ideias em realidade com design UX/UI premium, desenvolvimento front-end e estratégias de conversão de alta performance para o seu negócio.">
+    <title>ArcaLabs | Desenvolvimento de Software e Soluções B2B com IA</title>
+    <meta name="description" content="A ArcaLabs desenvolve aplicativos, sistemas e soluções B2B com Inteligência Artificial. Consultoria estratégica e desenvolvimento sob medida para automatizar processos e escalar o seu negócio.">
     <link rel="canonical" href="https://arcalabs.com.br/">
 
     <!-- Resource Hints -->
@@ -21,12 +21,12 @@
     <style>
         :root{--primary-bg:#111;--secondary-bg:#1a1a1a;--accent:#1686cf;--text-light:#fff;--text-dark:#ccc;--font-main:'Satoshi',sans-serif;--font-title:'Plus Jakarta Sans',sans-serif;--font-button:'Instrument Sans',sans-serif;--font-handwriting:'Dancing Script',cursive;--btn-bg:#f1f1f1;--btn-text:#111;--btn-hover:#e0e0e0}
         body{margin:0;padding:0;font-family:var(--font-main);background-color:var(--primary-bg);color:var(--text-light);line-height:1.6;scroll-behavior:smooth;overflow-x:hidden}
-        h1,h2,h3,.logo-text-html,summary{font-family:var(--font-title)}
+        h1,h2,h3,summary{font-family:var(--font-title)}
         header{display:flex;justify-content:center;align-items:center;padding:.6rem 2rem;background-color:rgba(17,17,17,.9);backdrop-filter:blur(15px);position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.3);box-sizing:border-box}
         .header-content{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1400px}
         .logo-combined{display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0}
-        .logo-arc-image{max-height:42px;width:auto}
-        .logo-text-html{font-size:.88rem;font-weight:800;line-height:1;margin-top:3px;text-align:center;text-transform:uppercase;background:linear-gradient(to right,#f0f0f0 0,#c0c0c0 25%,#f0f0f0 50%,#a0a0a0 75%,#f0f0f0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent}
+        .logo-wordmark{height:80px;width:auto;max-width:462px;display:block;object-fit:contain}
+        
         nav{flex-grow:1;display:flex;justify-content:center;align-items:center}
         nav ul{list-style:none;display:flex;gap:2rem;margin:0;padding:0}
         nav a{color:var(--text-light);text-decoration:none;font-size:1rem;transition:color .3s,text-shadow .3s;position:relative;white-space:nowrap}
@@ -39,7 +39,7 @@
         .contact-form-container button:hover,.cta-button:hover,.header-cta-button:hover,.white-cta-button:hover{box-shadow:0 0 15px var(--accent),0 0 25px rgba(22, 134, 207, 0.5);transform:translateY(-2px);background-color:var(--btn-hover)}
         .contact-form-container button::before,.cta-button::before,.header-cta-button::before,.white-cta-button::before{content:'';position:absolute;top:0;left:0;width:60%;height:100%;background:linear-gradient(to right,rgba(255,255,255,0) 0,rgba(255,255,255,.8) 50%,rgba(255,255,255,0) 100%);transform:skewX(-25deg) translateX(-200%);animation:slideReflection 2.5s infinite;z-index:2;pointer-events:none;will-change:transform}
         @keyframes slideReflection{0%{transform:skewX(-25deg) translateX(-200%)}100%{transform:skewX(-25deg) translateX(300%)}}
-        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 2rem 2rem;background-color:var(--primary-bg);position:relative}
+        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:135px 2rem 2rem;background-color:var(--primary-bg);position:relative}
         .hero-wrapper{width:100%;max-width:1300px;display:flex;flex-direction:column;position:relative}
         .faith-container{width:100%;display:flex;justify-content:flex-end;margin-bottom:15px;padding-right:10px;z-index:10}
         .faith-handwriting{font-family:var(--font-handwriting);font-size:1.6rem;color:#fff;white-space:nowrap;overflow:hidden;width:0;display:block;animation:typing 3.5s steps(25) forwards,silverSlide 2s ease-in-out 3.5s 2;will-change:width,background-position}
@@ -66,6 +66,7 @@
         .portfolio-item:hover,.service-item:hover{transform:translateY(-10px);box-shadow:0 10px 25px rgba(22, 134, 207, 0.3)}
         .service-video{width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:1.5rem;background-color:#000}
         .portfolio-item img{width:100%;height:220px;object-fit:cover;object-position:top;border-radius:8px;margin-bottom:1.5rem;box-shadow:0 4px 10px rgba(0,0,0,.3)}
+        .portfolio-item img.illustration{object-fit:contain;object-position:center;background-color:#0d1218;padding:6px;box-sizing:border-box}
         .cta-video-section{position:relative;max-width:1100px;margin:4rem auto;border-radius:24px;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 50px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,0.1);padding:5px;background-color:var(--secondary-bg)}
         .cta-video-section video{position:absolute;top:5px;left:5px;width:calc(100% - 10px);height:calc(100% - 10px);object-fit:cover;z-index:0;filter:brightness(.9);border-radius:20px}
         .cta-video-overlay{width:100%;background:linear-gradient(135deg,rgba(0,0,0,0.7) 0,rgba(0,0,0,0.3) 100%);padding:3rem 2rem;text-align:center;z-index:1;position:relative;border-radius:20px}
@@ -76,7 +77,7 @@
         .faq-item p{padding:0 2rem 1.5rem;margin:0;font-size:1.1rem;color:var(--text-dark);border-top:1px solid rgba(22, 134, 207, 0.2);padding-top:1.5rem}
         .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem}
         .contact-details,.contact-form-container{background-color:var(--secondary-bg);padding:3rem;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.4)}
-        .contact-details .logo-combined{align-items:flex-start;margin-bottom:1.5rem}.contact-details .logo-arc-image{max-height:35px}.contact-details .logo-text-html{font-size:.75rem;text-align:left}
+        .contact-details .logo-combined{align-items:flex-start;margin-bottom:1.5rem}.logo-wordmark-footer{height:86px;max-width:495px}
         .contact-description{font-size:1.05rem;color:var(--text-dark);margin-bottom:1.5rem;line-height:1.4;text-align:left}
         .contact-item{display:flex;align-items:flex-start;margin-bottom:1.5rem}.contact-icon{font-size:1.8rem;color:var(--accent);margin-right:1rem}.contact-item p{margin:0;font-size:1.1rem;color:var(--text-light);text-align:left}
         .contact-item a{color:var(--accent);text-decoration:none;transition:color .3s,text-shadow .3s}.contact-item a:hover{color:#1a94e0;text-shadow:0 0 8px #1a94e0}
@@ -91,14 +92,13 @@
         @keyframes scaleUp{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
         @media (max-width:1100px){.hamburger{display:flex}nav{position:fixed;top:0;right:-100%;width:70%;height:100vh;background-color:var(--secondary-bg);flex-direction:column;justify-content:center;transition:.4s;z-index:1050;box-shadow:-5px 0 15px rgba(0,0,0,.5)}nav.active{right:0}nav ul{flex-direction:column;gap:2.5rem;align-items:center}nav a{font-size:1.5rem}.header-actions{margin-right:40px}}
-        @media (max-width:768px){.header-actions{display:none}.hero h1{font-size:2rem}.hero-card{height:65vh;border-radius:20px}.headline-carousel{height:180px}.cta-button .desktop-text{display:none}.cta-button .mobile-text{display:inline}.client-carousel-track{animation-duration:12s}.client-carousel-track img{margin:0 30px;height:80px}.contact-grid{grid-template-columns:1fr}.faith-container{margin-bottom:10px;padding-right:5px}.faith-handwriting{font-size:1.1rem}@keyframes typing{from{width:0}to{width:220px}}}</style>
+        @media (max-width:768px){.header-actions{display:none}.logo-wordmark{height:66px;max-width:347px}.hero h1{font-size:2rem}.hero-card{height:65vh;border-radius:20px}.headline-carousel{height:180px}.cta-button .desktop-text{display:none}.cta-button .mobile-text{display:inline}.client-carousel-track{animation-duration:12s}.client-carousel-track img{margin:0 30px;height:80px}.contact-grid{grid-template-columns:1fr}.faith-container{margin-bottom:10px;padding-right:5px}.faith-handwriting{font-size:1.1rem}@keyframes typing{from{width:0}to{width:220px}}}</style>
 </head>
 <body>
     <header>
         <div class="header-content">
             <div class="logo-combined">
-                <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_150,f_auto,q_auto/v1766070173/logomarca_arca_semtexto_b8uddv.png" alt="Símbolo da Arca Digital" class="logo-arc-image" width="70" height="70">
-                <span class="logo-text-html">Arca Digital</span>
+                <img src="https://res.cloudinary.com/dtgcobo29/image/upload/e_replace_color:b4b4b3:40:white,f_png,q_auto/v1784739972/logo-arca-fundo-transparente_nh3w0k.png" alt="ArcaLabs" class="logo-wordmark" width="220" height="38">
             </div>
             <nav id="nav-menu">
                 <ul>
@@ -112,7 +112,7 @@
             </nav>
             <div class="header-actions">
                 <button id="soundToggle" class="sound-toggle"><i class="fas fa-volume-mute"></i><span>Som</span></button>
-                <a href="https://wa.me/5547992291756" target="_blank" class="header-cta-button">Receber Orçamento</a>
+                <a href="https://wa.me/5547992291756" target="_blank" class="header-cta-button">Agendar Diagnóstico</a>
             </div>
             <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         </div>
@@ -131,14 +131,14 @@
                     <div class="hero-card-overlay"></div>
                     <div class="hero-content">
                         <div class="headline-carousel">
-                            <h1 class="gradient-text active">Sua Visão, Nossa Especialidade</h1>
-                            <h1 class="gradient-text">Transformando idéias em realidade no digital</h1>
-                            <h1 class="gradient-text">Criamos conexão através de interfaces Premium</h1>
-                            <h1 class="gradient-text">Para Empresas que buscam se posicionar na internet</h1>
+                            <h1 class="gradient-text active">Software sob medida para o seu negócio</h1>
+                            <h1 class="gradient-text">Soluções B2B potencializadas por Inteligência Artificial</h1>
+                            <h1 class="gradient-text">Automatize processos. Escale resultados.</h1>
+                            <h1 class="gradient-text">Da ideia ao sistema no ar, com tecnologia de ponta</h1>
                         </div>
                         <a href="https://wa.me/5547992291756" target="_blank" class="cta-button">
-                            <span class="desktop-text">Eu Quero um Site Premium para o meu Negócio</span>
-                            <span class="mobile-text">Quero um Site Premium</span>
+                            <span class="desktop-text">Quero uma Solução Sob Medida para o meu Negócio</span>
+                            <span class="mobile-text">Quero minha Solução</span>
                         </a>
                     </div>
                 </div>
@@ -167,45 +167,45 @@
             <div class="services-grid">
                 <div class="service-item">
                     <video class="service-video" autoplay muted loop playsinline loading="lazy">
-                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766136797/Estrat%C3%A9gia-Digital-Personalizada_nvtav9.mp4" type="video/mp4">
-                    </video>
-                    <h3 class="gradient-text">Estratégia Digital Personalizada</h3>
-                    <p>Analisamos suas necessidades para criar um plano de design e marketing que gera resultados.</p>
-                </div>
-                <div class="service-item">
-                    <video class="service-video" autoplay muted loop playsinline loading="lazy">
-                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766136791/Design_UXUI_-_Trim_z4swmn.mp4" type="video/mp4">
-                    </video>
-                    <h3 class="gradient-text">Design UX/UI Premium</h3>
-                    <p>Desenvolvemos interfaces intuitivas e visualmente deslumbrantes.</p>
-                </div>
-                <div class="service-item">
-                    <video class="service-video" autoplay muted loop playsinline loading="lazy">
                         <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766136785/Desenvolvimento_Front-End_-_Trim_kgx6dv.mp4" type="video/mp4">
                     </video>
-                    <h3 class="gradient-text">Desenvolvimento Front-End Avançado</h3>
-                    <p>Codificamos sites com HTML semântico, CSS moderno e JavaScript interativo.</p>
+                    <h3 class="gradient-text">Desenvolvimento de Aplicativos</h3>
+                    <p>Construímos aplicativos web e sistemas SaaS completos, do banco de dados à interface, prontos para escalar com o seu negócio.</p>
                 </div>
                 <div class="service-item">
                     <video class="service-video" autoplay muted loop playsinline loading="lazy">
                         <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766166782/otimizacao-conversao_-_Trim_zyhoor.mp4" type="video/mp4">
                     </video>
-                    <h3 class="gradient-text">Otimização de Conversão</h3>
-                    <p>Criamos landing pages de alta performance, com CTAs estratégicos e formulários otimizados.</p>
-                </div>
-                <div class="service-item">
-                    <video id="copywritingVideo" class="service-video" autoplay muted loop playsinline loading="lazy">
-                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766166772/copy_f62tau.mp4" type="video/mp4">
-                    </video>
-                    <h3 class="gradient-text">Copywriting Persuasivo</h3>
-                    <p>Elaboramos textos que vendem, com headlines magnéticas e storytelling envolvente.</p>
+                    <h3 class="gradient-text">Soluções B2B com Inteligência Artificial</h3>
+                    <p>Integramos IA aos seus processos: análise de dados, agentes autônomos e automações inteligentes que reduzem custo e ganham escala.</p>
                 </div>
                 <div class="service-item">
                     <video id="infoprodutosVideo" class="service-video" autoplay muted loop playsinline loading="lazy">
                         <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766166777/landingpage_o8cti5.mp4" type="video/mp4">
                     </video>
-                    <h3 class="gradient-text">Soluções para Infoprodutos</h3>
-                    <p>Desenvolvemos páginas de vendas e plataformas online para o seu negócio digital.</p>
+                    <h3 class="gradient-text">Sites e Landing Pages</h3>
+                    <p>Também criamos sites institucionais e páginas de alta conversão, com o mesmo padrão de qualidade dos nossos produtos.</p>
+                </div>
+                <div class="service-item">
+                    <video class="service-video" autoplay muted loop playsinline loading="lazy">
+                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766136797/Estrat%C3%A9gia-Digital-Personalizada_nvtav9.mp4" type="video/mp4">
+                    </video>
+                    <h3 class="gradient-text">Consultoria em Produto e Tecnologia</h3>
+                    <p>Ajudamos a validar a ideia, definir o escopo e traçar a arquitetura certa antes de escrever a primeira linha de código.</p>
+                </div>
+                <div class="service-item">
+                    <video class="service-video" autoplay muted loop playsinline loading="lazy">
+                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766136791/Design_UXUI_-_Trim_z4swmn.mp4" type="video/mp4">
+                    </video>
+                    <h3 class="gradient-text">Design UX/UI de Produto</h3>
+                    <p>Desenhamos interfaces intuitivas e escaláveis, pensadas para a experiência de quem usa o seu software todos os dias.</p>
+                </div>
+                <div class="service-item">
+                    <video id="copywritingVideo" class="service-video" autoplay muted loop playsinline loading="lazy">
+                        <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766166772/copy_f62tau.mp4" type="video/mp4">
+                    </video>
+                    <h3 class="gradient-text">Automação de Processos</h3>
+                    <p>Eliminamos tarefas manuais e conectamos suas ferramentas, do atendimento no WhatsApp à integração entre sistemas internos.</p>
                 </div>
             </div>
         </section>
@@ -214,19 +214,19 @@
             <h2 class="gradient-text">Nosso Portfólio</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_600,f_auto,q_auto/v1766169672/automacao_1_xenizb.webp" alt="Projeto Automação" width="300" height="220" loading="lazy">
-                    <h3 class="gradient-text">Automação</h3>
-                    <p>Transforme seu atendimento via WhatsApp e otimize processos com automações personalizadas.</p>
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_600,f_auto,q_auto/v1766169672/automacao_1_xenizb.webp" alt="Plataforma SaaS B2B" width="300" height="220" loading="lazy">
+                    <h3 class="gradient-text">Plataforma SaaS B2B</h3>
+                    <p>Sistema completo de parceria e gestão para o mercado imobiliário, com assinaturas, área do cliente e automações rodando em produção.</p>
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_600,f_auto,q_auto/v1766169673/landingpage_1_ybjwmw.webp" alt="Landing Page" width="300" height="220" loading="lazy">
-                    <h3 class="gradient-text">Landing Page</h3>
-                    <p>Páginas de alta conversão, projetadas para capturar leads e impulsionar vendas.</p>
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1784734863/portfolio_financas_ia_jrlvnn.svg" alt="Dashboard de gestão financeira com IA" class="illustration" width="300" height="220" loading="lazy">
+                    <h3 class="gradient-text">Gestão Financeira com IA</h3>
+                    <p>Ferramenta de gestão e valuation que automatiza análises financeiras complexas e entrega decisões em minutos, não em dias.</p>
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_600,f_auto,q_auto/v1766169673/siteinstitucional_1_dyamkz.webp" alt="Site Institucional" width="300" height="220" loading="lazy">
-                    <h3 class="gradient-text">Site Institucional Inovador</h3>
-                    <p>Presença digital marcante para empresas que buscam posicionamento de mercado, com animações sutis.</p>
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1784734863/portfolio_automacao_atendimento_ycchpx.svg" alt="Automação de atendimento no WhatsApp com IA" class="illustration" width="300" height="220" loading="lazy">
+                    <h3 class="gradient-text">Automação de Atendimento</h3>
+                    <p>Integração de IA ao WhatsApp e aos processos internos, reduzindo trabalho manual e acelerando a resposta ao cliente.</p>
                 </div>
             </div>
         </section>
@@ -237,8 +237,8 @@
             </video>
             <div class="cta-video-overlay">
                 <div class="cta-video-content">
-                    <h2 class="gradient-text">Eleve o patamar do seu negócio e supere a concorrência!!</h2>
-                    <p>Esqueça as experiências frustrantes com entregas genéricas e fora do prazo. Descubra o valor de uma consultoria estratégica desenhada sob medida para as suas metas.</p>
+                    <h2 class="gradient-text">Transforme processos manuais em software que trabalha por você</h2>
+                    <p>Chega de depender de planilhas frágeis e soluções genéricas. Desenvolvemos sistemas e automações com IA desenhados sob medida para os desafios reais do seu negócio.</p>
                     <a href="https://wa.me/5547992291756" target="_blank" class="white-cta-button">Falar com Especialista</a>
                 </div>
             </div>
@@ -247,10 +247,10 @@
         <section id="faq">
             <h2 class="gradient-text">Perguntas Frequentes</h2>
             <div class="faq-container">
-                <details class="faq-item"><summary class="gradient-text">1. O site tem custos de manutenção contínuos?</summary><p>Não impomos mensalidades fixas para a hospedagem do seu site. Custos adicionais surgem exclusivamente para expansões.</p></details>
-                <details class="faq-item"><summary class="gradient-text">2. A Arca Digital oferece suporte após a entrega?</summary><p>Absolutamente! Oferecemos um período de suporte dedicado para ajustes finos e otimizações.</p></details>
-                <details class="faq-item"><summary class="gradient-text">3. Posso participar do processo de criação?</summary><p>Sua visão é fundamental. Cada etapa do projeto é construída em parceria colaborativa.</p></details>
-                <details class="faq-item"><summary class="gradient-text">4. Como a Arca Digital garante que o design e as soluções são eficazes?</summary><p>Aplicamos metodologias de UI/UX focadas no usuário para criar soluções intuitivas e escaláveis. Nosso design estratégico é desenhado para converter visitantes em resultados reais para seu negócio.</p></details>
+                <details class="faq-item"><summary class="gradient-text">1. Que tipo de software a ArcaLabs desenvolve?</summary><p>Desenvolvemos aplicativos web, sistemas SaaS, automações e soluções B2B com Inteligência Artificial, sempre sob medida para o processo do seu negócio, e não em modelos genéricos.</p></details>
+                <details class="faq-item"><summary class="gradient-text">2. Como funciona o início de um projeto?</summary><p>Começamos por um diagnóstico: entendemos o desafio, validamos a ideia e definimos escopo e arquitetura antes de desenvolver. Assim você investe com clareza sobre o resultado esperado.</p></details>
+                <details class="faq-item"><summary class="gradient-text">3. A ArcaLabs oferece suporte após a entrega?</summary><p>Sim. Oferecemos um período de suporte dedicado e planos de evolução contínua, para que o sistema acompanhe o crescimento da sua operação.</p></details>
+                <details class="faq-item"><summary class="gradient-text">4. Vocês também fazem sites?</summary><p>Fazemos. Sites institucionais e landing pages de alta conversão fazem parte dos nossos serviços, com o mesmo padrão de engenharia e design dos nossos produtos de software.</p></details>
             </div>
         </section>
 
@@ -258,15 +258,15 @@
             <h2 class="gradient-text">Fale Conosco</h2>
             <div class="contact-grid">
                 <div class="contact-details">
-                    <div class="logo-combined"><img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_150,f_auto,q_auto/v1766070173/logomarca_arca_semtexto_b8uddv.png" alt="Símbolo da Arca Digital" class="logo-arc-image" width="70" height="70" loading="lazy"><span class="logo-text-html">Arca Digital</span></div>
-                    <p class="contact-description">Criamos presença digital e interfaces de alta performance<br>para empresas nos mais diversos segmentos.<br>Utilizamos tecnologia imersiva e metodologia PVA (Performance Visual Auditiva)<br>com objetivo único de atração de clientes.</p>
+                    <div class="logo-combined"><img src="https://res.cloudinary.com/dtgcobo29/image/upload/e_replace_color:b4b4b3:40:white,f_png,q_auto/v1784739972/logo-arca-fundo-transparente_nh3w0k.png" alt="ArcaLabs" class="logo-wordmark logo-wordmark-footer" width="220" height="38" loading="lazy"></div>
+                    <p class="contact-description">Desenvolvemos aplicativos, sistemas e soluções B2B com Inteligência Artificial<br>para empresas nos mais diversos segmentos.<br>Unimos consultoria estratégica e engenharia sob medida<br>para automatizar processos e escalar resultados.</p>
                     <div class="contact-item"><i class="fab fa-whatsapp contact-icon"></i><p>WhatsApp: <a href="https://wa.me/5547992291756" target="_blank">(47) 99229-1756</a></p></div>
                     <div class="contact-item"><i class="fab fa-instagram contact-icon"></i><p>Instagram: <a href="https://www.instagram.com/arca.labs/" target="_blank">@arca.labs</a></p></div>
                     <div class="contact-item"><i class="fas fa-map-marker-alt contact-icon"></i><p>Rua Itaiópolis, 695 - Bairro Saguaçu <br> CEP 89221-155 - Joinville - SC</p></div>
                 </div>
                 <div class="contact-form-container">
                     <form id="contact-form" action="https://formspree.io/f/mdangzek" method="POST">
-                        <input type="hidden" name="_subject" value="Novo Contato via Site Arca Digital">
+                        <input type="hidden" name="_subject" value="Novo Contato via Site ArcaLabs">
                         <input type="text" id="name" name="name" placeholder="Nome" required>
                         <input type="tel" id="phone" name="phone" placeholder="Telefone">
                         <input type="email" id="email" name="email" placeholder="E-mail" required>
@@ -279,7 +279,7 @@
             </div>
         </section>
     </main>
-    <footer><p class="copyright">© 2025 Arca Digital. Todos os direitos reservados.</p></footer>
+    <footer><p class="copyright">© 2025 ArcaLabs. Todos os direitos reservados.</p></footer>
     <!-- Font Awesome Otimizado -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
     <script>
