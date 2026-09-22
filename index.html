@@ -127,6 +127,15 @@
         .info-card .pain{color:var(--text-light);font-weight:700;font-size:1.15rem;margin:0 0 .6rem;font-family:var(--font-title)}
         .info-card h3{color:var(--text-light);font-size:1.15rem;margin:0 0 .6rem}
         .info-card p{color:var(--text-dark);font-size:.98rem;margin:0;line-height:1.5}
+
+        /* ===== Redesign 2026-09: seção Sobre ===== */
+        .about-grid{display:flex;gap:3rem;align-items:center;margin-top:2rem;flex-wrap:wrap}
+        .about-photo-placeholder{width:200px;height:200px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,var(--secondary-bg),#222);display:flex;align-items:center;justify-content:center;font-size:3.5rem;font-weight:800;color:var(--accent);font-family:var(--font-title);border:2px solid rgba(22,134,207,.4);margin:0 auto}
+        .about-text{flex:1;min-width:280px}
+        .about-text h3{font-size:1.6rem;margin:0 0 .3rem}
+        .about-role{color:var(--accent);font-weight:700;margin-bottom:1rem;font-size:1rem}
+        .about-text p{color:var(--text-dark);font-size:1.05rem;line-height:1.6}
+        @media (max-width:768px){.about-grid{flex-direction:column;text-align:center}}
     </style>
 </head>
 <body>
@@ -143,6 +152,7 @@
                     <li><a href="#servicos">Serviços</a></li>
                     <li><a href="#diferenciais">Diferenciais</a></li>
                     <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
@@ -375,6 +385,19 @@
                     <!-- Loop -->
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1764385311/Design_sem_nome_8_rplrtq.png" alt="Devorare" class="logo-colored logo-devorare" width="140" height="100" loading="lazy">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1765711661/Haus_Climatiza%C3%A7%C3%A3o_lilbyy.png" alt="Haus Climatização" class="logo-white logo-haus" width="110" height="110" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre">
+            <h2 class="gradient-text">Quem constrói</h2>
+            <div class="about-grid">
+                <!-- TODO Marcos: trocar pelo placeholder por uma foto real (não encontrei nenhuma foto sua nos assets do site ou dos projetos) -->
+                <div class="about-photo-placeholder">M</div>
+                <div class="about-text">
+                    <h3>Marcos Morais</h3>
+                    <p class="about-role">Engenheiro de Controle e Automação · Fundador da ArcaLabs</p>
+                    <p>Atuação solo, do diagnóstico ao código no ar. Uso Inteligência Artificial como ferramenta de trabalho no próprio desenvolvimento — não só como produto vendido ao cliente — pra entregar sistemas sob medida com mais velocidade e sem perder qualidade de engenharia. Sem agência, sem intermediário: quem conversa com você é quem constrói o seu sistema.</p>
                 </div>
             </div>
         </section>
