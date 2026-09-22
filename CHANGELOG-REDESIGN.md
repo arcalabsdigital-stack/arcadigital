@@ -8,7 +8,7 @@ Registro de todas as decisões tomadas de forma autônoma durante o redesign ini
 
 1. **O repositório do site NÃO é o que constava no briefing original.** O briefing descrevia uma stack Next.js/TypeScript. Na prática, `arcalabsdigital-stack/arcadigital` é um site **estático** — um único `index.html` com CSS e JS inline, sem build step, hospedado via **GitHub Pages** (arquivo `CNAME` apontando para `www.arcalabs.com.br`). Isso muda a abordagem técnica: não há "componentes" React para reaproveitar, e não há preview automático por branch (GitHub Pages normalmente publica a partir de uma branch fixa, não de PRs). Vou trabalhar direto no HTML/CSS/JS existente, reaproveitando classes e estrutura já criadas.
 2. **Nome do repositório é enganoso.** `arcadigital` é o repo do site da própria ArcaLabs (confirmado pelo Marcos), não de um cliente chamado "Arca Digital". Documentando aqui para não haver confusão futura.
-3. **Bloqueio de acesso identificado e reportado ao Marcos:** a conta `gh` autenticada (`institutohombridade`) tem permissão de leitura mas não de escrita (`push: false`) no repo `arcalabsdigital-stack/arcadigital`. Por isso, todo o trabalho abaixo foi feito **localmente** na branch `redesign/2026-09`, sem nenhum push ao GitHub até a permissão ser resolvida. O Marcos está ciente e vai liberar acesso ou trocar de credencial.
+3. **Bloqueio de acesso identificado e resolvido.** A conta `gh` autenticada originalmente (`institutohombridade`) tinha permissão de leitura mas não de escrita (`push: false`) no repo `arcalabsdigital-stack/arcadigital`. Por isso, todo o trabalho abaixo foi feito **localmente** na branch `redesign/2026-09` primeiro. O Marcos autenticou a conta `arcalabsdigital-stack` via `gh auth login --web` (confirmado `push: true` pela API) e, como o `git push` seguia sendo negado pelo sistema de permissões do próprio Claude Code (não mais por credencial), ele rodou o push manualmente. Confirmado via `git ls-remote` que `backup/pre-redesign-2026-09-21`, `v-antes-redesign` e `redesign/2026-09` estão no GitHub.
 4. **Paleta e tipografia extraídas do CSS existente (não inventadas):**
    - `--primary-bg: #111` (fundo principal, quase preto)
    - `--secondary-bg: #1a1a1a` (fundo de cards)
@@ -29,7 +29,7 @@ Registro de todas as decisões tomadas de forma autônoma durante o redesign ini
 
 - Branch `backup/pre-redesign-2026-09-21` criada a partir do commit `94964d9` (HEAD da `main` em 2026-09-22, mensagem "Update consultoria IA").
 - Tag anotada `v-antes-redesign` apontando para o mesmo commit `94964d9`.
-- **Push pendente** por causa do bloqueio de credencial descrito acima. Branch e tag existem localmente; serão enviadas ao GitHub assim que o acesso de escrita for liberado.
+- **Push confirmado no GitHub** (`git ls-remote origin`): `refs/heads/backup/pre-redesign-2026-09-21` → `94964d9`, `refs/tags/v-antes-redesign` → `94964d9`.
 
 ---
 
@@ -114,7 +114,7 @@ Mantidas as 4 perguntas originais. Adicionadas 3 novas, cobrindo exatamente as l
 
 ## Pendências para o Marcos revisar/decidir
 
-1. **Autorizar push** de `backup/pre-redesign-2026-09-21`, `v-antes-redesign` e `redesign/2026-09` pro GitHub (bloqueado por permissão da conta `gh` atual — ver Fase 0, item 3).
+1. ~~Autorizar push~~ — feito em 2026-09-22: `backup/pre-redesign-2026-09-21`, `v-antes-redesign` e `redesign/2026-09` confirmados no GitHub.
 2. **Substituir a foto placeholder** da seção Sobre por uma foto real.
 3. **Revisar os valores dos pacotes** (Fase 3) — foram definidos por julgamento de mercado, não por dado interno da ArcaLabs.
 4. **Verificação visual em navegador real** antes do merge (ver limitação técnica acima).
