@@ -569,14 +569,28 @@
             const recomendacoes={
                 sem_sistema:{titulo:'Sistema Sob Medida',texto:'Sua empresa ainda não tem sistema próprio. O caminho mais comum é começar com um diagnóstico rápido e desenhar um Sistema Sob Medida enxuto (MVP), que já resolve o essencial e cresce junto com o negócio.'},
                 planilha_travando:{titulo:'Sistema Sob Medida',texto:'Planilha que já não aguenta o tamanho da operação é o sinal mais claro de que chegou a hora de migrar pra um Sistema Sob Medida, com banco de dados de verdade e processos automatizados.'},
-                atendimento:{titulo:'Automação com IA',texto:'Atendimento consumindo tempo demais é resolvido com Automação com IA — conectando WhatsApp e ferramentas internas, sempre com supervisão humana nos pontos críticos.'},
+                atendimento:{titulo:'Automação com IA',texto:'Atendimento consumindo tempo demais é resolvido com Automação com IA — conectando WhatsApp e ferramentas internas, sempre com supervisão humana nos pontos críticos. O valor é sempre orçado sob consulta, depois de entender o fluxo no diagnóstico gratuito.'},
                 validar_ideia:{titulo:'Consultoria / Diagnóstico + MVP',texto:'Antes de investir pesado numa ideia de produto/SaaS, o caminho mais seguro é uma Consultoria/Diagnóstico pra validar escopo e, se fizer sentido, um MVP enxuto pra testar rápido.'}
             };
+            const diagnosticoGratuito={titulo:'Diagnóstico Gratuito',texto:'Com esse orçamento, o passo certo ainda não é fechar um pacote — é entender o escopo primeiro. Agende um diagnóstico gratuito de 30 minutos: a gente conversa sobre o seu momento e só depois indica o caminho (e o valor) certo pra sua realidade.'};
             const prazos={urgente:'Prazo apertado, em poucas semanas.',medio:'Prazo de 1 a 3 meses.',pesquisando:'Ainda em fase de pesquisa.'};
             const orcamentos={ate_2k:'Orçamento de até R$ 2 mil.',"2a10k":'Orçamento entre R$ 2 mil e R$ 10 mil.',acima_10k:'Orçamento acima de R$ 10 mil.',nao_sei:'Orçamento ainda não definido — é exatamente pra isso que serve o diagnóstico.'};
+            const RESSALVA_TETO=' Importante: com esse orçamento, o valor final pode ficar acima do teto informado, dependendo do escopo — isso é esclarecido sem custo no diagnóstico, antes de qualquer compromisso.';
             function buildResult(){
-                let rec=recomendacoes[answers['1']];
-                if(answers['1']==='sem_sistema'&&answers['3']==='ate_2k'){rec={titulo:'Landing Page / Site Institucional',texto:'Com esse orçamento, o ponto de partida ideal é o Pacote de Entrada: um site institucional profissional que já coloca sua empresa no ar. Depois, dá pra evoluir pra um sistema sob medida.'}}
+                const dor=answers['1'],orcamento=answers['3'];
+                let rec;
+                if(orcamento==='ate_2k'&&dor==='sem_sistema'){
+                    // Único caso em que "até R$ 2 mil" cobre o piso de um pacote com preço fixo (Landing Page, R$ 1.900).
+                    rec={titulo:'Landing Page / Site Institucional',texto:'Com esse orçamento, o ponto de partida ideal é o Pacote de Entrada: um site institucional profissional que já coloca sua empresa no ar. Depois, dá pra evoluir pra um sistema sob medida.'};
+                } else if(orcamento==='ate_2k'){
+                    // planilha_travando, atendimento e validar_ideia apontam pra pacotes sem piso compatível com até R$ 2 mil — não prometer o que não cabe no orçamento.
+                    rec=diagnosticoGratuito;
+                } else {
+                    rec=Object.assign({},recomendacoes[dor]);
+                    if(orcamento==='2a10k'&&(rec.titulo==='Sistema Sob Medida'||rec.titulo==='Automação com IA')){
+                        rec.texto+=RESSALVA_TETO;
+                    }
+                }
                 const summaryEl=document.getElementById('quizSummary');
                 summaryEl.textContent='Recomendação: '+rec.titulo+'\n\n'+rec.texto+'\n\n'+prazos[answers['2']]+'\n'+orcamentos[answers['3']];
                 const msg='Olá! Fiz o diagnóstico rápido no site da ArcaLabs e o resultado foi: '+rec.titulo+'. Quero conversar sobre isso.';
