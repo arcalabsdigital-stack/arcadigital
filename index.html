@@ -118,6 +118,14 @@
         .quiz-result .quiz-summary{background:var(--primary-bg);padding:1.2rem;border-radius:8px;color:var(--text-dark);font-size:.95rem;margin-bottom:1.5rem;white-space:pre-line;text-align:left}
         .quiz-restart{background:none;border:none;color:var(--text-dark);text-decoration:underline;cursor:pointer;font-family:var(--font-main);margin-top:1rem;font-size:.9rem}
         @media (max-width:768px){.quiz-box{padding:1.5rem}}
+
+        /* ===== Redesign 2026-09: cards genéricos de informação (Para quem / Diferenciais / Segurança) ===== */
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:2rem}
+        .info-card{background-color:var(--secondary-bg);padding:2rem;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.4);transition:transform .3s,box-shadow .3s}
+        .info-card:hover{transform:translateY(-6px);box-shadow:0 10px 25px rgba(22,134,207,.3)}
+        .info-card .card-icon{font-size:1.7rem;color:var(--accent);margin-bottom:1rem;display:block}
+        .info-card .pain{color:var(--text-light);font-weight:700;font-size:1.15rem;margin:0 0 .6rem;font-family:var(--font-title)}
+        .info-card p{color:var(--text-dark);font-size:.98rem;margin:0;line-height:1.5}
     </style>
 </head>
 <body>
@@ -130,6 +138,7 @@
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#diagnostico">Diagnóstico</a></li>
+                    <li><a href="#para-quem">Pra quem</a></li>
                     <li><a href="#servicos">Serviços</a></li>
                     <li><a href="#portfolio">Portfólio</a></li>
                     <li><a href="#clientes">Clientes</a></li>
@@ -226,6 +235,32 @@
                         <br>
                         <button type="button" class="quiz-restart" id="quizRestart">Refazer o diagnóstico</button>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="para-quem">
+            <h2 class="gradient-text">Pra quem é a ArcaLabs</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-cubes card-icon"></i>
+                    <p class="pain">Sua empresa ainda não tem sistema próprio</p>
+                    <p>Hoje tudo roda em planilha, WhatsApp e ferramentas genéricas que não conversam entre si. A gente desenha e constrói um sistema sob medida do zero, focado no seu processo real — não num modelo pronto que você tenta adaptar.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-file-excel card-icon"></i>
+                    <p class="pain">Sua planilha já não aguenta mais</p>
+                    <p>O negócio cresceu, os dados se multiplicaram e a planilha começou a travar, duplicar e gerar erro. Migramos essa operação pra um sistema com banco de dados de verdade, feito pra crescer junto com você.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fab fa-whatsapp card-icon"></i>
+                    <p class="pain">Você quer automatizar o atendimento</p>
+                    <p>Sua equipe perde tempo respondendo as mesmas perguntas no WhatsApp e no e-mail. Automatizamos esse fluxo com IA, dentro de regras claras e com supervisão humana nos pontos que exigem julgamento.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-rocket card-icon"></i>
+                    <p class="pain">Você quer validar uma ideia de produto/SaaS</p>
+                    <p>Antes de investir pesado, vale testar rápido. Fazemos o diagnóstico, definimos o escopo mínimo que já entrega valor e construímos um MVP enxuto pra validar com usuários reais.</p>
                 </div>
             </div>
         </section>
