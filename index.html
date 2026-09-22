@@ -92,7 +92,19 @@
         @keyframes scaleUp{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
         @media (max-width:1100px){.hamburger{display:flex}nav{position:fixed;top:0;right:-100%;width:70%;height:100vh;background-color:var(--secondary-bg);flex-direction:column;justify-content:center;transition:.4s;z-index:1050;box-shadow:-5px 0 15px rgba(0,0,0,.5)}nav.active{right:0}nav ul{flex-direction:column;gap:2.5rem;align-items:center}nav a{font-size:1.5rem}.header-actions{margin-right:40px}}
-        @media (max-width:768px){.header-actions{display:none}.logo-wordmark{height:66px;max-width:347px}.hero h1{font-size:2rem}.hero-card{height:65vh;border-radius:20px}.headline-carousel{height:180px}.cta-button .desktop-text{display:none}.cta-button .mobile-text{display:inline}.client-carousel-track{animation-duration:12s}.client-carousel-track img{margin:0 30px;height:80px}.contact-grid{grid-template-columns:1fr}.faith-container{margin-bottom:10px;padding-right:5px}.faith-handwriting{font-size:1.1rem}@keyframes typing{from{width:0}to{width:220px}}}</style>
+        @media (max-width:768px){.header-actions{display:none}.logo-wordmark{height:66px;max-width:347px}.hero h1{font-size:2rem}.hero-card{height:65vh;border-radius:20px}.headline-carousel{height:180px}.cta-button .desktop-text{display:none}.cta-button .mobile-text{display:inline}.client-carousel-track{animation-duration:12s}.client-carousel-track img{margin:0 30px;height:80px}.contact-grid{grid-template-columns:1fr}.faith-container{margin-bottom:10px;padding-right:5px}.faith-handwriting{font-size:1.1rem}@keyframes typing{from{width:0}to{width:220px}}}
+
+        /* ===== Redesign 2026-09: hero CTA secundário de baixa fricção ===== */
+        .hero-secondary-cta{margin-top:1.2rem}
+        .mini-contact-toggle{display:inline-block;color:var(--text-dark);font-size:.9rem;text-decoration:underline;cursor:pointer;background:none;border:none;font-family:var(--font-main);padding:.5rem}
+        .mini-contact-toggle:hover{color:var(--accent)}
+        .mini-contact-form{display:none;max-width:420px;margin:1rem auto 0;background:rgba(26,26,26,.92);backdrop-filter:blur(6px);padding:1.5rem;border-radius:12px;text-align:left;border:1px solid rgba(255,255,255,.1)}
+        .mini-contact-form.active{display:block;animation:fadeIn .4s ease-out}
+        .mini-contact-form input{width:100%;box-sizing:border-box;background-color:var(--primary-bg);border:1px solid var(--accent);padding:.8rem;border-radius:5px;color:var(--text-light);font-size:.95rem;font-family:var(--font-main);margin-bottom:1rem}
+        .mini-contact-form button{width:100%}
+        .mini-contact-form #hero-thank-you{display:none;text-align:center;color:var(--text-light);font-size:.95rem}
+        @media (max-width:768px){.mini-contact-form{max-width:100%}}
+    </style>
 </head>
 <body>
     <header>
@@ -140,6 +152,19 @@
                             <span class="desktop-text">Quero uma Solução Sob Medida para o meu Negócio</span>
                             <span class="mobile-text">Quero minha Solução</span>
                         </a>
+                        <div class="hero-secondary-cta">
+                            <button type="button" class="mini-contact-toggle" id="heroMiniToggle">Prefere deixar seus dados e a gente te chama? →</button>
+                            <div class="mini-contact-form" id="heroMiniForm">
+                                <form id="hero-mini-contact-form" action="https://formspree.io/f/mdangzek" method="POST">
+                                    <input type="hidden" name="_subject" value="Novo Contato via Site ArcaLabs (Hero - Formulário Rápido)">
+                                    <input type="text" name="name" placeholder="Seu nome" required>
+                                    <input type="email" name="email" placeholder="Seu e-mail" required>
+                                    <input type="text" name="necessidade" placeholder="O que você precisa?" required>
+                                    <button type="submit" id="hero-submit-btn">Quero ser contatado</button>
+                                </form>
+                                <p id="hero-thank-you">Recebemos seus dados! Entraremos em contato em breve.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -284,6 +309,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
     <script>
         const hamburger=document.getElementById('hamburger'),navMenu=document.getElementById('nav-menu'),navLinks=document.querySelectorAll('nav a');hamburger.addEventListener('click',()=>{navMenu.classList.toggle('active');hamburger.classList.toggle('active')});navLinks.forEach(link=>{link.addEventListener('click',()=>{navMenu.classList.remove('active');hamburger.classList.remove('active')})});const headlines=document.querySelectorAll('.headline-carousel h1');let currentHeadline=0;function cycleHeadlines(){headlines[currentHeadline].classList.remove('active');currentHeadline=(currentHeadline+1)%headlines.length;headlines[currentHeadline].classList.add('active')}setInterval(cycleHeadlines,4000);const heroVideo=document.getElementById('heroVideo'),soundToggle=document.getElementById('soundToggle'),soundIcon=soundToggle.querySelector('i'),soundText=soundToggle.querySelector('span');soundToggle.addEventListener('click',()=>{if(heroVideo.muted){heroVideo.muted=!1;soundIcon.className='fas fa-volume-up';soundText.innerText='Som On'}else{heroVideo.muted=!0;soundIcon.className='fas fa-volume-mute';soundText.innerText='Som Off'}});window.onload=function(){const cv=document.getElementById('ctaVideo');if(cv)cv.playbackRate=.33;const iv=document.getElementById('infoprodutosVideo');if(iv)iv.playbackRate=.25;const cw=document.getElementById('copywritingVideo');if(cw)cw.playbackRate=.25;const cn=document.getElementById('faithContainer');setInterval(()=>{const o=cn.querySelector('.faith-handwriting'),n=o.cloneNode(!0);cn.removeChild(o);cn.appendChild(n)},8000)};const f=document.getElementById('contact-form'),y=document.getElementById('thank-you-message'),b=document.getElementById('submit-btn');f.addEventListener('submit',async function(e){e.preventDefault();b.disabled=!0;b.innerText="Enviando...";const g=new FormData(f);try{const r=await fetch(f.action,{method:'POST',body:g,headers:{Accept:'application/json'}});if(r.ok){f.style.display='none';y.style.display='block'}else{alert("Erro ao enviar.");b.disabled=!1;b.innerText="Enviar Mensagem"}}catch(k){alert("Erro de conexão.");b.disabled=!1;b.innerText="Enviar Mensagem"}});function resetForm(){f.reset();f.style.display='flex';y.style.display='none';b.disabled=!1;b.innerText="Enviar Mensagem"}
+
+        // Redesign 2026-09: mini-formulário do hero (CTA secundário de baixa fricção)
+        const heroToggle=document.getElementById('heroMiniToggle'),heroForm=document.getElementById('heroMiniForm');
+        heroToggle.addEventListener('click',()=>{heroForm.classList.toggle('active')});
+        const hf=document.getElementById('hero-mini-contact-form'),hy=document.getElementById('hero-thank-you'),hb=document.getElementById('hero-submit-btn');
+        hf.addEventListener('submit',async function(e){e.preventDefault();hb.disabled=!0;hb.innerText="Enviando...";const g=new FormData(hf);try{const r=await fetch(hf.action,{method:'POST',body:g,headers:{Accept:'application/json'}});if(r.ok){hf.style.display='none';hy.style.display='block'}else{alert("Erro ao enviar.");hb.disabled=!1;hb.innerText="Quero ser contatado"}}catch(k){alert("Erro de conexão.");hb.disabled=!1;hb.innerText="Quero ser contatado"}});
     </script>
 </body>
 </html>
