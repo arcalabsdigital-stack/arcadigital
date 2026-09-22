@@ -136,6 +136,22 @@
         .about-role{color:var(--accent);font-weight:700;margin-bottom:1rem;font-size:1rem}
         .about-text p{color:var(--text-dark);font-size:1.05rem;line-height:1.6}
         @media (max-width:768px){.about-grid{flex-direction:column;text-align:center}}
+
+        /* ===== Redesign 2026-09: Pacotes / Investimento ===== */
+        .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:2rem;align-items:stretch}
+        .pricing-item{background-color:var(--secondary-bg);border-radius:14px;padding:2.2rem 1.8rem;display:flex;flex-direction:column;box-shadow:0 5px 15px rgba(0,0,0,.4);transition:transform .3s,box-shadow .3s;border:1px solid rgba(255,255,255,.06)}
+        .pricing-item:hover{transform:translateY(-6px);box-shadow:0 10px 25px rgba(22,134,207,.3)}
+        .pricing-item.featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 10px 25px rgba(22,134,207,.3)}
+        .pricing-badge{align-self:flex-start;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;padding:.3rem .7rem;border-radius:20px;margin-bottom:1rem;text-transform:uppercase;letter-spacing:.05em}
+        .pricing-item h3{margin:0 0 .3rem;font-size:1.3rem;color:var(--text-light)}
+        .pricing-desc{color:var(--text-dark);font-size:.9rem;margin:0 0 1rem}
+        .pricing-price{font-size:1.9rem;font-weight:800;font-family:var(--font-title);margin:.3rem 0 1.2rem;color:var(--text-light)}
+        .pricing-price span{font-size:.85rem;font-weight:400;color:var(--text-dark);display:block;margin-top:.3rem;font-family:var(--font-main)}
+        .pricing-item ul{list-style:none;padding:0;margin:0 0 1.5rem;flex-grow:1}
+        .pricing-item ul li{color:var(--text-dark);font-size:.92rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.5rem;align-items:flex-start}
+        .pricing-item ul li::before{content:'✓';color:var(--accent);font-weight:700}
+        .pricing-item .cta-button,.pricing-item .white-cta-button{width:100%;box-sizing:border-box}
+        .pricing-note{text-align:center;color:var(--text-dark);font-size:.9rem;max-width:750px;margin:2.5rem auto 0;line-height:1.6}
     </style>
 </head>
 <body>
@@ -153,6 +169,7 @@
                     <li><a href="#diferenciais">Diferenciais</a></li>
                     <li><a href="#portfolio">Portfólio</a></li>
                     <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#pacotes">Pacotes</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
@@ -413,6 +430,62 @@
                     <a href="https://wa.me/5547992291756" target="_blank" class="white-cta-button">Falar com Especialista</a>
                 </div>
             </div>
+        </section>
+
+        <section id="pacotes">
+            <h2 class="gradient-text">Pacotes e Investimento</h2>
+            <div class="pricing-grid">
+                <div class="pricing-item">
+                    <h3>Landing Page / Site Institucional</h3>
+                    <p class="pricing-desc">Pra colocar sua empresa no ar com credibilidade.</p>
+                    <div class="pricing-price">R$ 1.900<span>valor fixo</span></div>
+                    <ul>
+                        <li>Até 5 páginas (Home, Sobre, Serviços, Contato + 1)</li>
+                        <li>Design responsivo, com a identidade da sua marca</li>
+                        <li>Formulário de contato integrado</li>
+                        <li>SEO on-page básico</li>
+                        <li>Até 2 rodadas de revisão</li>
+                        <li>Prazo estimado: 10 a 15 dias úteis</li>
+                    </ul>
+                    <a href="https://wa.me/5547992291756?text=Quero%20saber%20mais%20sobre%20o%20pacote%20Landing%20Page%20%2F%20Site%20Institucional" target="_blank" class="cta-button">Falar sobre esse pacote</a>
+                </div>
+                <div class="pricing-item featured">
+                    <span class="pricing-badge">Mais procurado</span>
+                    <h3>Sistema Sob Medida</h3>
+                    <p class="pricing-desc">SaaS ou aplicativo construído pro seu processo específico.</p>
+                    <div class="pricing-price">A partir de R$ 8.900<span>valor final definido após o diagnóstico</span></div>
+                    <ul>
+                        <li>Diagnóstico e definição de escopo incluídos</li>
+                        <li>Banco de dados, autenticação e painel administrativo</li>
+                        <li>Arquitetura pensada pra crescer com o negócio</li>
+                        <li>Suporte dedicado após a entrega</li>
+                    </ul>
+                    <a href="https://wa.me/5547992291756?text=Quero%20saber%20mais%20sobre%20o%20pacote%20Sistema%20Sob%20Medida" target="_blank" class="cta-button">Falar sobre esse pacote</a>
+                </div>
+                <div class="pricing-item">
+                    <h3>Automação com IA</h3>
+                    <p class="pricing-desc">Pra tirar tarefas repetitivas das mãos da sua equipe.</p>
+                    <div class="pricing-price">A partir de R$ 1.490<span>automação simples · projetos maiores sob consulta</span></div>
+                    <ul>
+                        <li>Automação simples: 1 fluxo (ex.: WhatsApp, e-mail ou integração entre 2 ferramentas)</li>
+                        <li>Projetos com IA generativa ou múltiplas integrações: orçados sob consulta</li>
+                        <li>Supervisão humana nos pontos críticos do fluxo</li>
+                    </ul>
+                    <a href="https://wa.me/5547992291756?text=Quero%20saber%20mais%20sobre%20Automa%C3%A7%C3%A3o%20com%20IA" target="_blank" class="cta-button">Falar sobre esse pacote</a>
+                </div>
+                <div class="pricing-item">
+                    <h3>Consultoria / Diagnóstico</h3>
+                    <p class="pricing-desc">Pra entender o caminho certo antes de investir.</p>
+                    <div class="pricing-price">Gratuita<span>diagnóstico técnico documentado: R$ 490 (abatido do projeto, se fechado)</span></div>
+                    <ul>
+                        <li>Primeira conversa de diagnóstico (30 min, por WhatsApp): sem custo</li>
+                        <li>Diagnóstico técnico aprofundado e documentado: sob demanda, valor abatido caso o projeto avance</li>
+                        <li>Ideal antes de decisões maiores (Sistema Sob Medida ou validação de produto)</li>
+                    </ul>
+                    <a href="https://wa.me/5547992291756?text=Quero%20agendar%20um%20diagn%C3%B3stico" target="_blank" class="white-cta-button">Agendar diagnóstico gratuito</a>
+                </div>
+            </div>
+            <p class="pricing-note">Os valores de Sistema Sob Medida e Automação com IA são estimativas de mercado para projetos de escopo padrão — o valor final é sempre fechado depois do diagnóstico, com escopo, prazo e entregáveis por escrito antes de qualquer cobrança.</p>
         </section>
 
         <section id="faq">
