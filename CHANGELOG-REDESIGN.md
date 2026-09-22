@@ -112,10 +112,29 @@ Mantidas as 4 perguntas originais. Adicionadas 3 novas, cobrindo exatamente as l
 
 ---
 
+## Rodada 2 — Ajustes pedidos pelo Marcos após revisão (2026-09-22)
+
+Todos os 9 itens abaixo foram commitados individualmente na branch `redesign/2026-09`, na ordem 2→9→1 (a lógica do quiz do item 1 foi implementada por último de propósito, já considerando a mudança de preço do item 9, pra não precisar reescrevê-la duas vezes).
+
+1. **Lógica do quiz corrigida (orçamento × recomendação).** O bug: pra quem respondia "planilha travando", "atendimento" ou "validar ideia" na pergunta 1 e "Até R$ 2 mil" na pergunta 3, o quiz podia recomendar Sistema Sob Medida (a partir de R$ 8.900) ou Automação com IA — incompatível com o orçamento informado. Corrigido com uma nova regra: orçamento "até R$ 2 mil" agora só recomenda Landing Page (dor = sem_sistema, único pacote com piso ≤ R$ 2 mil) ou "Diagnóstico Gratuito" (as outras 3 dores) — nunca um pacote sem piso compatível. Pra faixa "Entre R$ 2 mil e R$ 10 mil", quando a recomendação é Sistema Sob Medida ou Automação com IA, o texto agora inclui uma ressalva explícita de que o valor final pode ficar acima do teto informado, a esclarecer no diagnóstico gratuito. **Verificação:** como a pergunta de prazo (pergunta 2) não influencia qual pacote é recomendado — só adiciona uma frase informativa ao resumo —, a lógica de recomendação depende apenas de dor×orçamento (16 combinações, que cobrem as 48 combinações totais 4×3×4). Rodei um script Node simulando essas 16 combinações contra os pisos de preço de cada pacote: **zero incompatibilidades sem ressalva** (log completo rodado nesta sessão, disponível no histórico do terminal).
+2. **Título do diagnóstico** trocado de "Veja o diagnóstico funcionando, ao vivo" para "Faça um diagnóstico rápido".
+3. **Card de diferencial** "Comunicação direta com o fundador" → "Comunicação direta com o programador". Parágrafo abaixo não citava "fundador" diretamente, então não precisou de ajuste de concordância.
+4. **Título do portfólio** "Prova Social" → "Veja alguns produtos desenvolvidos".
+5. **Seção "Sobre" (Quem constrói) removida por completo** — placeholder de foto, nome, cargo e texto, mais o CSS específico dela (`.about-grid`, `.about-photo-placeholder`, `.about-text`, `.about-role` e o media query associado), que ficaria órfão no arquivo. O banner de CTA em vídeo passou a vir logo depois do portfólio, sem espaço em branco. Verificado balanceamento de tags após a remoção (11 `<section>` abertas/fechadas, 75 `<div>` abertas/fechadas).
+6. **Menu "Pacotes" → "Preços".** Mantive `id="pacotes"` no HTML (não quebra o link de âncora) e troquei só o texto visível do menu. Pra consistência, também troquei o `<h2>` da seção de "Pacotes e Investimento" pra "Preços" e a referência na pergunta 5 do FAQ ("veja a seção de Pacotes" → "veja a seção de Preços").
+7. **Card "Onde seus dados ficam"** não cita mais "Railway" — mantém a explicação sobre PostgreSQL, infraestrutura na nuvem e acesso restrito por autenticação, só sem nomear o provedor específico.
+8. **Novo card "Guard rails: trava técnica, não promessa"** adicionado na seção Segurança e IA, logo depois do card "A IA não decide sozinha" (reforça o mesmo ponto, indo um pouco mais fundo): explica que o login exige autenticação com permissão por papel de usuário, e que os agentes de IA rodam com regras técnicas que bloqueiam automaticamente qualquer ação fora do escopo combinado — sem jargão de engenharia.
+9. **Automação com IA nos Pacotes** trocou de "A partir de R$ 1.490" pra "Sob consulta", no mesmo formato do Sistema Sob Medida. A lista de itens do card foi ajustada pra deixar claro que o escopo (simples ou complexo) é o que define o orçamento, sem piso fixo. A nota geral abaixo da tabela de preços também foi reescrita pra não sugerir mais que Automação tem uma "estimativa de mercado" — agora deixa explícito que é sempre sob consulta.
+
+**Sobre o pedido de revisar o FAQ (pergunta 5):** conferi o texto atual e ele já dizia "automações com IA têm valor final definido depois do diagnóstico" — não citava um valor específico de automação como a premissa da tarefa supunha. Não havia, portanto, nada desatualizado por causa da mudança do item 9 além da referência "seção de Pacotes", já corrigida no item 6.
+
+---
+
 ## Pendências para o Marcos revisar/decidir
 
 1. ~~Autorizar push~~ — feito em 2026-09-22: `backup/pre-redesign-2026-09-21`, `v-antes-redesign` e `redesign/2026-09` confirmados no GitHub.
-2. **Substituir a foto placeholder** da seção Sobre por uma foto real.
-3. **Revisar os valores dos pacotes** (Fase 3) — foram definidos por julgamento de mercado, não por dado interno da ArcaLabs.
-4. **Verificação visual em navegador real** antes do merge (ver limitação técnica acima).
-5. Nenhum merge feito na `main`, nenhum deploy em produção — aguardando autorização explícita, conforme instrução.
+2. ~~Substituir a foto placeholder da seção Sobre~~ — não se aplica mais: a seção "Sobre" foi removida por completo na Rodada 2.
+3. **Revisar os valores dos pacotes** (Fase 3, e a mudança da Automação com IA para "Sob consulta" na Rodada 2) — foram definidos por julgamento de mercado, não por dado interno da ArcaLabs.
+4. **Verificação visual em navegador real** antes do merge (ver limitação técnica na seção "Verificação técnica feita" — ainda não há ferramenta de browser disponível nesta sessão).
+5. **Novo commit local pendente de push:** a branch `redesign/2026-09` recebeu 9 commits novos nesta rodada (o mais recente é o da correção da lógica do quiz) que ainda não foram enviados ao GitHub — repetir `git push origin redesign/2026-09`.
+6. Nenhum merge feito na `main`, nenhum deploy em produção — aguardando autorização explícita, conforme instrução.
