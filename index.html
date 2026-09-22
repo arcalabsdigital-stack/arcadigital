@@ -92,7 +92,58 @@
         @keyframes scaleUp{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
         @media (max-width:1100px){.hamburger{display:flex}nav{position:fixed;top:0;right:-100%;width:70%;height:100vh;background-color:var(--secondary-bg);flex-direction:column;justify-content:center;transition:.4s;z-index:1050;box-shadow:-5px 0 15px rgba(0,0,0,.5)}nav.active{right:0}nav ul{flex-direction:column;gap:2.5rem;align-items:center}nav a{font-size:1.5rem}.header-actions{margin-right:40px}}
-        @media (max-width:768px){.header-actions{display:none}.logo-wordmark{height:66px;max-width:347px}.hero h1{font-size:2rem}.hero-card{height:65vh;border-radius:20px}.headline-carousel{height:180px}.cta-button .desktop-text{display:none}.cta-button .mobile-text{display:inline}.client-carousel-track{animation-duration:12s}.client-carousel-track img{margin:0 30px;height:80px}.contact-grid{grid-template-columns:1fr}.faith-container{margin-bottom:10px;padding-right:5px}.faith-handwriting{font-size:1.1rem}@keyframes typing{from{width:0}to{width:220px}}}</style>
+        @media (max-width:768px){.header-actions{display:none}.logo-wordmark{height:66px;max-width:347px}.hero h1{font-size:2rem}.hero-card{height:65vh;border-radius:20px}.headline-carousel{height:180px}.cta-button .desktop-text{display:none}.cta-button .mobile-text{display:inline}.client-carousel-track{animation-duration:12s}.client-carousel-track img{margin:0 30px;height:80px}.contact-grid{grid-template-columns:1fr}.faith-container{margin-bottom:10px;padding-right:5px}.faith-handwriting{font-size:1.1rem}@keyframes typing{from{width:0}to{width:220px}}}
+
+        /* ===== Redesign 2026-09: hero CTA secundário de baixa fricção ===== */
+        .hero-secondary-cta{margin-top:1.2rem}
+        .mini-contact-toggle{display:inline-block;color:var(--text-dark);font-size:.9rem;text-decoration:underline;cursor:pointer;background:none;border:none;font-family:var(--font-main);padding:.5rem}
+        .mini-contact-toggle:hover{color:var(--accent)}
+        .mini-contact-form{display:none;max-width:420px;margin:1rem auto 0;background:rgba(26,26,26,.92);backdrop-filter:blur(6px);padding:1.5rem;border-radius:12px;text-align:left;border:1px solid rgba(255,255,255,.1)}
+        .mini-contact-form.active{display:block;animation:fadeIn .4s ease-out}
+        .mini-contact-form input{width:100%;box-sizing:border-box;background-color:var(--primary-bg);border:1px solid var(--accent);padding:.8rem;border-radius:5px;color:var(--text-light);font-size:.95rem;font-family:var(--font-main);margin-bottom:1rem}
+        .mini-contact-form button{width:100%}
+        .mini-contact-form #hero-thank-you{display:none;text-align:center;color:var(--text-light);font-size:.95rem}
+        @media (max-width:768px){.mini-contact-form{max-width:100%}}
+
+        /* ===== Redesign 2026-09: diagnóstico interativo (prova ao vivo) ===== */
+        .quiz-box{max-width:700px;margin:2rem auto 0;background:var(--secondary-bg);padding:2.5rem;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+        .quiz-step{display:none}
+        .quiz-step.active{display:block;animation:fadeIn .4s ease-out}
+        .quiz-progress{font-size:.85rem;color:var(--text-dark);margin-bottom:1rem}
+        .quiz-step p.quiz-question{font-size:1.25rem;font-weight:700;margin:0 0 1.3rem}
+        .quiz-options{display:flex;flex-direction:column;gap:.8rem}
+        .quiz-options button{background:var(--primary-bg);border:1px solid rgba(255,255,255,.15);color:var(--text-light);padding:1rem 1.2rem;border-radius:8px;text-align:left;cursor:pointer;font-family:var(--font-main);font-size:1rem;transition:all .2s ease}
+        .quiz-options button:hover{border-color:var(--accent);box-shadow:0 0 10px rgba(22,134,207,.4)}
+        .quiz-result h3{margin-top:0;font-size:1.5rem}
+        .quiz-result .quiz-summary{background:var(--primary-bg);padding:1.2rem;border-radius:8px;color:var(--text-dark);font-size:.95rem;margin-bottom:1.5rem;white-space:pre-line;text-align:left}
+        .quiz-restart{background:none;border:none;color:var(--text-dark);text-decoration:underline;cursor:pointer;font-family:var(--font-main);margin-top:1rem;font-size:.9rem}
+        @media (max-width:768px){.quiz-box{padding:1.5rem}}
+
+        /* ===== Redesign 2026-09: cards genéricos de informação (Para quem / Diferenciais / Segurança) ===== */
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:2rem}
+        .info-card{background-color:var(--secondary-bg);padding:2rem;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.4);transition:transform .3s,box-shadow .3s}
+        .info-card:hover{transform:translateY(-6px);box-shadow:0 10px 25px rgba(22,134,207,.3)}
+        .info-card .card-icon{font-size:1.7rem;color:var(--accent);margin-bottom:1rem;display:block}
+        .info-card .pain{color:var(--text-light);font-weight:700;font-size:1.15rem;margin:0 0 .6rem;font-family:var(--font-title)}
+        .info-card h3{color:var(--text-light);font-size:1.15rem;margin:0 0 .6rem}
+        .info-card p{color:var(--text-dark);font-size:.98rem;margin:0;line-height:1.5}
+
+        /* ===== Redesign 2026-09: Pacotes / Investimento ===== */
+        .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:2rem;align-items:stretch}
+        .pricing-item{background-color:var(--secondary-bg);border-radius:14px;padding:2.2rem 1.8rem;display:flex;flex-direction:column;box-shadow:0 5px 15px rgba(0,0,0,.4);transition:transform .3s,box-shadow .3s;border:1px solid rgba(255,255,255,.06)}
+        .pricing-item:hover{transform:translateY(-6px);box-shadow:0 10px 25px rgba(22,134,207,.3)}
+        .pricing-item.featured{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 10px 25px rgba(22,134,207,.3)}
+        .pricing-badge{align-self:flex-start;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;padding:.3rem .7rem;border-radius:20px;margin-bottom:1rem;text-transform:uppercase;letter-spacing:.05em}
+        .pricing-item h3{margin:0 0 .3rem;font-size:1.3rem;color:var(--text-light)}
+        .pricing-desc{color:var(--text-dark);font-size:.9rem;margin:0 0 1rem}
+        .pricing-price{font-size:1.9rem;font-weight:800;font-family:var(--font-title);margin:.3rem 0 1.2rem;color:var(--text-light)}
+        .pricing-price span{font-size:.85rem;font-weight:400;color:var(--text-dark);display:block;margin-top:.3rem;font-family:var(--font-main)}
+        .pricing-item ul{list-style:none;padding:0;margin:0 0 1.5rem;flex-grow:1}
+        .pricing-item ul li{color:var(--text-dark);font-size:.92rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.5rem;align-items:flex-start}
+        .pricing-item ul li::before{content:'✓';color:var(--accent);font-weight:700}
+        .pricing-item .cta-button,.pricing-item .white-cta-button{width:100%;box-sizing:border-box}
+        .pricing-note{text-align:center;color:var(--text-dark);font-size:.9rem;max-width:750px;margin:2.5rem auto 0;line-height:1.6}
+    </style>
 </head>
 <body>
     <header>
@@ -103,9 +154,10 @@
             <nav id="nav-menu">
                 <ul>
                     <li><a href="#home">Home</a></li>
+                    <li><a href="#diagnostico">Diagnóstico</a></li>
                     <li><a href="#servicos">Serviços</a></li>
                     <li><a href="#portfolio">Portfólio</a></li>
-                    <li><a href="#clientes">Clientes</a></li>
+                    <li><a href="#pacotes">Preços</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
@@ -140,24 +192,91 @@
                             <span class="desktop-text">Quero uma Solução Sob Medida para o meu Negócio</span>
                             <span class="mobile-text">Quero minha Solução</span>
                         </a>
+                        <div class="hero-secondary-cta">
+                            <button type="button" class="mini-contact-toggle" id="heroMiniToggle">Prefere deixar seus dados e a gente te chama? →</button>
+                            <div class="mini-contact-form" id="heroMiniForm">
+                                <form id="hero-mini-contact-form" action="https://formspree.io/f/mdangzek" method="POST">
+                                    <input type="hidden" name="_subject" value="Novo Contato via Site ArcaLabs (Hero - Formulário Rápido)">
+                                    <input type="text" name="name" placeholder="Seu nome" required>
+                                    <input type="email" name="email" placeholder="Seu e-mail" required>
+                                    <input type="text" name="necessidade" placeholder="O que você precisa?" required>
+                                    <button type="submit" id="hero-submit-btn">Quero ser contatado</button>
+                                </form>
+                                <p id="hero-thank-you">Recebemos seus dados! Entraremos em contato em breve.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="clientes">
-            <h2 class="gradient-text">Clientes Satisfeitos</h2>
-            <div class="client-carousel-container">
-                <div class="client-carousel-track">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1764385311/Design_sem_nome_8_rplrtq.png" alt="Devorare" class="logo-colored logo-devorare" width="140" height="100" loading="lazy">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1765711661/Haus_Climatiza%C3%A7%C3%A3o_lilbyy.png" alt="Haus Climatização" class="logo-white logo-haus" width="110" height="110" loading="lazy">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_300,f_auto,q_auto/v1765411342/logocompleta_transp_w7xlok.png" alt="Marcio Morais" class="logo-colored logo-marcio" width="140" height="140" loading="lazy">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_250,f_auto,q_auto/v1765137026/logoMultiAeletric-transp_wjbkot.png" alt="MultiA" class="logo-colored logo-multia" width="130" height="130" loading="lazy">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_300,f_auto,q_auto/v1766241369/39_90_500_x_800_px_kkc6w6.png" alt="Curados para Vencer" class="logo-curados" width="210" height="210" loading="lazy">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1766241536/LIA_FUNDO_TRANSPARENTE_ncmieo.png" alt="LIA" class="logo-colored logo-lia" width="110" height="110" loading="lazy">
-                    <!-- Loop -->
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1764385311/Design_sem_nome_8_rplrtq.png" alt="Devorare" class="logo-colored logo-devorare" width="140" height="100" loading="lazy">
-                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1765711661/Haus_Climatiza%C3%A7%C3%A3o_lilbyy.png" alt="Haus Climatização" class="logo-white logo-haus" width="110" height="110" loading="lazy">
+        <section id="diagnostico">
+            <h2 class="gradient-text">Faça um diagnóstico rápido</h2>
+            <p style="text-align:center;color:var(--text-dark);max-width:700px;margin:-1.5rem auto 0">Antes de fechar qualquer projeto, a gente faz um diagnóstico pra entender o seu momento. Responda 3 perguntas rápidas e veja, na hora, qual caminho faz mais sentido pro seu negócio.</p>
+            <div class="quiz-box" id="quizBox">
+                <div class="quiz-step active" data-step="1">
+                    <p class="quiz-progress">Pergunta 1 de 3</p>
+                    <p class="quiz-question">Qual frase mais parece com o momento da sua empresa hoje?</p>
+                    <div class="quiz-options">
+                        <button type="button" data-q="1" data-v="sem_sistema">Ainda não tenho sistema próprio — uso planilha e WhatsApp</button>
+                        <button type="button" data-q="1" data-v="planilha_travando">Tenho planilha, mas ela já não aguenta o tamanho da operação</button>
+                        <button type="button" data-q="1" data-v="atendimento">Meu atendimento consome tempo demais e quero automatizar</button>
+                        <button type="button" data-q="1" data-v="validar_ideia">Tenho uma ideia de produto/SaaS e quero validar antes de investir pesado</button>
+                    </div>
+                </div>
+                <div class="quiz-step" data-step="2">
+                    <p class="quiz-progress">Pergunta 2 de 3</p>
+                    <p class="quiz-question">Qual é o prazo que você imagina pra isso sair do papel?</p>
+                    <div class="quiz-options">
+                        <button type="button" data-q="2" data-v="urgente">Preciso rápido, em poucas semanas</button>
+                        <button type="button" data-q="2" data-v="medio">1 a 3 meses, sem pressa extrema</button>
+                        <button type="button" data-q="2" data-v="pesquisando">Ainda estou só pesquisando e entendendo opções</button>
+                    </div>
+                </div>
+                <div class="quiz-step" data-step="3">
+                    <p class="quiz-progress">Pergunta 3 de 3</p>
+                    <p class="quiz-question">Qual orçamento aproximado você tem em mente pra esse projeto?</p>
+                    <div class="quiz-options">
+                        <button type="button" data-q="3" data-v="ate_2k">Até R$ 2 mil</button>
+                        <button type="button" data-q="3" data-v="2a10k">Entre R$ 2 mil e R$ 10 mil</button>
+                        <button type="button" data-q="3" data-v="acima_10k">Acima de R$ 10 mil</button>
+                        <button type="button" data-q="3" data-v="nao_sei">Ainda não sei, quero entender antes</button>
+                    </div>
+                </div>
+                <div class="quiz-step" data-step="result">
+                    <div class="quiz-result">
+                        <h3 class="gradient-text">É isso que recomendamos pra você</h3>
+                        <div class="quiz-summary" id="quizSummary"></div>
+                        <a href="#" target="_blank" id="quizWhatsApp" class="cta-button">Continuar essa conversa no WhatsApp</a>
+                        <br>
+                        <button type="button" class="quiz-restart" id="quizRestart">Refazer o diagnóstico</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="para-quem">
+            <h2 class="gradient-text">Pra quem é a ArcaLabs</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-cubes card-icon"></i>
+                    <p class="pain">Sua empresa ainda não tem sistema próprio</p>
+                    <p>Hoje tudo roda em planilha, WhatsApp e ferramentas genéricas que não conversam entre si. A gente desenha e constrói um sistema sob medida do zero, focado no seu processo real — não num modelo pronto que você tenta adaptar.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-file-excel card-icon"></i>
+                    <p class="pain">Sua planilha já não aguenta mais</p>
+                    <p>O negócio cresceu, os dados se multiplicaram e a planilha começou a travar, duplicar e gerar erro. Migramos essa operação pra um sistema com banco de dados de verdade, feito pra crescer junto com você.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fab fa-whatsapp card-icon"></i>
+                    <p class="pain">Você quer automatizar o atendimento</p>
+                    <p>Sua equipe perde tempo respondendo as mesmas perguntas no WhatsApp e no e-mail. Automatizamos esse fluxo com IA, dentro de regras claras e com supervisão humana nos pontos que exigem julgamento.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-rocket card-icon"></i>
+                    <p class="pain">Você quer validar uma ideia de produto/SaaS</p>
+                    <p>Antes de investir pesado, vale testar rápido. Fazemos o diagnóstico, definimos o escopo mínimo que já entrega valor e construímos um MVP enxuto pra validar com usuários reais.</p>
                 </div>
             </div>
         </section>
@@ -170,63 +289,107 @@
                         <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766136785/Desenvolvimento_Front-End_-_Trim_kgx6dv.mp4" type="video/mp4">
                     </video>
                     <h3 class="gradient-text">Desenvolvimento de Aplicativos</h3>
-                    <p>Construímos aplicativos web e sistemas SaaS completos, do banco de dados à interface, prontos para escalar com o seu negócio.</p>
+                    <p><strong>Problema:</strong> processos presos em planilhas e ferramentas genéricas que não crescem com o negócio. <strong>Solução:</strong> construímos aplicativos web e sistemas SaaS completos, do banco de dados à interface, prontos para escalar.</p>
                 </div>
                 <div class="service-item">
                     <video class="service-video" autoplay muted loop playsinline loading="lazy">
                         <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766166782/otimizacao-conversao_-_Trim_zyhoor.mp4" type="video/mp4">
                     </video>
                     <h3 class="gradient-text">Soluções B2B com Inteligência Artificial</h3>
-                    <p>Integramos IA aos seus processos: análise de dados, agentes autônomos e automações inteligentes que reduzem custo e ganham escala.</p>
+                    <p><strong>Problema:</strong> decisões lentas e tarefas repetitivas consumindo o tempo da sua equipe. <strong>Solução:</strong> integramos IA aos seus processos — análise de dados, agentes e automações inteligentes, sempre operando dentro de regras definidas.</p>
                 </div>
                 <div class="service-item">
                     <video id="infoprodutosVideo" class="service-video" autoplay muted loop playsinline loading="lazy">
                         <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766166777/landingpage_o8cti5.mp4" type="video/mp4">
                     </video>
                     <h3 class="gradient-text">Sites e Landing Pages</h3>
-                    <p>Também criamos sites institucionais e páginas de alta conversão, com o mesmo padrão de qualidade dos nossos produtos.</p>
+                    <p><strong>Problema:</strong> site de template genérico que não representa o valor real da sua empresa. <strong>Solução:</strong> criamos sites institucionais e páginas de alta conversão com o mesmo padrão de engenharia dos nossos sistemas.</p>
                 </div>
                 <div class="service-item">
                     <video class="service-video" autoplay muted loop playsinline loading="lazy">
                         <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766136797/Estrat%C3%A9gia-Digital-Personalizada_nvtav9.mp4" type="video/mp4">
                     </video>
                     <h3 class="gradient-text">Consultoria em Produto e Tecnologia</h3>
-                    <p>Ajudamos a validar a ideia, definir o escopo e traçar a arquitetura certa antes de escrever a primeira linha de código.</p>
+                    <p><strong>Problema:</strong> medo de investir num projeto sem saber se o escopo e a arquitetura estão certos. <strong>Solução:</strong> fazemos o diagnóstico antes de codar — validamos a ideia e definimos o caminho técnico certo desde o início.</p>
                 </div>
                 <div class="service-item">
                     <video class="service-video" autoplay muted loop playsinline loading="lazy">
                         <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766136791/Design_UXUI_-_Trim_z4swmn.mp4" type="video/mp4">
                     </video>
                     <h3 class="gradient-text">Design UX/UI de Produto</h3>
-                    <p>Desenhamos interfaces intuitivas e escaláveis, pensadas para a experiência de quem usa o seu software todos os dias.</p>
+                    <p><strong>Problema:</strong> sistema difícil de usar reduz a adoção da sua equipe e dos seus clientes. <strong>Solução:</strong> desenhamos interfaces intuitivas e escaláveis, pensadas pra quem usa o software todos os dias.</p>
                 </div>
                 <div class="service-item">
                     <video id="copywritingVideo" class="service-video" autoplay muted loop playsinline loading="lazy">
                         <source src="https://res.cloudinary.com/dtgcobo29/video/upload/f_auto,q_auto/v1766166772/copy_f62tau.mp4" type="video/mp4">
                     </video>
                     <h3 class="gradient-text">Automação de Processos</h3>
-                    <p>Eliminamos tarefas manuais e conectamos suas ferramentas, do atendimento no WhatsApp à integração entre sistemas internos.</p>
+                    <p><strong>Problema:</strong> tarefas manuais repetitivas e ferramentas que não se conversam geram retrabalho todo dia. <strong>Solução:</strong> conectamos seus sistemas e eliminamos o trabalho manual, do atendimento no WhatsApp às integrações internas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="diferenciais">
+            <h2 class="gradient-text">Por que a ArcaLabs</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-stethoscope card-icon"></i>
+                    <h3>Diagnóstico antes de codar</h3>
+                    <p>Você só investe depois de entender o escopo, o prazo e a arquitetura do que vai ser construído — nada de orçamento no escuro.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-user-tie card-icon"></i>
+                    <h3>Comunicação direta com o programador</h3>
+                    <p>Sem gerente de conta, sem intermediário de agência inflada. Você fala direto com quem projeta e constrói o seu sistema.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-life-ring card-icon"></i>
+                    <h3>Suporte pós-entrega</h3>
+                    <p>O trabalho não termina quando o sistema vai ao ar. Acompanhamos a operação e evoluímos o produto junto com o seu negócio.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-layer-group card-icon"></i>
+                    <h3>Stack moderna, testada em produção</h3>
+                    <p>Usamos a mesma tecnologia dos nossos sistemas em operação real — nada de modelo genérico de prateleira.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-key card-icon"></i>
+                    <h3>O sistema e os dados são seus</h3>
+                    <p>Ao final do projeto, você é dono do código e dos dados. Sem dependência eterna da ArcaLabs pra operar o que é seu.</p>
                 </div>
             </div>
         </section>
 
         <section id="portfolio">
-            <h2 class="gradient-text">Nosso Portfólio</h2>
+            <h2 class="gradient-text">Veja alguns produtos desenvolvidos</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_600,f_auto,q_auto/v1766169672/automacao_1_xenizb.webp" alt="Plataforma SaaS B2B" width="300" height="220" loading="lazy">
-                    <h3 class="gradient-text">Plataforma SaaS B2B</h3>
-                    <p>Sistema completo de parceria e gestão para o mercado imobiliário, com assinaturas, área do cliente e automações rodando em produção.</p>
+                    <h3 class="gradient-text">Plataforma SaaS B2B (Parcerix)</h3>
+                    <p>Sistema completo de parceria e gestão para o mercado imobiliário, com assinaturas, área do cliente e automações. <strong>Em produção desde maio de 2026.</strong></p>
                 </div>
                 <div class="portfolio-item">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1784734863/portfolio_financas_ia_jrlvnn.svg" alt="Dashboard de gestão financeira com IA" class="illustration" width="300" height="220" loading="lazy">
-                    <h3 class="gradient-text">Gestão Financeira com IA</h3>
-                    <p>Ferramenta de gestão e valuation que automatiza análises financeiras complexas e entrega decisões em minutos, não em dias.</p>
+                    <h3 class="gradient-text">Gestão Financeira com IA (Fluc)</h3>
+                    <p>Ferramenta de gestão e valuation que automatiza análises financeiras complexas e entrega decisões em minutos, não em dias. <strong>Em desenvolvimento ativo.</strong></p>
                 </div>
                 <div class="portfolio-item">
                     <img src="https://res.cloudinary.com/dtgcobo29/image/upload/v1784734863/portfolio_automacao_atendimento_ycchpx.svg" alt="Automação de atendimento no WhatsApp com IA" class="illustration" width="300" height="220" loading="lazy">
                     <h3 class="gradient-text">Automação de Atendimento</h3>
-                    <p>Integração de IA ao WhatsApp e aos processos internos, reduzindo trabalho manual e acelerando a resposta ao cliente.</p>
+                    <p>Integração de IA ao WhatsApp e aos processos internos de clientes reais, reduzindo trabalho manual e acelerando a resposta. <strong>Em uso ativo.</strong></p>
+                </div>
+            </div>
+            <div class="client-carousel-container">
+                <div class="client-carousel-track">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1764385311/Design_sem_nome_8_rplrtq.png" alt="Devorare" class="logo-colored logo-devorare" width="140" height="100" loading="lazy">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1765711661/Haus_Climatiza%C3%A7%C3%A3o_lilbyy.png" alt="Haus Climatização" class="logo-white logo-haus" width="110" height="110" loading="lazy">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_300,f_auto,q_auto/v1765411342/logocompleta_transp_w7xlok.png" alt="Marcio Morais" class="logo-colored logo-marcio" width="140" height="140" loading="lazy">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_250,f_auto,q_auto/v1765137026/logoMultiAeletric-transp_wjbkot.png" alt="MultiA" class="logo-colored logo-multia" width="130" height="130" loading="lazy">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_300,f_auto,q_auto/v1766241369/39_90_500_x_800_px_kkc6w6.png" alt="Curados para Vencer" class="logo-curados" width="210" height="210" loading="lazy">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1766241536/LIA_FUNDO_TRANSPARENTE_ncmieo.png" alt="LIA" class="logo-colored logo-lia" width="110" height="110" loading="lazy">
+                    <!-- Loop -->
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1764385311/Design_sem_nome_8_rplrtq.png" alt="Devorare" class="logo-colored logo-devorare" width="140" height="100" loading="lazy">
+                    <img src="https://res.cloudinary.com/dtgcobo29/image/upload/c_scale,w_200,f_auto,q_auto/v1765711661/Haus_Climatiza%C3%A7%C3%A3o_lilbyy.png" alt="Haus Climatização" class="logo-white logo-haus" width="110" height="110" loading="lazy">
                 </div>
             </div>
         </section>
@@ -244,6 +407,100 @@
             </div>
         </section>
 
+        <section id="pacotes">
+            <h2 class="gradient-text">Preços</h2>
+            <div class="pricing-grid">
+                <div class="pricing-item">
+                    <h3>Landing Page / Site Institucional</h3>
+                    <p class="pricing-desc">Pra colocar sua empresa no ar com credibilidade.</p>
+                    <div class="pricing-price">R$ 1.900<span>valor fixo</span></div>
+                    <ul>
+                        <li>Até 5 páginas (Home, Sobre, Serviços, Contato + 1)</li>
+                        <li>Design responsivo, com a identidade da sua marca</li>
+                        <li>Formulário de contato integrado</li>
+                        <li>SEO on-page básico</li>
+                        <li>Até 2 rodadas de revisão</li>
+                        <li>Prazo estimado: 10 a 15 dias úteis</li>
+                    </ul>
+                    <a href="https://wa.me/5547992291756?text=Quero%20saber%20mais%20sobre%20o%20pacote%20Landing%20Page%20%2F%20Site%20Institucional" target="_blank" class="cta-button">Falar sobre esse pacote</a>
+                </div>
+                <div class="pricing-item featured">
+                    <span class="pricing-badge">Mais procurado</span>
+                    <h3>Sistema Sob Medida</h3>
+                    <p class="pricing-desc">SaaS ou aplicativo construído pro seu processo específico.</p>
+                    <div class="pricing-price">A partir de R$ 8.900<span>valor final definido após o diagnóstico</span></div>
+                    <ul>
+                        <li>Diagnóstico e definição de escopo incluídos</li>
+                        <li>Banco de dados, autenticação e painel administrativo</li>
+                        <li>Arquitetura pensada pra crescer com o negócio</li>
+                        <li>Suporte dedicado após a entrega</li>
+                    </ul>
+                    <a href="https://wa.me/5547992291756?text=Quero%20saber%20mais%20sobre%20o%20pacote%20Sistema%20Sob%20Medida" target="_blank" class="cta-button">Falar sobre esse pacote</a>
+                </div>
+                <div class="pricing-item">
+                    <h3>Automação com IA</h3>
+                    <p class="pricing-desc">Pra tirar tarefas repetitivas das mãos da sua equipe.</p>
+                    <div class="pricing-price">Sob consulta<span>valor definido conforme o escopo, no diagnóstico gratuito</span></div>
+                    <ul>
+                        <li>Automação simples: 1 fluxo (ex.: WhatsApp, e-mail ou integração entre 2 ferramentas)</li>
+                        <li>Automação complexa: IA generativa e múltiplas integrações</li>
+                        <li>O escopo (simples ou complexo) é o que define o orçamento final</li>
+                        <li>Supervisão humana nos pontos críticos do fluxo</li>
+                    </ul>
+                    <a href="https://wa.me/5547992291756?text=Quero%20saber%20mais%20sobre%20Automa%C3%A7%C3%A3o%20com%20IA" target="_blank" class="cta-button">Falar sobre esse pacote</a>
+                </div>
+                <div class="pricing-item">
+                    <h3>Consultoria / Diagnóstico</h3>
+                    <p class="pricing-desc">Pra entender o caminho certo antes de investir.</p>
+                    <div class="pricing-price">Gratuita<span>diagnóstico técnico documentado: R$ 490 (abatido do projeto, se fechado)</span></div>
+                    <ul>
+                        <li>Primeira conversa de diagnóstico (30 min, por WhatsApp): sem custo</li>
+                        <li>Diagnóstico técnico aprofundado e documentado: sob demanda, valor abatido caso o projeto avance</li>
+                        <li>Ideal antes de decisões maiores (Sistema Sob Medida ou validação de produto)</li>
+                    </ul>
+                    <a href="https://wa.me/5547992291756?text=Quero%20agendar%20um%20diagn%C3%B3stico" target="_blank" class="white-cta-button">Agendar diagnóstico gratuito</a>
+                </div>
+            </div>
+            <p class="pricing-note">O valor de Sistema Sob Medida é uma estimativa de mercado para projetos de escopo padrão; Automação com IA é sempre orçada sob consulta, sem piso fixo. Em ambos os casos, o valor final é sempre fechado depois do diagnóstico, com escopo, prazo e entregáveis por escrito antes de qualquer cobrança.</p>
+        </section>
+
+        <section id="seguranca">
+            <h2 class="gradient-text">Segurança e IA: sem letra miúda</h2>
+            <p style="text-align:center;color:var(--text-dark);max-width:700px;margin:-1.5rem auto 0">A gente sabe que "IA" e "meus dados na nuvem" ainda geram desconfiança. Aqui está, em português claro, como isso funciona de verdade nos sistemas que construímos.</p>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-database card-icon"></i>
+                    <h3>Onde seus dados ficam</h3>
+                    <p>Os sistemas rodam em banco de dados PostgreSQL, hospedado em infraestrutura na nuvem, com acesso restrito por autenticação. Ninguém entra nos dados sem senha e permissão — nem dentro da própria empresa.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-robot card-icon"></i>
+                    <h3>A IA não decide sozinha</h3>
+                    <p>A Inteligência Artificial opera dentro de regras e limites definidos com você. Ela não inventa política, preço ou resposta fora do que foi combinado no escopo do projeto.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-shield-alt card-icon"></i>
+                    <h3>Guard rails: trava técnica, não promessa</h3>
+                    <p>No login, cada pessoa só acessa o que faz sentido pro seu papel — sem senha e permissão certas, não entra. Nos agentes de IA existem "guard rails": regras técnicas que bloqueiam automaticamente qualquer ação fora do escopo combinado, como um freio embutido no próprio sistema. Não depende da IA "se comportar bem" por conta própria.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-user-check card-icon"></i>
+                    <h3>Supervisão humana nos pontos críticos</h3>
+                    <p>Em interações com o cliente final — atendimento, cobrança, decisões sensíveis — existe sempre um ponto de checagem humana antes que algo importante aconteça sem revisão.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-balance-scale card-icon"></i>
+                    <h3>Conformidade com a LGPD</h3>
+                    <p>Os sistemas são desenhados para coletar só o dado necessário, com controle de acesso e possibilidade de exclusão, seguindo os princípios da Lei Geral de Proteção de Dados.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-key card-icon"></i>
+                    <h3>Você é dono do que construímos</h3>
+                    <p>Ao final do projeto, o código-fonte e os dados são seus. Você não fica refém da ArcaLabs pra continuar operando o próprio sistema.</p>
+                </div>
+            </div>
+        </section>
+
         <section id="faq">
             <h2 class="gradient-text">Perguntas Frequentes</h2>
             <div class="faq-container">
@@ -251,6 +508,9 @@
                 <details class="faq-item"><summary class="gradient-text">2. Como funciona o início de um projeto?</summary><p>Começamos por um diagnóstico: entendemos o desafio, validamos a ideia e definimos escopo e arquitetura antes de desenvolver. Assim você investe com clareza sobre o resultado esperado.</p></details>
                 <details class="faq-item"><summary class="gradient-text">3. A ArcaLabs oferece suporte após a entrega?</summary><p>Sim. Oferecemos um período de suporte dedicado e planos de evolução contínua, para que o sistema acompanhe o crescimento da sua operação.</p></details>
                 <details class="faq-item"><summary class="gradient-text">4. Vocês também fazem sites?</summary><p>Fazemos. Sites institucionais e landing pages de alta conversão fazem parte dos nossos serviços, com o mesmo padrão de engenharia e design dos nossos produtos de software.</p></details>
+                <details class="faq-item"><summary class="gradient-text">5. Quanto custa um projeto com a ArcaLabs?</summary><p>Temos pacotes a partir de R$ 1.900 (site institucional). Sistemas sob medida e automações com IA têm valor final definido depois do diagnóstico, porque dependem do escopo real do seu negócio — veja a seção de Preços acima pras faixas de valor.</p></details>
+                <details class="faq-item"><summary class="gradient-text">6. Meus dados e os dados dos meus clientes ficam seguros?</summary><p>Sim. Usamos banco de dados PostgreSQL com acesso restrito por autenticação, seguimos os princípios da LGPD e a IA opera sempre dentro de regras definidas, com supervisão humana nos pontos críticos. Veja a seção "Segurança e IA" acima para mais detalhes.</p></details>
+                <details class="faq-item"><summary class="gradient-text">7. Fico "preso" à ArcaLabs depois que o sistema fica pronto?</summary><p>Não. Ao final do projeto, o código e os dados são seus. Você pode continuar com a gente no suporte pós-entrega ou levar o sistema pra outra equipe — a decisão é sempre sua.</p></details>
             </div>
         </section>
 
@@ -279,11 +539,68 @@
             </div>
         </section>
     </main>
-    <footer><p class="copyright">© 2025 ArcaLabs. Todos os direitos reservados.</p></footer>
+    <footer><p class="copyright">© 2026 ArcaLabs. Todos os direitos reservados.</p></footer>
     <!-- Font Awesome Otimizado -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
     <script>
         const hamburger=document.getElementById('hamburger'),navMenu=document.getElementById('nav-menu'),navLinks=document.querySelectorAll('nav a');hamburger.addEventListener('click',()=>{navMenu.classList.toggle('active');hamburger.classList.toggle('active')});navLinks.forEach(link=>{link.addEventListener('click',()=>{navMenu.classList.remove('active');hamburger.classList.remove('active')})});const headlines=document.querySelectorAll('.headline-carousel h1');let currentHeadline=0;function cycleHeadlines(){headlines[currentHeadline].classList.remove('active');currentHeadline=(currentHeadline+1)%headlines.length;headlines[currentHeadline].classList.add('active')}setInterval(cycleHeadlines,4000);const heroVideo=document.getElementById('heroVideo'),soundToggle=document.getElementById('soundToggle'),soundIcon=soundToggle.querySelector('i'),soundText=soundToggle.querySelector('span');soundToggle.addEventListener('click',()=>{if(heroVideo.muted){heroVideo.muted=!1;soundIcon.className='fas fa-volume-up';soundText.innerText='Som On'}else{heroVideo.muted=!0;soundIcon.className='fas fa-volume-mute';soundText.innerText='Som Off'}});window.onload=function(){const cv=document.getElementById('ctaVideo');if(cv)cv.playbackRate=.33;const iv=document.getElementById('infoprodutosVideo');if(iv)iv.playbackRate=.25;const cw=document.getElementById('copywritingVideo');if(cw)cw.playbackRate=.25;const cn=document.getElementById('faithContainer');setInterval(()=>{const o=cn.querySelector('.faith-handwriting'),n=o.cloneNode(!0);cn.removeChild(o);cn.appendChild(n)},8000)};const f=document.getElementById('contact-form'),y=document.getElementById('thank-you-message'),b=document.getElementById('submit-btn');f.addEventListener('submit',async function(e){e.preventDefault();b.disabled=!0;b.innerText="Enviando...";const g=new FormData(f);try{const r=await fetch(f.action,{method:'POST',body:g,headers:{Accept:'application/json'}});if(r.ok){f.style.display='none';y.style.display='block'}else{alert("Erro ao enviar.");b.disabled=!1;b.innerText="Enviar Mensagem"}}catch(k){alert("Erro de conexão.");b.disabled=!1;b.innerText="Enviar Mensagem"}});function resetForm(){f.reset();f.style.display='flex';y.style.display='none';b.disabled=!1;b.innerText="Enviar Mensagem"}
+
+        // Redesign 2026-09: mini-formulário do hero (CTA secundário de baixa fricção)
+        const heroToggle=document.getElementById('heroMiniToggle'),heroForm=document.getElementById('heroMiniForm');
+        heroToggle.addEventListener('click',()=>{heroForm.classList.toggle('active')});
+        const hf=document.getElementById('hero-mini-contact-form'),hy=document.getElementById('hero-thank-you'),hb=document.getElementById('hero-submit-btn');
+        hf.addEventListener('submit',async function(e){e.preventDefault();hb.disabled=!0;hb.innerText="Enviando...";const g=new FormData(hf);try{const r=await fetch(hf.action,{method:'POST',body:g,headers:{Accept:'application/json'}});if(r.ok){hf.style.display='none';hy.style.display='block'}else{alert("Erro ao enviar.");hb.disabled=!1;hb.innerText="Quero ser contatado"}}catch(k){alert("Erro de conexão.");hb.disabled=!1;hb.innerText="Quero ser contatado"}});
+
+        // Redesign 2026-09: diagnóstico interativo (quiz de 3 perguntas)
+        (function(){
+            const quizBox=document.getElementById('quizBox');
+            if(!quizBox)return;
+            const answers={};
+            const steps=quizBox.querySelectorAll('.quiz-step');
+            function showStep(step){steps.forEach(s=>s.classList.toggle('active',s.dataset.step===step))}
+            quizBox.querySelectorAll('.quiz-options button').forEach(btn=>{
+                btn.addEventListener('click',()=>{
+                    answers[btn.dataset.q]=btn.dataset.v;
+                    if(btn.dataset.q==='1')showStep('2');
+                    else if(btn.dataset.q==='2')showStep('3');
+                    else if(btn.dataset.q==='3'){buildResult();showStep('result')}
+                });
+            });
+            const recomendacoes={
+                sem_sistema:{titulo:'Sistema Sob Medida',texto:'Sua empresa ainda não tem sistema próprio. O caminho mais comum é começar com um diagnóstico rápido e desenhar um Sistema Sob Medida enxuto (MVP), que já resolve o essencial e cresce junto com o negócio.'},
+                planilha_travando:{titulo:'Sistema Sob Medida',texto:'Planilha que já não aguenta o tamanho da operação é o sinal mais claro de que chegou a hora de migrar pra um Sistema Sob Medida, com banco de dados de verdade e processos automatizados.'},
+                atendimento:{titulo:'Automação com IA',texto:'Atendimento consumindo tempo demais é resolvido com Automação com IA — conectando WhatsApp e ferramentas internas, sempre com supervisão humana nos pontos críticos. O valor é sempre orçado sob consulta, depois de entender o fluxo no diagnóstico gratuito.'},
+                validar_ideia:{titulo:'Consultoria / Diagnóstico + MVP',texto:'Antes de investir pesado numa ideia de produto/SaaS, o caminho mais seguro é uma Consultoria/Diagnóstico pra validar escopo e, se fizer sentido, um MVP enxuto pra testar rápido.'}
+            };
+            const diagnosticoGratuito={titulo:'Diagnóstico Gratuito',texto:'Com esse orçamento, o passo certo ainda não é fechar um pacote — é entender o escopo primeiro. Agende um diagnóstico gratuito de 30 minutos: a gente conversa sobre o seu momento e só depois indica o caminho (e o valor) certo pra sua realidade.'};
+            const prazos={urgente:'Prazo apertado, em poucas semanas.',medio:'Prazo de 1 a 3 meses.',pesquisando:'Ainda em fase de pesquisa.'};
+            const orcamentos={ate_2k:'Orçamento de até R$ 2 mil.',"2a10k":'Orçamento entre R$ 2 mil e R$ 10 mil.',acima_10k:'Orçamento acima de R$ 10 mil.',nao_sei:'Orçamento ainda não definido — é exatamente pra isso que serve o diagnóstico.'};
+            const RESSALVA_TETO=' Importante: com esse orçamento, o valor final pode ficar acima do teto informado, dependendo do escopo — isso é esclarecido sem custo no diagnóstico, antes de qualquer compromisso.';
+            function buildResult(){
+                const dor=answers['1'],orcamento=answers['3'];
+                let rec;
+                if(orcamento==='ate_2k'&&dor==='sem_sistema'){
+                    // Único caso em que "até R$ 2 mil" cobre o piso de um pacote com preço fixo (Landing Page, R$ 1.900).
+                    rec={titulo:'Landing Page / Site Institucional',texto:'Com esse orçamento, o ponto de partida ideal é o Pacote de Entrada: um site institucional profissional que já coloca sua empresa no ar. Depois, dá pra evoluir pra um sistema sob medida.'};
+                } else if(orcamento==='ate_2k'){
+                    // planilha_travando, atendimento e validar_ideia apontam pra pacotes sem piso compatível com até R$ 2 mil — não prometer o que não cabe no orçamento.
+                    rec=diagnosticoGratuito;
+                } else {
+                    rec=Object.assign({},recomendacoes[dor]);
+                    if(orcamento==='2a10k'&&(rec.titulo==='Sistema Sob Medida'||rec.titulo==='Automação com IA')){
+                        rec.texto+=RESSALVA_TETO;
+                    }
+                }
+                const summaryEl=document.getElementById('quizSummary');
+                summaryEl.textContent='Recomendação: '+rec.titulo+'\n\n'+rec.texto+'\n\n'+prazos[answers['2']]+'\n'+orcamentos[answers['3']];
+                const msg='Olá! Fiz o diagnóstico rápido no site da ArcaLabs e o resultado foi: '+rec.titulo+'. Quero conversar sobre isso.';
+                document.getElementById('quizWhatsApp').href='https://wa.me/5547992291756?text='+encodeURIComponent(msg);
+            }
+            document.getElementById('quizRestart').addEventListener('click',()=>{
+                Object.keys(answers).forEach(k=>delete answers[k]);
+                showStep('1');
+            });
+        })();
     </script>
 </body>
 </html>
