@@ -97,6 +97,11 @@ Mantidas as 4 perguntas originais. Adicionadas 3 novas, cobrindo exatamente as l
 
 ---
 
+## Ajustes finais de polimento
+
+- **Banner de CTA em vídeo** ("Transforme processos manuais em software que trabalha por você") não fazia parte dos 11 itens listados no briefing, mas já existia no site original como reforço de conversão no meio da página. Mantive-o, reposicionado entre "Sobre" e "Pacotes" — funciona como uma ponte natural antes de mostrar preço.
+- **Rodapé:** corrigido "© 2025 ArcaLabs" para "© 2026 ArcaLabs" (estava desatualizado mesmo antes do redesign).
+
 ## Verificação técnica feita
 
 - Balanceamento de tags (`<section>`, `<div>`) e ausência de `id` duplicado verificados via script Node — OK.
