@@ -1,0 +1,9 @@
+name = "arcalabs-diagnostico"
+main = "src/index.js"
+compatibility_date = "2026-09-22"
+
+# Segredos: NUNCA colocar aqui nem em nenhum outro arquivo commitado.
+# Configure com `wrangler secret put <NOME>` (ver README.md desta pasta):
+#   EVOLUTION_API_URL
+#   EVOLUTION_INSTANCE
+#   EVOLUTION_API_KEY
