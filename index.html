@@ -117,6 +117,10 @@
         .quiz-result h3{margin-top:0;font-size:1.5rem}
         .quiz-result .quiz-summary{background:var(--primary-bg);padding:1.2rem;border-radius:8px;color:var(--text-dark);font-size:.95rem;margin-bottom:1.5rem;white-space:pre-line;text-align:left}
         .quiz-restart{background:none;border:none;color:var(--text-dark);text-decoration:underline;cursor:pointer;font-family:var(--font-main);margin-top:1rem;font-size:.9rem}
+        .quiz-contact-form{display:flex;flex-direction:column;gap:1rem;max-width:420px;margin:0 auto}
+        .quiz-contact-form input{width:100%;box-sizing:border-box;background-color:var(--primary-bg);border:1px solid var(--accent);padding:.9rem 1rem;border-radius:8px;color:var(--text-light);font-size:1rem;font-family:var(--font-main)}
+        .quiz-contact-form input:focus{outline:0;box-shadow:0 0 10px rgba(22,134,207,.5)}
+        .quiz-contact-note{font-size:.85rem;color:var(--text-dark);margin:1rem auto 0;max-width:420px;text-align:center}
         @media (max-width:768px){.quiz-box{padding:1.5rem}}
 
         /* ===== Redesign 2026-09: cards genéricos de informação (Para quem / Diferenciais / Segurança) ===== */
@@ -242,6 +246,16 @@
                         <button type="button" data-q="3" data-v="acima_10k">Acima de R$ 10 mil</button>
                         <button type="button" data-q="3" data-v="nao_sei">Ainda não sei, quero entender antes</button>
                     </div>
+                </div>
+                <div class="quiz-step" data-step="contato">
+                    <p class="quiz-progress">Último passo</p>
+                    <p class="quiz-question">Pra onde a gente manda seu diagnóstico?</p>
+                    <form id="quizContatoForm" class="quiz-contact-form">
+                        <input type="text" id="quizNome" placeholder="Seu nome" required>
+                        <input type="tel" id="quizWhatsappNumero" placeholder="Seu WhatsApp com DDD (ex: 47999999999)" required>
+                        <button type="submit" class="cta-button">Ver meu diagnóstico</button>
+                    </form>
+                    <p class="quiz-contact-note">Enviamos o diagnóstico automaticamente pro seu WhatsApp e também guardamos seus dados pra gente poder te ajudar, caso o envio automático falhe.</p>
                 </div>
                 <div class="quiz-step" data-step="result">
                     <div class="quiz-result">
@@ -563,7 +577,7 @@
                     answers[btn.dataset.q]=btn.dataset.v;
                     if(btn.dataset.q==='1')showStep('2');
                     else if(btn.dataset.q==='2')showStep('3');
-                    else if(btn.dataset.q==='3'){buildResult();showStep('result')}
+                    else if(btn.dataset.q==='3')showStep('contato');
                 });
             });
             const recomendacoes={
@@ -576,7 +590,7 @@
             const prazos={urgente:'Prazo apertado, em poucas semanas.',medio:'Prazo de 1 a 3 meses.',pesquisando:'Ainda em fase de pesquisa.'};
             const orcamentos={ate_2k:'Orçamento de até R$ 2 mil.',"2a10k":'Orçamento entre R$ 2 mil e R$ 10 mil.',acima_10k:'Orçamento acima de R$ 10 mil.',nao_sei:'Orçamento ainda não definido — é exatamente pra isso que serve o diagnóstico.'};
             const RESSALVA_TETO=' Importante: com esse orçamento, o valor final pode ficar acima do teto informado, dependendo do escopo — isso é esclarecido sem custo no diagnóstico, antes de qualquer compromisso.';
-            function buildResult(){
+            function computeRecommendation(){
                 const dor=answers['1'],orcamento=answers['3'];
                 let rec;
                 if(orcamento==='ate_2k'&&dor==='sem_sistema'){
@@ -591,13 +605,56 @@
                         rec.texto+=RESSALVA_TETO;
                     }
                 }
+                return rec;
+            }
+
+            // Redesign 2026-09: envio automático de WhatsApp via proxy Cloudflare Worker (Evolution API).
+            // A API key da Evolution API NUNCA fica no frontend — o Worker é quem guarda o segredo.
+            // TODO Marcos: trocar pela URL real assim que o Worker for deployado (ver /worker/README.md).
+            const WORKER_ENDPOINT='https://SEU-WORKER.workers.dev/enviar-diagnostico';
+
+            function enviarLeadFormspree(nome,whatsapp,rec){
+                const fd=new FormData();
+                fd.append('_subject','Novo Lead via Site ArcaLabs (Diagnóstico rápido)');
+                fd.append('name',nome);
+                fd.append('phone',whatsapp);
+                fd.append('recomendacao',rec.titulo);
+                fd.append('detalhe',rec.texto);
+                fd.append('prazo',prazos[answers['2']]||'');
+                fd.append('orcamento',orcamentos[answers['3']]||'');
+                return fetch('https://formspree.io/f/mdangzek',{method:'POST',body:fd,headers:{Accept:'application/json'}});
+            }
+
+            function enviarWhatsAppAutomatico(nome,whatsapp,rec){
+                return fetch(WORKER_ENDPOINT,{
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({nome:nome,whatsapp:whatsapp,tituloRecomendacao:rec.titulo,textoRecomendacao:rec.texto})
+                });
+            }
+
+            document.getElementById('quizContatoForm').addEventListener('submit',function(e){
+                e.preventDefault();
+                const nome=document.getElementById('quizNome').value.trim();
+                const whatsapp=document.getElementById('quizWhatsappNumero').value.trim();
+                if(!nome||!whatsapp)return;
+
+                const rec=computeRecommendation();
                 const summaryEl=document.getElementById('quizSummary');
                 summaryEl.textContent='Recomendação: '+rec.titulo+'\n\n'+rec.texto+'\n\n'+prazos[answers['2']]+'\n'+orcamentos[answers['3']];
                 const msg='Olá! Fiz o diagnóstico rápido no site da ArcaLabs e o resultado foi: '+rec.titulo+'. Quero conversar sobre isso.';
                 document.getElementById('quizWhatsApp').href='https://wa.me/5547992291756?text='+encodeURIComponent(msg);
-            }
+
+                // O resultado aparece imediatamente — os dois envios abaixo rodam em paralelo, cada um com
+                // seu próprio catch, e nenhum dos dois bloqueia a experiência do visitante nem o outro canal.
+                showStep('result');
+
+                enviarLeadFormspree(nome,whatsapp,rec).catch(function(err){console.warn('Falha ao enviar lead via Formspree (canal redundante via WhatsApp automático segue tentando em paralelo):',err)});
+                enviarWhatsAppAutomatico(nome,whatsapp,rec).catch(function(err){console.warn('Falha ao enviar WhatsApp automático (lead já registrado via Formspree):',err)});
+            });
             document.getElementById('quizRestart').addEventListener('click',()=>{
                 Object.keys(answers).forEach(k=>delete answers[k]);
+                document.getElementById('quizContatoForm').reset();
                 showStep('1');
             });
         })();
