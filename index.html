@@ -610,8 +610,7 @@
 
             // Redesign 2026-09: envio automático de WhatsApp via proxy Cloudflare Worker (Evolution API).
             // A API key da Evolution API NUNCA fica no frontend — o Worker é quem guarda o segredo.
-            // TODO Marcos: trocar pela URL real assim que o Worker for deployado (ver /worker/README.md).
-            const WORKER_ENDPOINT='https://SEU-WORKER.workers.dev/enviar-diagnostico';
+            const WORKER_ENDPOINT='https://arcalabs-diagnostico.arcalabs-digital.workers.dev/';
 
             function enviarLeadFormspree(nome,whatsapp,rec){
                 const fd=new FormData();
