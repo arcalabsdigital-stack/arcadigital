@@ -1,0 +1,5 @@
+# Segredos locais do Cloudflare Worker — NUNCA commitar.
+worker/.dev.vars
+worker/.env
+worker/.wrangler/
+worker/node_modules/

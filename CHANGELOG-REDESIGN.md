@@ -130,11 +130,158 @@ Todos os 9 itens abaixo foram commitados individualmente na branch `redesign/202
 
 ---
 
+## Rodada 3 — Envio automático de WhatsApp via Evolution API (2026-09-22)
+
+### Arquitetura escolhida e por quê
+
+O site é estático (GitHub Pages) — todo JavaScript que roda no navegador do
+visitante é público e inspecionável (basta abrir o DevTools). Por isso, **não
+é seguro chamar a Evolution API direto do frontend**: a API key ficaria
+exposta no código-fonte do `index.html`, e qualquer pessoa poderia copiá-la e
+mandar mensagens pela instância de WhatsApp da ArcaLabs.
+
+Solução: um **proxy server-side em Cloudflare Workers** (`worker/`), que é
+quem efetivamente guarda a API key (como variável de ambiente secreta,
+configurada via `wrangler secret put` — nunca commitada) e conversa com a
+Evolution API. O frontend só conhece a URL pública do Worker, nunca a chave.
+
+Por que Cloudflare Workers e não outra opção: plano gratuito cobre o volume
+esperado, não exige migrar o site pra fora do GitHub Pages (é só um endpoint
+HTTP separado) e tem suporte nativo a segredos via `wrangler secret`, sem
+precisar montar infraestrutura própria só pra guardar uma chave.
+
+### O que foi implementado
+
+1. **`worker/src/index.js`** — Worker completo: recebe `{ nome, whatsapp,
+   tituloRecomendacao, textoRecomendacao }`, normaliza o número (só dígitos +
+   código do país 55), monta a mensagem no tom pedido ("Oi, [nome]! Aqui é a
+   ArcaLabs 👋 ... Esta é uma mensagem automática com o resultado do seu
+   diagnóstico..."), chama `POST {EVOLUTION_API_URL}/message/sendText/{instance}`
+   com header `apikey`, e responde ao frontend só com `{ok:true}` ou
+   `{ok:false, error:"..."}` — nunca com a chave. Tem CORS restrito à origem
+   `https://www.arcalabs.com.br` e só aceita `POST`.
+2. **`worker/wrangler.toml`** e **`worker/README.md`** — configuração e passo
+   a passo de deploy (`wrangler login` → `wrangler secret put` × 3 → `wrangler
+   deploy`). Nenhum dos dois arquivos contém valor real de segredo, só os
+   *nomes* das variáveis esperadas.
+3. **`.gitignore`** criado na raiz do repo (não existia antes) — ignora
+   `worker/.dev.vars`, `worker/.env` e `worker/.wrangler/`, que são onde o
+   `wrangler` guardaria segredos locais durante desenvolvimento, pra evitar
+   commit acidental.
+4. **Novo passo "contato" no quiz** (`index.html`) — antes o quiz ia direto
+   da pergunta 3 pro resultado, sem coletar nome/WhatsApp em lugar nenhum (o
+   pedido original presumia que esse passo já existia; não existia, então foi
+   criado agora). Formulário com nome + WhatsApp, inserido entre a pergunta 3
+   e o resultado.
+5. **Envio duplo em paralelo, sem bloquear a UI:** ao confirmar o passo de
+   contato, o resultado do quiz aparece **imediatamente** (`showStep('result')`
+   é chamado antes de qualquer `fetch` ser aguardado), e os dois envios
+   disparam em paralelo, cada um com seu próprio `.catch()` independente:
+   - `enviarLeadFormspree()` — reaproveita o mesmo endpoint Formspree já usado
+     no site (`mdangzek`), agora também recebendo o resultado do diagnóstico
+     (recomendação, prazo, orçamento) como um novo tipo de lead.
+   - `enviarWhatsAppAutomatico()` — chama o Worker, que dispara a mensagem via
+     Evolution API pro WhatsApp que o próprio visitante digitou.
+   - Falha de um não afeta o outro nem trava a experiência — é exatamente a
+     redundância pedida: se a Evolution API estiver fora do ar, o Marcos ainda
+     recebe o lead pelo Formspree; se o Formspree falhar, o cliente já recebeu
+     o diagnóstico automático no WhatsApp dele.
+6. **Números de WhatsApp — confirmado que não foram confundidos.** Nenhum
+   link ou botão `wa.me/5547992291756` existente foi alterado (inclusive o
+   botão "Continuar essa conversa no WhatsApp" do resultado, que continua
+   apontando pro canal humano). O número usado para enviar a mensagem
+   automática é o que o **visitante** digita no novo campo do quiz — o número
+   da instância Evolution API não é (nem precisa ser) conhecido pelo código:
+   ele é definido pela conexão da instância, do lado do Worker/Evolution.
+
+### Teste do fluxo completo (documentado, já que não há navegador real disponível nesta sessão)
+
+Sem uma instância real da Evolution API nem um browser disponível neste
+ambiente, o teste possível e mais próximo do real foi: extrair o `<script>`
+real do `index.html` (o mesmo que vai pro navegador) e executá-lo dentro de
+um contexto Node (`vm.createContext`) com `document`/`fetch` simulados,
+simulando cliques reais nas perguntas do quiz e o submit do formulário de
+contato. Script de teste rodado a partir do scratchpad da sessão (não
+commitado no repo — é ferramenta de verificação pontual, não parte do site).
+4 cenários rodados:
+
+| Cenário | Resultado exibido na hora? | Erro tratado sem exceção? |
+|---|---|---|
+| Formspree OK + Worker OK | Sim | Sim |
+| Formspree falha + Worker OK | Sim | Sim (só 1 aviso no console, referente ao Formspree) |
+| Formspree OK + Worker falha | Sim | Sim (só 1 aviso no console, referente ao Worker) |
+| Ambos falham | Sim | Sim (2 avisos no console, zero exceção não tratada) |
+
+Em todos os 4 cenários, `quizSummary` e o link de WhatsApp humano
+(`quizWhatsApp.href`) foram preenchidos corretamente antes de qualquer
+`fetch` ser considerado, confirmando que a experiência do visitante nunca
+depende do sucesso dos dois envios. Nenhum `unhandledRejection` foi
+disparado em nenhum cenário.
+
+**O que este teste NÃO cobre** (limitação a documentar com transparência):
+não valida o payload real aceito pela Evolution API (formato de
+`/message/sendText` pode variar por versão — comentário deixado em
+`worker/src/index.js`), nem o comportamento visual/mobile do novo passo do
+quiz — segue a mesma limitação de ausência de navegador já registrada mais
+acima neste changelog.
+
+### Status da integração: **funcionando, testada de ponta a ponta**
+
+O Marcos forneceu as credenciais (URL base, nome da instância, API key) e
+conduzimos juntos o deploy real:
+
+1. **Autenticação:** `wrangler login` via OAuth (conta `arcalabs.digital@gmail.com`
+   na Cloudflare).
+2. **Segredos configurados** via `wrangler secret put` (`EVOLUTION_API_URL`,
+   `EVOLUTION_INSTANCE`, `EVOLUTION_API_KEY`) — inseridos diretamente via
+   stdin, nunca escritos em arquivo.
+3. **Deploy do Worker:** precisou registrar um subdomínio `workers.dev` pra
+   conta (primeira vez usando Workers nela) — feito pelo Marcos no painel da
+   Cloudflare. Worker publicado em
+   `https://arcalabs-diagnostico.arcalabs-digital.workers.dev/`.
+4. **Bug real encontrado e corrigido em produção (fora do nosso código):**
+   os primeiros testes de envio davam timeout (erro `524` da Cloudflare)
+   pra qualquer número de destino. Isolamos a causa passo a passo:
+   - Confirmamos que a Evolution API validava o payload corretamente e
+     rapidamente (`{number, text}` é o formato certo pra v2.3.7) — descartando
+     bug no Worker ou no payload.
+   - Descartamos a hipótese de "autoenvio" (mandar mensagem pro próprio
+     número da instância) testando com um número diferente — travou do
+     mesmo jeito.
+   - Pedimos os logs de runtime do serviço `evolution-api` na Railway ao
+     Marcos, e encontramos `ERROR [Redis] redis disconnected` se repetindo
+     sem parar, coincidindo exatamente com o momento em que a Evolution API
+     tentava despachar a mensagem (`Sending message to ...@s.whatsapp.net`).
+   - Causa raiz: o serviço Redis existia no projeto Railway e estava
+     "Online", mas **não estava de fato conectado à Evolution API** — faltavam
+     as variáveis `CACHE_REDIS_ENABLED` e `CACHE_REDIS_URI` no serviço
+     `evolution-api` (só existiam as variáveis genéricas `REDIS_URL` etc.,
+     que a Evolution API não lê para ativar o cache).
+   - Fix aplicado pelo Marcos: adicionar `CACHE_REDIS_ENABLED=true` e
+     `CACHE_REDIS_URI=${{REDIS_URL}}` (sintaxe de referência de variável da
+     própria Railway) no serviço `evolution-api`, e reiniciar.
+5. **Teste real de ponta a ponta confirmado com sucesso:** após o fix, o
+   Worker respondeu `{"ok":true}` em ~2 segundos (antes travava por mais de
+   100s), e o Marcos confirmou o recebimento da mensagem de teste no
+   WhatsApp de destino.
+6. **`WORKER_ENDPOINT` atualizado no `index.html`** para a URL real
+   (`https://arcalabs-diagnostico.arcalabs-digital.workers.dev/`), substituindo
+   o placeholder. Testes automatizados do fluxo do quiz (script Node com DOM
+   simulado, mesmo usado antes) rodados de novo depois da troca — sem
+   regressão.
+
+**Nenhum segredo (API key, URL da instância) foi commitado em nenhum momento**
+— tudo passou só por `wrangler secret put` (stdin) ou comandos `curl` locais,
+nunca gravado em arquivo do repositório.
+
+---
+
 ## Pendências para o Marcos revisar/decidir
 
 1. ~~Autorizar push~~ — feito em 2026-09-22: `backup/pre-redesign-2026-09-21`, `v-antes-redesign` e `redesign/2026-09` confirmados no GitHub.
 2. ~~Substituir a foto placeholder da seção Sobre~~ — não se aplica mais: a seção "Sobre" foi removida por completo na Rodada 2.
 3. **Revisar os valores dos pacotes** (Fase 3, e a mudança da Automação com IA para "Sob consulta" na Rodada 2) — foram definidos por julgamento de mercado, não por dado interno da ArcaLabs.
 4. **Verificação visual em navegador real** antes do merge (ver limitação técnica na seção "Verificação técnica feita" — ainda não há ferramenta de browser disponível nesta sessão).
-5. **Novo commit local pendente de push:** a branch `redesign/2026-09` recebeu 9 commits novos nesta rodada (o mais recente é o da correção da lógica do quiz) que ainda não foram enviados ao GitHub — repetir `git push origin redesign/2026-09`.
-6. Nenhum merge feito na `main`, nenhum deploy em produção — aguardando autorização explícita, conforme instrução.
+5. ~~Fornecer credenciais da Evolution API~~ — feito. Worker deployado, segredos configurados, bug de Redis na Evolution API (Railway) diagnosticado e corrigido pelo Marcos, teste de ponta a ponta confirmado com sucesso (ver Rodada 3 acima).
+6. **Novo commit local pendente de push:** a branch `redesign/2026-09` recebeu commits novos nesta rodada (Worker + novo passo do quiz + URL real do endpoint) que ainda não foram enviados ao GitHub — repetir `git push origin redesign/2026-09`.
+7. Nenhum merge feito na `main`, nenhum deploy do site em produção — aguardando autorização explícita, conforme instrução. **O Worker do Cloudflare já está ativo em produção** (é um serviço separado do site, e o deploy dele já foi confirmado e autorizado por mensagem antes de rodar `wrangler deploy`).
