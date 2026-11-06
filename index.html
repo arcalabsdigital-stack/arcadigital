@@ -427,7 +427,7 @@
                 <div class="pricing-item">
                     <h3>Landing Page / Site Institucional</h3>
                     <p class="pricing-desc">Pra colocar sua empresa no ar com credibilidade.</p>
-                    <div class="pricing-price">R$ 1.900<span>valor fixo</span></div>
+                    <div class="pricing-price">Sob consulta<span>valor definido conforme o escopo, no diagnóstico gratuito</span></div>
                     <ul>
                         <li>Até 5 páginas (Home, Sobre, Serviços, Contato + 1)</li>
                         <li>Design responsivo, com a identidade da sua marca</li>
@@ -442,7 +442,7 @@
                     <span class="pricing-badge">Mais procurado</span>
                     <h3>Sistema Sob Medida</h3>
                     <p class="pricing-desc">SaaS ou aplicativo construído pro seu processo específico.</p>
-                    <div class="pricing-price">A partir de R$ 8.900<span>valor final definido após o diagnóstico</span></div>
+                    <div class="pricing-price">Sob consulta<span>valor definido conforme o escopo, no diagnóstico gratuito</span></div>
                     <ul>
                         <li>Diagnóstico e definição de escopo incluídos</li>
                         <li>Banco de dados, autenticação e painel administrativo</li>
@@ -475,7 +475,7 @@
                     <a href="https://wa.me/5547992291756?text=Quero%20agendar%20um%20diagn%C3%B3stico" target="_blank" class="white-cta-button">Agendar diagnóstico gratuito</a>
                 </div>
             </div>
-            <p class="pricing-note">O valor de Sistema Sob Medida é uma estimativa de mercado para projetos de escopo padrão; Automação com IA é sempre orçada sob consulta, sem piso fixo. Em ambos os casos, o valor final é sempre fechado depois do diagnóstico, com escopo, prazo e entregáveis por escrito antes de qualquer cobrança.</p>
+            <p class="pricing-note">Landing Page, Sistema Sob Medida e Automação com IA são orçados sob consulta, sem piso fixo. O valor final é sempre fechado depois do diagnóstico, com escopo, prazo e entregáveis por escrito antes de qualquer cobrança.</p>
         </section>
 
         <section id="seguranca">
@@ -522,7 +522,7 @@
                 <details class="faq-item"><summary class="gradient-text">2. Como funciona o início de um projeto?</summary><p>Começamos por um diagnóstico: entendemos o desafio, validamos a ideia e definimos escopo e arquitetura antes de desenvolver. Assim você investe com clareza sobre o resultado esperado.</p></details>
                 <details class="faq-item"><summary class="gradient-text">3. A ArcaLabs oferece suporte após a entrega?</summary><p>Sim. Oferecemos um período de suporte dedicado e planos de evolução contínua, para que o sistema acompanhe o crescimento da sua operação.</p></details>
                 <details class="faq-item"><summary class="gradient-text">4. Vocês também fazem sites?</summary><p>Fazemos. Sites institucionais e landing pages de alta conversão fazem parte dos nossos serviços, com o mesmo padrão de engenharia e design dos nossos produtos de software.</p></details>
-                <details class="faq-item"><summary class="gradient-text">5. Quanto custa um projeto com a ArcaLabs?</summary><p>Temos pacotes a partir de R$ 1.900 (site institucional). Sistemas sob medida e automações com IA têm valor final definido depois do diagnóstico, porque dependem do escopo real do seu negócio — veja a seção de Preços acima pras faixas de valor.</p></details>
+                <details class="faq-item"><summary class="gradient-text">5. Quanto custa um projeto com a ArcaLabs?</summary><p>Todos os pacotes de projeto (site institucional, sistema sob medida e automação com IA) são sob consulta, porque o valor depende do escopo real do seu negócio. Ele é definido no diagnóstico gratuito — veja a seção de Preços acima pra conferir o que cada pacote inclui.</p></details>
                 <details class="faq-item"><summary class="gradient-text">6. Meus dados e os dados dos meus clientes ficam seguros?</summary><p>Sim. Usamos banco de dados PostgreSQL com acesso restrito por autenticação, seguimos os princípios da LGPD e a IA opera sempre dentro de regras definidas, com supervisão humana nos pontos críticos. Veja a seção "Segurança e IA" acima para mais detalhes.</p></details>
                 <details class="faq-item"><summary class="gradient-text">7. Fico "preso" à ArcaLabs depois que o sistema fica pronto?</summary><p>Não. Ao final do projeto, o código e os dados são seus. Você pode continuar com a gente no suporte pós-entrega ou levar o sistema pra outra equipe — a decisão é sempre sua.</p></details>
             </div>
@@ -593,11 +593,8 @@
             function computeRecommendation(){
                 const dor=answers['1'],orcamento=answers['3'];
                 let rec;
-                if(orcamento==='ate_2k'&&dor==='sem_sistema'){
-                    // Único caso em que "até R$ 2 mil" cobre o piso de um pacote com preço fixo (Landing Page, R$ 1.900).
-                    rec={titulo:'Landing Page / Site Institucional',texto:'Com esse orçamento, o ponto de partida ideal é o Pacote de Entrada: um site institucional profissional que já coloca sua empresa no ar. Depois, dá pra evoluir pra um sistema sob medida.'};
-                } else if(orcamento==='ate_2k'){
-                    // planilha_travando, atendimento e validar_ideia apontam pra pacotes sem piso compatível com até R$ 2 mil — não prometer o que não cabe no orçamento.
+                if(orcamento==='ate_2k'){
+                    // Todos os pacotes de projeto são sob consulta, sem piso compatível com até R$ 2 mil — não prometer o que não cabe no orçamento.
                     rec=diagnosticoGratuito;
                 } else {
                     rec=Object.assign({},recomendacoes[dor]);
