@@ -475,7 +475,7 @@
                     <a href="https://wa.me/5547992291756?text=Quero%20agendar%20um%20diagn%C3%B3stico" target="_blank" class="white-cta-button">Agendar diagnóstico gratuito</a>
                 </div>
             </div>
-            <p class="pricing-note">O valor de Sistema Sob Medida é uma estimativa de mercado para projetos de escopo padrão; Automação com IA é sempre orçada sob consulta, sem piso fixo. Em ambos os casos, o valor final é sempre fechado depois do diagnóstico, com escopo, prazo e entregáveis por escrito antes de qualquer cobrança.</p>
+            <p class="pricing-note">Landing Page, Sistema Sob Medida e Automação com IA são orçados sob consulta, sem piso fixo. O valor final é sempre fechado depois do diagnóstico, com escopo, prazo e entregáveis por escrito antes de qualquer cobrança.</p>
         </section>
 
         <section id="seguranca">
@@ -593,11 +593,8 @@
             function computeRecommendation(){
                 const dor=answers['1'],orcamento=answers['3'];
                 let rec;
-                if(orcamento==='ate_2k'&&dor==='sem_sistema'){
-                    // Único caso em que "até R$ 2 mil" cobre o piso de um pacote com preço fixo (Landing Page, R$ 1.900).
-                    rec={titulo:'Landing Page / Site Institucional',texto:'Com esse orçamento, o ponto de partida ideal é o Pacote de Entrada: um site institucional profissional que já coloca sua empresa no ar. Depois, dá pra evoluir pra um sistema sob medida.'};
-                } else if(orcamento==='ate_2k'){
-                    // planilha_travando, atendimento e validar_ideia apontam pra pacotes sem piso compatível com até R$ 2 mil — não prometer o que não cabe no orçamento.
+                if(orcamento==='ate_2k'){
+                    // Todos os pacotes de projeto são sob consulta, sem piso compatível com até R$ 2 mil — não prometer o que não cabe no orçamento.
                     rec=diagnosticoGratuito;
                 } else {
                     rec=Object.assign({},recomendacoes[dor]);
