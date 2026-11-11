@@ -2,8 +2,9 @@
 (function () {
   "use strict";
 
-  // Preencha antes de publicar (veja README.md). Enquanto houver "{{", o Pixel não é carregado.
-  var PIXEL_ID = "{{META_PIXEL_ID}}";
+  // ID do Pixel do Meta (só números). Enquanto estiver vazio, o Pixel não é carregado.
+  // Pendência: ver CHANGELOG-REDESIGN.md.
+  var PIXEL_ID = "";
   var CHAVE = "arcalabs_cookies_v1";
 
   var doc = document;
@@ -20,7 +21,7 @@
   /* ---------- Pixel do Meta (só depois de aceitar) ---------- */
   var pixelPronto = false;
   function carregarPixel() {
-    if (pixelPronto || PIXEL_ID.indexOf("{{") !== -1) return;
+    if (pixelPronto || !/^\d+$/.test(PIXEL_ID)) return;
     pixelPronto = true;
     /* eslint-disable */
     !function (f, b, e, v, n, t, s) {
@@ -44,6 +45,24 @@
   if (bSim) bSim.addEventListener("click", function () { gravarConsent("sim"); fechar(); carregarPixel(); });
   if (bNao) bNao.addEventListener("click", function () { gravarConsent("nao"); fechar(); });
 
+  /* ---------- Menu do topo (celular) ---------- */
+  var menu = doc.getElementById("menu");
+  var menuBotao = doc.getElementById("menu-botao");
+  function menuAberto(v) {
+    menu.classList.toggle("aberto", v);
+    menuBotao.setAttribute("aria-expanded", v ? "true" : "false");
+    menuBotao.setAttribute("aria-label", v ? "Fechar menu" : "Abrir menu");
+  }
+  if (menu && menuBotao) {
+    menuBotao.addEventListener("click", function () { menuAberto(!menu.classList.contains("aberto")); });
+    Array.prototype.forEach.call(menu.querySelectorAll("a"), function (a) {
+      a.addEventListener("click", function () { menuAberto(false); });
+    });
+    doc.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && menu.classList.contains("aberto")) { menuAberto(false); menuBotao.focus(); }
+    });
+  }
+
   /* ---------- Botões de compra: mantém UTMs e avisa o Pixel ---------- */
   var utms = {};
   try {
@@ -55,7 +74,8 @@
   var compras = doc.querySelectorAll("[data-compra]");
   Array.prototype.forEach.call(compras, function (a) {
     var href = a.getAttribute("href") || "";
-    if (Object.keys(utms).length && /^https?:/i.test(href)) {
+    // UTMs só vão para o checkout; o link do WhatsApp fica intacto.
+    if (Object.keys(utms).length && /^https?:/i.test(href) && !/^https?:\/\/wa\.me\//i.test(href)) {
       try {
         var u = new URL(href);
         Object.keys(utms).forEach(function (k) { u.searchParams.set(k, utms[k]); });

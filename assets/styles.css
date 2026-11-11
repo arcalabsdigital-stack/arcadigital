@@ -61,6 +61,35 @@ p { margin: 0; }
 .topo .cont { display: flex; align-items: center; justify-content: space-between; min-height: 68px; gap: 16px; }
 .topo img { height: 30px; width: auto; }
 .topo .btn { min-height: 44px; padding: 10px 20px; font-size: 15px; }
+[id] { scroll-margin-top: 84px; }
+
+/* Menu do topo */
+.topo .cont:has(.menu) { width: min(1320px, 100% - 32px); }
+.marca { flex: none; }
+.menu { display: flex; align-items: center; gap: 20px; font: 500 15px/1.2 "Inter", sans-serif; }
+.menu a { text-decoration: none; color: var(--suave); white-space: nowrap; transition: color .18s ease; }
+.menu a:hover { color: var(--texto); }
+.menu .menu-contrate { color: var(--ciano); border: 1px solid rgba(150,226,251,.45); border-radius: 10px; padding: 8px 14px; }
+.menu .menu-contrate:hover { background: rgba(150,226,251,.08); color: var(--ciano); }
+.topo-acoes { display: flex; align-items: center; gap: 10px; flex: none; }
+.menu-botao { display: none; width: 44px; height: 44px; padding: 0; border: 1px solid var(--borda); border-radius: 12px; background: transparent; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+.menu-botao span { display: block; width: 20px; height: 2px; border-radius: 2px; background: var(--texto); transition: transform .2s ease, opacity .2s ease; }
+.menu-botao[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-botao[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-botao[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 1240px) {
+  .menu-botao { display: inline-flex; }
+  .menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 16px 18px; background: rgba(10,10,15,.97); border-bottom: 1px solid var(--borda); max-height: calc(100vh - 68px); overflow-y: auto; }
+  .menu.aberto { display: flex; }
+  .menu a { padding: 14px 4px; border-bottom: 1px solid rgba(38,38,52,.7); font-size: 16px; color: var(--texto); }
+  .menu .menu-contrate { margin: 14px 0 4px; text-align: center; border-bottom: 1px solid rgba(150,226,251,.45); padding: 12px 14px; order: 1; }
+  .sem-js .menu { display: flex; position: static; flex-direction: row; flex-wrap: wrap; gap: 4px 16px; padding: 0; background: none; border: 0; }
+  .sem-js .topo .cont { flex-wrap: wrap; }
+  .sem-js .menu a { border: 0; padding: 6px 0; }
+}
+
+/* Dado pendente: o Marcos precisa preencher antes de publicar */
+.pendente { display: inline; padding: 1px 6px; border-radius: 6px; border: 1px dashed rgba(251,191,36,.7); background: rgba(251,191,36,.1); color: var(--amarelo); font-size: .92em; font-weight: 500; }
 
 /* Seções */
 section { padding: 80px 0; position: relative; }
@@ -140,6 +169,34 @@ section { padding: 80px 0; position: relative; }
 .bloco ul { margin: 0; padding-left: 18px; color: var(--suave); font-size: 15.5px; display: grid; gap: 6px; }
 .prep { margin-top: 20px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; padding: 24px 28px; border: 1px dashed #3b3b55; border-radius: var(--raio); background: rgba(150,226,251,.04); }
 .prep .icone { margin: 0; }
+a.selo-evento { text-decoration: none; transition: border-color .18s ease; }
+a.selo-evento:hover { border-color: #3b3b55; }
+.e-mais { margin-top: 28px; color: var(--suave); font-size: 16px; text-align: center; }
+.e-mais b { color: var(--texto); font-weight: 600; }
+.etapas-titulo { margin: 56px 0 20px; font-size: 24px; }
+
+/* Próximas turmas */
+.turma { max-width: 760px; border: 1px solid #3b3b55; border-radius: 28px; padding: 36px 40px; background: radial-gradient(120% 90% at 0% 0%, rgba(59,130,246,.16), transparent 60%), var(--sup); box-shadow: 0 40px 90px -50px rgba(99,102,241,.55); }
+.turma-topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+.turma-topo h3 { font-size: 28px; }
+.turma-status { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border: 1px solid rgba(52,211,153,.35); border-radius: 999px; font-size: 14px; color: var(--verde); }
+.turma-dados { margin: 0 0 30px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 32px; }
+.turma-dados div { padding: 14px 0; border-bottom: 1px solid var(--borda); }
+.turma-dados dt { font: 600 12px/1 "Poppins", sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--suave); margin-bottom: 8px; }
+.turma-dados dd { margin: 0; font-weight: 600; }
+
+/* Como garantir sua vaga */
+.passos { list-style: none; padding: 0; margin: 28px auto 32px; max-width: 520px; display: grid; gap: 14px; text-align: left; }
+.passos li { display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: center; color: var(--suave); }
+.passos li b { color: var(--texto); font-weight: 600; }
+.passos li > span { width: 34px; height: 34px; border-radius: 50%; background: var(--grad); color: #fff; display: grid; place-items: center; font: 700 15px/1 "Poppins", sans-serif; }
+
+/* Serviços (para empresas) */
+.servicos { padding-top: 0; }
+.servicos-caixa { display: grid; grid-template-columns: 1fr auto; gap: 28px 48px; align-items: center; padding: 36px 40px; border: 1px solid var(--borda); border-radius: var(--raio); background: var(--sup); }
+.servicos-caixa h2 { font-size: clamp(24px, 3vw, 32px); margin-bottom: 18px; }
+.servicos-caixa .lista { gap: 10px; font-size: 16px; color: var(--suave); }
+.servicos-caixa .lista b { color: var(--texto); }
 
 /* Investimento */
 .oferta { max-width: 760px; margin: 0 auto; text-align: center; border: 1px solid #3b3b55; border-radius: 28px; padding: 52px 40px; background: radial-gradient(120% 90% at 50% 0%, rgba(99,102,241,.22), transparent 60%), var(--sup); box-shadow: 0 40px 90px -40px rgba(99,102,241,.55); }
@@ -225,4 +282,15 @@ footer nav { display: grid; gap: 8px; align-content: start; }
   .oferta { padding: 36px 20px; }
   .garantia, .prep { grid-template-columns: 1fr; }
   .fatos { gap: 12px 22px; }
+  .topo .cont { gap: 10px; }
+  .topo .btn { padding: 9px 12px; font-size: 13.5px; }
+  .turma { padding: 28px 20px; }
+  .turma-dados { grid-template-columns: 1fr; }
+  .servicos-caixa { grid-template-columns: 1fr; padding: 28px 20px; }
+  .servicos-caixa .btn { width: 100%; }
+}
+@media (max-width: 400px) {
+  .topo img { height: 20px; }
+  .topo .btn { padding: 8px 10px; font-size: 13px; }
+  .menu-botao { width: 40px; height: 40px; }
 }
