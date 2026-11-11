@@ -434,3 +434,43 @@ Também pendente, fora de placeholder: **o link de inscrição final** (hoje os 
 - Home, termos e política em 360, 390, 820, 1280 e 1440px: sem rolagem horizontal e sem erros de JavaScript.
 - Nenhum dos textos "30 vagas", "24 h", "limite de uso", "teto de gasto", "sexta" ou "3 dias" no texto renderizado das três páginas.
 - Capturas conferidas: fatos do hero (5 itens quebram bem em 360 e 1440), card da Turma 1 (8 campos em 2 colunas no desktop e 1 no celular), "Para participar" e "Custos" no celular.
+
+---
+
+## Rodada 6: acesso, liberação e sessão de preparação (2026-11-11)
+
+Branch `redesign/escola-ia`. **Nada foi mergeado nem enviado para a `main`.**
+
+### O que mudou
+
+1. **Acesso:** "1 ano de acesso, a contar da data do pagamento" no hero (fato "1 ano"), em "O que está incluso", na seção Comunidade, no card da Turma 1, no FAQ "Por quanto tempo tenho acesso?", na chamada final e nos termos §2. O placeholder "da compra ou do início da turma" saiu da home e dos termos.
+2. **Liberação:** "acesso liberado logo após a compra" em "O que está incluso", no card da Turma 1 (novo campo "Liberação"), no FAQ "Por quanto tempo tenho acesso?" (cita gravações, cartilha e kit de agentes) e nos termos §4 (gravações, cartilha em PDF e Notion, kit e projeto de referência, na Hotmart, assim que a compra é confirmada). O placeholder "quando o material é liberado" saiu.
+3. **Sessão de preparação** (online, antes do início da turma, para criar as contas e preparar o computador, incluída no curso):
+   - Volta ao card da Turma 1 (novo campo), a "O que está incluso", ao FAQ "O que preciso instalar?", a "Para participar" e aos termos §2.
+   - A data e o horário ficam no placeholder `[MARCOS: inserir data e horário da sessão de preparação:  2 dias antes do inicio]` no card, em "Para participar", no FAQ e nos termos. Em "O que está incluso" o item não tem data, porque ali só se lista o que o curso inclui.
+   - O card da Turma 1 tem agora 10 campos: Início, Formato, Dias e horários, Duração de cada aula, Gravações, Vagas, Sessão de preparação, Acesso ao curso, Liberação e Comunidade.
+4. **Não mexi** no apoio para a verificação do Railway, no custo das ferramentas de vídeo, nem no texto sobre a chave de API. A política de privacidade não cita o prazo de acesso nem a liberação, então ficou igual.
+
+### Placeholders `[MARCOS: ...]` (situação atual)
+
+Resultado de `grep -rn "MARCOS" index.html termos-e-garantia.html politica-de-privacidade.html`: **7 ocorrências**, 4 assuntos.
+
+| O que falta | Onde | Ocorrências |
+|---|---|---|
+| Data e horário da sessão de preparação (2 dias antes do início, ou seja, antes de 23/11/2026) | Home: card da Turma 1, "Para participar", FAQ "O que preciso instalar?". Termos §2 | 4 |
+| Se o apoio para a verificação do Railway continua | Home: "O que está incluso" | 1 |
+| Se as ferramentas de vídeo têm custo | Home: "Custos por sua conta" | 1 |
+| Preço, forma de pagamento e se o checkout é pela Hotmart | Termos §3 | 1 |
+
+Resolvidos nesta rodada: o início do 1 ano de acesso (data do pagamento) e a liberação do material (logo após a compra).
+
+### Pendências fora de placeholder
+
+1. **API do agente de WhatsApp** (ver rodada 5): a página diz que o aluno paga só o plano do Claude e o Railway, mas o agente chama a API da Anthropic, cobrada à parte. Texto mantido como está, a pedido.
+2. **Link de inscrição final** (hoje os 5 botões `data-compra` levam ao WhatsApp).
+3. As pendências fora da página listadas na rodada 4 (og:image, ID do Pixel, canonical com ou sem www, política para `/contrate/`, revisão por advogado, sitemap e robots, logo não usado).
+
+### Verificação feita (Chrome real via playwright-core, servidor local)
+
+- Home, termos e política em 360, 390, 820, 1280 e 1440px: sem rolagem horizontal e sem erros de JavaScript.
+- Capturas conferidas: fatos do hero (o item de acesso quebra bem em 360 e 1440), card da Turma 1 com 10 campos em 2 colunas no desktop e "O que está incluso" no celular.
