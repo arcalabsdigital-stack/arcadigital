@@ -325,6 +325,8 @@ Branch `redesign/escola-ia`, criada a partir da `main` em `d0f58fd`. **Nada foi 
 
 ### Placeholders visíveis `[MARCOS: ...]` (aparecem em amarelo na página)
 
+> Lista original da rodada 4. A situação atual está na **Rodada 5**, abaixo.
+
 | # | O que falta | Onde |
 |---|---|---|
 | 1 | Dias e horários das aulas ao vivo | Home: card da Turma 1 e FAQ "Quando começa". Termos §2 |
@@ -366,3 +368,69 @@ Para achar todos: `grep -rn "MARCOS:" index.html termos-e-garantia.html`.
   - Quiz completo: Formspree e Worker recebem o POST em paralelo, o resultado aparece e o link do WhatsApp é montado. Os envios foram interceptados no teste, então nenhum lead nem mensagem real saiu.
   - O menu cabe em uma linha de 1280 a 1440px e vira hambúrguer abaixo disso, como na `main`. O logo tem o mesmo tamanho da `main`.
 - **Falso positivo conhecido:** a checagem de imagens de `/contrate/` acusa logos duplicados do carrossel com `loading="lazy"` que ainda não tinham carregado. As 10 imagens únicas respondem 200 por requisição direta, e o código é idêntico ao da `main`.
+
+---
+
+## Rodada 5: formato das aulas e plano do Claude (2026-11-11)
+
+Branch `redesign/escola-ia`. **Nada foi mergeado nem enviado para a `main`.**
+
+### O que mudou
+
+1. **Placeholders removidos:** ferramentas de vídeo (o card "Vídeos com IA" termina em "Crie e edite vídeos com a ajuda de ferramentas de IA.") e acompanhamento na comunidade (o parágrafo da seção Comunidade saiu inteiro, assim como o placeholder do FAQ "Como funciona a comunidade?").
+2. **Formato das aulas** (hero, "O que está incluso", card da Turma 1, FAQ, chamada final, termos §2):
+   - Ao vivo pelo Zoom, de segunda a domingo, às 14h e às 20h (Brasília). O aluno escolhe o horário.
+   - Cada aula dura de 1 a 2 horas. **Sem** total de aulas, de dias ou carga horária.
+   - **10 vagas**, como informação fixa, com o motivo (atenção individual até o app ficar pronto). Sem contador nem urgência.
+   - Aulas gravadas na Hotmart, disponíveis nos 12 meses de acesso. Novo item em "O que está incluso". FAQ "E se eu perder uma aula?" → assiste à gravação na Hotmart.
+   - Hero: novo fato "14h ou 20h, você escolhe". O card da Turma 1 tem agora 8 campos (Início, Formato, Dias e horários, Duração de cada aula, Gravações, Vagas, Acesso, Comunidade).
+   - **Não existe seção "Como funciona"** nesta home. As informações foram para "O que está incluso", o card da Turma 1 e o FAQ.
+3. **Plano do Claude no lugar da chave de API do curso:**
+   - Saiu de "O que está incluso" o item "Chave de API da Anthropic (com limite de uso, só Sonnet)". Saiu de "Custos" a frase sobre a chave deixar de valer e o crédito com teto de gasto.
+   - "Para participar" e "Custos": plano do Claude com acesso ao Claude Code (os planos pagos, como Pro e Max), contratado e pago pelo aluno na Anthropic, **à parte do curso**, sem valor (consulte o preço no site da Anthropic).
+   - FAQ "Preciso pagar alguma coisa além do curso?": agora começa com "Sim" e cita o plano do Claude, o Railway depois do teste gratuito e o Meta Ads.
+   - FAQ "O que preciso instalar?": a assinatura do Claude entra antes do Zoom e das instalações.
+   - Etapa 3: "Depois: custos, chave própria e próximos passos" → "Depois: custos e próximos passos".
+   - **Não existe seção "IA com segurança"** nesta home (nem na página de vendas de origem). A ideia "o aluno usa a própria conta, e o código e os dados ficam com ele" entrou no item "Projeto funcionando" de "E você leva para casa".
+   - Termos §8: a linha da chave do curso saiu. Entrou o plano do Claude pago pelo aluno e "o curso não fornece chave de API da Anthropic".
+4. **Política de privacidade:** não citava a chave de API. Entraram dois itens em §3, "Gravação das aulas" (imagem, voz e chat podem aparecer na gravação) e "Conta do Claude" (contratada direto com a Anthropic), e em §5 a finalidade "gravar as aulas e disponibilizar aos alunos (execução de contrato)". **Precisa de revisão jurídica**, como o resto da política.
+
+### ⚠️ Ponto para decidir: a API do agente de WhatsApp
+
+O projeto do curso é um agente de WhatsApp que **responde com o Claude** (Etapa 2: "Resposta com IA e guard rails"). Isso é uma chamada à **API** da Anthropic, que precisa de uma chave de API e é cobrada por uso no Console. Pelo que eu sei, ela é cobrada **à parte** dos planos Pro e Max, que cobrem o uso do Claude Code mas não dão chave de API para apps próprios. Antes, a chave do curso cobria isso. Agora a página diz que o aluno só paga o plano do Claude e o Railway. Se o agente continuar chamando a API, falta informar esse custo (ou mudar o projeto). Confira as regras atuais da Anthropic e decida o texto.
+
+### Placeholders `[MARCOS: ...]` (situação atual)
+
+| # | O que falta | Onde | Situação |
+|---|---|---|---|
+| 1 | Dias e horários das aulas | — | ✅ Resolvido |
+| 2 | Duração e carga horária | — | ✅ Resolvido (1 a 2 h por aula, sem total) |
+| 3 | Número de vagas | — | ✅ Resolvido (10) |
+| 4 | Sessão de preparação antes de 23/11 (existe? quando?) | Home: "Para participar" e FAQ "O que preciso instalar?". Termos §2 | ⏳ Pendente |
+| 5 | Ferramentas de vídeo e o que o aluno produz | — | ✅ Removido a pedido |
+| 6 | Se as ferramentas de vídeo têm custo | Home: "Custos por sua conta" | ⏳ Pendente (não estava na sua lista; mantido) |
+| 7 | Até quando vale a chave do curso | — | ✅ Removido (não há chave do curso) |
+| 8 | 1 ano de acesso conta da compra ou do início da turma? | Home: FAQ "Por quanto tempo tenho acesso?". Termos §2 | ⏳ Pendente (não estava na sua lista; mantido) |
+| 9 | Acompanhamento na comunidade | — | ✅ Removido a pedido |
+| 10 | Gravações na Hotmart | — | ✅ Resolvido (12 meses) |
+| 11 | Preço, forma de pagamento e se o checkout é pela Hotmart | Termos §3 | ⏳ Pendente |
+| 12 | Quando o material é liberado | Termos §4 | ⏳ Pendente (não estava na sua lista; mantido) |
+| 13 | Se o apoio para a verificação do Railway continua | Home: "O que está incluso" | ⏳ Pendente (placeholder novo, porque o item só fica se você confirmar) |
+
+Também pendente, fora de placeholder: **o link de inscrição final** (hoje os 5 botões `data-compra` vão para o WhatsApp). Os termos §5 e a política §3 já citam a Hotmart como plataforma da compra, então confira esses dois trechos se o pagamento for por outro meio.
+
+### Conferência por busca (index, termos, privacidade, `assets/`, `contrate/`)
+
+- **`[MARCOS`**: 5 na home (preparação ×2, Railway, custo das ferramentas de vídeo, início do 1 ano) e 4 nos termos (preparação, início do 1 ano, preço/pagamento, liberação do material). Nenhum na política.
+- **"30 vagas"** e **"24 h"**: nenhum nas páginas. Só aparecem neste CHANGELOG, como histórico.
+- **"R$"**: nenhum.
+- **"chave"**: termos §8, "o curso não fornece chave de API da Anthropic" (intencional). Também `CHAVE` em `assets/app.js` (nome da variável do consentimento de cookies) e a API key da Evolution API em `contrate/` e `worker/`, que não têm relação com o curso.
+- **"Anthropic"**: home ("Para participar", "Custos", FAQ de instalação e de custos, aviso de não afiliação no rodapé), termos §8 (×2) e política §3. Todos coerentes com o plano pago pelo aluno.
+- **"3 dias"**, **"sexta"** e **"sábado"**: só o comentário sobre a og:image no `<head>` e a conversa de exemplo do celular no hero ("Vocês atendem aos sábados?"), que é a demonstração do atendente, não a agenda do curso.
+- O hero continua com "você aprende **em poucos dias**", sem número. Combina com "aprendizado rápido", mas troque se preferir evitar qualquer menção a dias.
+
+### Verificação feita (Chrome real via playwright-core, servidor local)
+
+- Home, termos e política em 360, 390, 820, 1280 e 1440px: sem rolagem horizontal e sem erros de JavaScript.
+- Nenhum dos textos "30 vagas", "24 h", "limite de uso", "teto de gasto", "sexta" ou "3 dias" no texto renderizado das três páginas.
+- Capturas conferidas: fatos do hero (5 itens quebram bem em 360 e 1440), card da Turma 1 (8 campos em 2 colunas no desktop e 1 no celular), "Para participar" e "Custos" no celular.
