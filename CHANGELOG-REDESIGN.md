@@ -285,3 +285,237 @@ nunca gravado em arquivo do repositório.
 5. ~~Fornecer credenciais da Evolution API~~ — feito. Worker deployado, segredos configurados, bug de Redis na Evolution API (Railway) diagnosticado e corrigido pelo Marcos, teste de ponta a ponta confirmado com sucesso (ver Rodada 3 acima).
 6. **Novo commit local pendente de push:** a branch `redesign/2026-09` recebeu commits novos nesta rodada (Worker + novo passo do quiz + URL real do endpoint) que ainda não foram enviados ao GitHub — repetir `git push origin redesign/2026-09`.
 7. Nenhum merge feito na `main`, nenhum deploy do site em produção — aguardando autorização explícita, conforme instrução. **O Worker do Cloudflare já está ativo em produção** (é um serviço separado do site, e o deploy dele já foi confirmado e autorizado por mensagem antes de rodar `wrangler deploy`).
+
+
+---
+
+## Rodada 4 — Reposicionamento como escola de IA (2026-11-11)
+
+Branch `redesign/escola-ia`, criada a partir da `main` em `d0f58fd`. **Nada foi mergeado nem enviado para a `main`.**
+
+### O que mudou
+
+1. **Site de serviços preservado em `/contrate/`** (`contrate/index.html`, cópia literal de `main:index.html`, commit próprio). Ajustes depois da cópia:
+   - title, meta description, canonical e og tags próprios (`https://arcalabs.com.br/contrate/`). Sem og:image, porque o site de serviços nunca teve uma.
+   - Item **"← Escola de IA"** (→ `../`) no início do menu, em azul, também no menu móvel.
+   - Os 8 links fixos de WhatsApp agora levam a frase "Vim pela página de serviços do site." Os que não tinham mensagem receberam "Olá! Vim pela página de serviços do site."
+   - **Quiz e Worker intocados.** A mensagem do WhatsApp que o quiz monta no JavaScript também ficou como estava, porque a instrução era não alterar o quiz. Se quiser a origem marcada também ali, é uma linha.
+   - Todos os recursos do site antigo são URLs absolutas (Cloudinary, Google Fonts, Font Awesome, Formspree, Worker), então nada quebra na subpasta. O Worker aceita a origem `https://www.arcalabs.com.br`, que é a mesma em `/contrate/`.
+2. **A home virou a página do curso Do Zero ao App.** Base: `C:/Projetos/Treinamento_ClaudeCode/pagina-de-vendas/` (a cópia em `C:\AI_FACTORY\projects\Treinamento_ClaudeCode\` é idêntica, exceto pelas capturas em `_testes/`). Foram copiados `index.html`, `assets/`, `termos-e-garantia.html` e `politica-de-privacidade.html`, primeiro sem alteração (commit próprio) e depois editados. **Não** foram copiados `README.md`, `_testes/` nem `assets/og-image.png` (a imagem fala em "3 dias").
+3. **Conteúdo removido:** 6, 7 e 8 de novembro, "3 dias", "24 h ao vivo", "30 vagas", R$ 697, "Vendas até", sessão de preparação de 4/5 de novembro, grade por dia/horário, bloco de preço e a chamada final "Em 3 dias…". Todos os `{{...}}` saíram da página e do `app.js`.
+4. **Seções novas ou reescritas**, nesta ordem: Hero (selo "Próxima turma: 23/11" → `#turmas`) → Para quem é → **O que você vai aprender** (Apps com Claude Code, Meta Ads com IA, Vídeos com IA) → **Seu primeiro projeto** (agente de WhatsApp + mini CRM, com os tópicos da programação antiga em 3 etapas, sem dias nem horários) → O que está incluso → **Comunidade** → Quem ensina → **Próximas turmas** (card da Turma 1) → **Como garantir sua vaga** (no lugar do bloco de investimento, com a garantia de 7 dias) → Requisitos e custos (com o aviso de bloqueio do número) → FAQ → Chamada final ("primeiro app funcionando") → **Ou a gente constrói pra você** (→ `/contrate/`) → Rodapé (`id="contato"`, dados da empresa e link para `/contrate/`) → banner de cookies.
+5. **Inscrição:** os 5 botões `data-compra` (topo, hero, card da turma, "Como garantir", chamada final) apontam para `https://wa.me/5547992291756?text=Quero%20garantir%20minha%20vaga%20na%20Turma%201%20do%20curso%20Do%20Zero%20ao%20App`. Quando houver o link da Hotmart, basta trocar esse `href` nos 5 botões.
+6. **Menu no topo:** O Curso, O que você vai aprender, Comunidade, Próximas turmas, FAQ, **Contrate a ArcaLabs** (botão de contorno ciano, → `contrate/`), Contato, mais o botão "Quero minha vaga". Abaixo de 1280px vira hambúrguer (fecha ao tocar num item ou com Esc, `aria-expanded` atualizado). Sem JavaScript, os links aparecem em linha. O corte em 1279px foi medido: com 7 itens, o menu completo não cabe abaixo disso.
+7. **`assets/app.js`:**
+   - O consentimento do Pixel ficou igual: nada do Meta carrega antes de "Aceitar".
+   - `PIXEL_ID` agora é `""`, e o Pixel só carrega com um ID numérico. Isso substitui a trava antiga baseada em `{{`.
+   - Os parâmetros UTM continuam sendo repassados aos links `data-compra`, **exceto** quando o link é do WhatsApp, para não sujar a mensagem.
+   - Entrou o código do menu móvel.
+8. **SEO da home:** novos title, description e og tags. Canonical e og:url passam a `https://arcalabs.com.br/`. og:image e twitter:image saíram, e `twitter:card` virou `summary`.
+9. **Sitemap e robots:** não existem no repositório, então não havia o que atualizar. Não criei.
+10. **Páginas legais:** saíram datas, horas, 30 alunos e R$ 697. Entraram 1 ano de acesso, comunidade na Hotmart, Meta Ads com conta e orçamento do aluno, e "não prometemos desempenho de anúncios". Data de atualização: 11/11/2026. O aviso "Rascunho a revisar por advogado" continua.
+
+### Decisões tomadas sem dado explícito (revisar)
+
+- **Mantido da página de vendas, por não ter sido contradito:** Zoom como plataforma das aulas, cartilha (PDF e Notion), kit de agentes, projeto de referência, chave da Anthropic durante o curso (Sonnet, com limite), apoio à verificação do Railway, custos do Railway e a garantia de 7 dias (CDC, art. 49). **Confirme se tudo isso continua valendo no formato novo.**
+- **"E mais"** (pilares): só com o que está nos materiais. Não há material de Meta Ads nem de vídeo em `Treinamento_ClaudeCode` (a pasta `criativos-meta-ads` é a divulgação do curso, não conteúdo), então o card de vídeo ficou com placeholder, e o "e mais" cita só prompts, boas práticas e solução de problemas, que são capítulos da cartilha.
+- **"Inscrições abertas"** no card da Turma 1: decorre de os botões já levarem à inscrição. Não há contador de vagas nem urgência.
+- **Evento do Pixel:** os botões de inscrição continuam disparando `InitiateCheckout`, mesmo indo para o WhatsApp. Quando o checkout for a Hotmart, isso volta a ser exato. Até lá, dá para trocar por `Contact` se preferir.
+- O rodapé da home mantém o aviso de não afiliação (Meta, WhatsApp, Anthropic, Evolution API, Railway).
+
+### Placeholders visíveis `[MARCOS: ...]` (aparecem em amarelo na página)
+
+> Lista original da rodada 4. A situação atual está na **Rodada 5**, abaixo.
+
+| # | O que falta | Onde |
+|---|---|---|
+| 1 | Dias e horários das aulas ao vivo | Home: card da Turma 1 e FAQ "Quando começa". Termos §2 |
+| 2 | Duração e carga horária | Home: card da Turma 1. Termos §2 |
+| 3 | Número de vagas | Home: card da Turma 1 e FAQ "Quantas pessoas participam?". Termos §2 |
+| 4 | Se haverá sessão de preparação antes de 23/11, e quando | Home: requisitos e FAQ "O que preciso instalar?". Termos §2 |
+| 5 | Ferramentas de vídeo usadas e o que o aluno produz | Home: card "Vídeos com IA" |
+| 6 | Se as ferramentas de vídeo têm custo | Home: requisitos e custos |
+| 7 | Até quando vale a chave da Anthropic do curso | Home: requisitos e custos. Termos §8 |
+| 8 | O 1 ano de acesso conta da compra ou do início da turma? | Home: FAQ "Por quanto tempo tenho acesso?". Termos §2 |
+| 9 | Formato e frequência do acompanhamento na comunidade | Home: seção Comunidade e FAQ "Como funciona a comunidade?" |
+| 10 | Se as aulas ficam gravadas na Hotmart e por quanto tempo | Home: FAQ "E se eu perder uma aula?" |
+| 11 | Preço, forma de pagamento e se o checkout é pela Hotmart | Termos §3 (na home o preço não aparece, de propósito) |
+| 12 | Quando o material (cartilha, kit) é liberado | Termos §4 |
+
+Para achar todos: `grep -rn "MARCOS:" index.html termos-e-garantia.html`.
+
+### Pendências fora da página
+
+1. **Imagem de compartilhamento (og:image) nova**, sem "3 dias". Depois é só adicionar `og:image`, `og:image:width/height/alt` e voltar `twitter:card` para `summary_large_image`.
+2. **ID do Pixel do Meta** em `assets/app.js` (`PIXEL_ID`, só números).
+3. **Link da Hotmart**, quando existir: trocar o `href` dos 5 botões `data-compra`.
+4. **Canonical sem www, domínio servido com www.** O pedido foi `https://arcalabs.com.br/`, mas o `CNAME` publica `www.arcalabs.com.br`, então o GitHub Pages redireciona o endereço sem www para o com www, e o canonical aponta para uma URL que redireciona. Recomendo alinhar os dois. Se o domínio principal mudar para sem www, atualize também o `ALLOWED_ORIGIN` do Worker (`worker/src/index.js`), senão o quiz deixa de mandar o WhatsApp automático.
+5. **A política de privacidade não cobre `/contrate/`.** Ela diz que a página do curso não tem formulários, o que é verdade, mas `/contrate/` coleta nome, e-mail e WhatsApp (Formspree, Worker e Evolution API) e não tem link para nenhuma política. Precisa de revisão jurídica.
+6. **Revisão por advogado** dos termos e da política (o aviso de rascunho continua na página).
+7. **Sitemap e robots.txt** não existem. Vale criar com `/` e `/contrate/`.
+8. `assets/logo-arcalabs-claro.png` (170 KB) veio junto com `assets/` e não é usado. Pode ser apagado.
+
+### Verificação feita (Chrome real via playwright-core, servidor local)
+
+- **Sintaxe:** `node --check` em `assets/app.js` e no script inline de `/contrate/`, os dois sem erro.
+- **Home:** sem `{{`; 5 botões de inscrição com o link certo; 9 links de WhatsApp com o número certo; todas as âncoras existem; links internos respondem 200; imagens carregam; sem erros de JS.
+- **Restos do formato antigo:** nenhum "R$ 697", "30 vagas", "24 h", "6, 7 e 8" ou "em 3 dias" no texto da home nem das páginas legais.
+- **Cookies:** o aviso aparece; aceitar não carrega o Meta (sem ID); a escolha é lembrada ao recarregar; recusar não carrega nada. UTMs não alteram o link do WhatsApp.
+- **Menu da home:** cada item rola até a seção certa sem ficar sob o cabeçalho. "Contrate a ArcaLabs" abre `/contrate/`, e "← Escola de IA" volta para `/` (desktop e celular).
+- **Larguras testadas:** 360, 390, 820, 1200, 1279 e 1280 (720 e 800 de altura) e 1366: sem rolagem horizontal e cabeçalho cabendo. O hambúrguer abre, fecha ao tocar num item e a página rola até "Próximas turmas". Sem JavaScript, o menu continua utilizável.
+- **`/contrate/`:**
+  - title, canonical e og:url próprios; as 8 mensagens de WhatsApp com a origem marcada; âncoras do menu existem.
+  - Quiz completo: Formspree e Worker recebem o POST em paralelo, o resultado aparece e o link do WhatsApp é montado. Os envios foram interceptados no teste, então nenhum lead nem mensagem real saiu.
+  - O menu cabe em uma linha de 1280 a 1440px e vira hambúrguer abaixo disso, como na `main`. O logo tem o mesmo tamanho da `main`.
+- **Falso positivo conhecido:** a checagem de imagens de `/contrate/` acusa logos duplicados do carrossel com `loading="lazy"` que ainda não tinham carregado. As 10 imagens únicas respondem 200 por requisição direta, e o código é idêntico ao da `main`.
+
+---
+
+## Rodada 5: formato das aulas e plano do Claude (2026-11-11)
+
+Branch `redesign/escola-ia`. **Nada foi mergeado nem enviado para a `main`.**
+
+### O que mudou
+
+1. **Placeholders removidos:** ferramentas de vídeo (o card "Vídeos com IA" termina em "Crie e edite vídeos com a ajuda de ferramentas de IA.") e acompanhamento na comunidade (o parágrafo da seção Comunidade saiu inteiro, assim como o placeholder do FAQ "Como funciona a comunidade?").
+2. **Formato das aulas** (hero, "O que está incluso", card da Turma 1, FAQ, chamada final, termos §2):
+   - Ao vivo pelo Zoom, de segunda a domingo, às 14h e às 20h (Brasília). O aluno escolhe o horário.
+   - Cada aula dura de 1 a 2 horas. **Sem** total de aulas, de dias ou carga horária.
+   - **10 vagas**, como informação fixa, com o motivo (atenção individual até o app ficar pronto). Sem contador nem urgência.
+   - Aulas gravadas na Hotmart, disponíveis nos 12 meses de acesso. Novo item em "O que está incluso". FAQ "E se eu perder uma aula?" → assiste à gravação na Hotmart.
+   - Hero: novo fato "14h ou 20h, você escolhe". O card da Turma 1 tem agora 8 campos (Início, Formato, Dias e horários, Duração de cada aula, Gravações, Vagas, Acesso, Comunidade).
+   - **Não existe seção "Como funciona"** nesta home. As informações foram para "O que está incluso", o card da Turma 1 e o FAQ.
+3. **Plano do Claude no lugar da chave de API do curso:**
+   - Saiu de "O que está incluso" o item "Chave de API da Anthropic (com limite de uso, só Sonnet)". Saiu de "Custos" a frase sobre a chave deixar de valer e o crédito com teto de gasto.
+   - "Para participar" e "Custos": plano do Claude com acesso ao Claude Code (os planos pagos, como Pro e Max), contratado e pago pelo aluno na Anthropic, **à parte do curso**, sem valor (consulte o preço no site da Anthropic).
+   - FAQ "Preciso pagar alguma coisa além do curso?": agora começa com "Sim" e cita o plano do Claude, o Railway depois do teste gratuito e o Meta Ads.
+   - FAQ "O que preciso instalar?": a assinatura do Claude entra antes do Zoom e das instalações.
+   - Etapa 3: "Depois: custos, chave própria e próximos passos" → "Depois: custos e próximos passos".
+   - **Não existe seção "IA com segurança"** nesta home (nem na página de vendas de origem). A ideia "o aluno usa a própria conta, e o código e os dados ficam com ele" entrou no item "Projeto funcionando" de "E você leva para casa".
+   - Termos §8: a linha da chave do curso saiu. Entrou o plano do Claude pago pelo aluno e "o curso não fornece chave de API da Anthropic".
+4. **Política de privacidade:** não citava a chave de API. Entraram dois itens em §3, "Gravação das aulas" (imagem, voz e chat podem aparecer na gravação) e "Conta do Claude" (contratada direto com a Anthropic), e em §5 a finalidade "gravar as aulas e disponibilizar aos alunos (execução de contrato)". **Precisa de revisão jurídica**, como o resto da política.
+
+### ⚠️ Ponto para decidir: a API do agente de WhatsApp
+
+O projeto do curso é um agente de WhatsApp que **responde com o Claude** (Etapa 2: "Resposta com IA e guard rails"). Isso é uma chamada à **API** da Anthropic, que precisa de uma chave de API e é cobrada por uso no Console. Pelo que eu sei, ela é cobrada **à parte** dos planos Pro e Max, que cobrem o uso do Claude Code mas não dão chave de API para apps próprios. Antes, a chave do curso cobria isso. Agora a página diz que o aluno só paga o plano do Claude e o Railway. Se o agente continuar chamando a API, falta informar esse custo (ou mudar o projeto). Confira as regras atuais da Anthropic e decida o texto.
+
+### Placeholders `[MARCOS: ...]` (situação atual)
+
+| # | O que falta | Onde | Situação |
+|---|---|---|---|
+| 1 | Dias e horários das aulas | — | ✅ Resolvido |
+| 2 | Duração e carga horária | — | ✅ Resolvido (1 a 2 h por aula, sem total) |
+| 3 | Número de vagas | — | ✅ Resolvido (10) |
+| 4 | Sessão de preparação antes de 23/11 (existe? quando?) | Home: "Para participar" e FAQ "O que preciso instalar?". Termos §2 | ⏳ Pendente |
+| 5 | Ferramentas de vídeo e o que o aluno produz | — | ✅ Removido a pedido |
+| 6 | Se as ferramentas de vídeo têm custo | Home: "Custos por sua conta" | ⏳ Pendente (não estava na sua lista; mantido) |
+| 7 | Até quando vale a chave do curso | — | ✅ Removido (não há chave do curso) |
+| 8 | 1 ano de acesso conta da compra ou do início da turma? | Home: FAQ "Por quanto tempo tenho acesso?". Termos §2 | ⏳ Pendente (não estava na sua lista; mantido) |
+| 9 | Acompanhamento na comunidade | — | ✅ Removido a pedido |
+| 10 | Gravações na Hotmart | — | ✅ Resolvido (12 meses) |
+| 11 | Preço, forma de pagamento e se o checkout é pela Hotmart | Termos §3 | ⏳ Pendente |
+| 12 | Quando o material é liberado | Termos §4 | ⏳ Pendente (não estava na sua lista; mantido) |
+| 13 | Se o apoio para a verificação do Railway continua | Home: "O que está incluso" | ⏳ Pendente (placeholder novo, porque o item só fica se você confirmar) |
+
+Também pendente, fora de placeholder: **o link de inscrição final** (hoje os 5 botões `data-compra` vão para o WhatsApp). Os termos §5 e a política §3 já citam a Hotmart como plataforma da compra, então confira esses dois trechos se o pagamento for por outro meio.
+
+### Conferência por busca (index, termos, privacidade, `assets/`, `contrate/`)
+
+- **`[MARCOS`**: 5 na home (preparação ×2, Railway, custo das ferramentas de vídeo, início do 1 ano) e 4 nos termos (preparação, início do 1 ano, preço/pagamento, liberação do material). Nenhum na política.
+- **"30 vagas"** e **"24 h"**: nenhum nas páginas. Só aparecem neste CHANGELOG, como histórico.
+- **"R$"**: nenhum.
+- **"chave"**: termos §8, "o curso não fornece chave de API da Anthropic" (intencional). Também `CHAVE` em `assets/app.js` (nome da variável do consentimento de cookies) e a API key da Evolution API em `contrate/` e `worker/`, que não têm relação com o curso.
+- **"Anthropic"**: home ("Para participar", "Custos", FAQ de instalação e de custos, aviso de não afiliação no rodapé), termos §8 (×2) e política §3. Todos coerentes com o plano pago pelo aluno.
+- **"3 dias"**, **"sexta"** e **"sábado"**: só o comentário sobre a og:image no `<head>` e a conversa de exemplo do celular no hero ("Vocês atendem aos sábados?"), que é a demonstração do atendente, não a agenda do curso.
+- O hero continua com "você aprende **em poucos dias**", sem número. Combina com "aprendizado rápido", mas troque se preferir evitar qualquer menção a dias.
+
+### Verificação feita (Chrome real via playwright-core, servidor local)
+
+- Home, termos e política em 360, 390, 820, 1280 e 1440px: sem rolagem horizontal e sem erros de JavaScript.
+- Nenhum dos textos "30 vagas", "24 h", "limite de uso", "teto de gasto", "sexta" ou "3 dias" no texto renderizado das três páginas.
+- Capturas conferidas: fatos do hero (5 itens quebram bem em 360 e 1440), card da Turma 1 (8 campos em 2 colunas no desktop e 1 no celular), "Para participar" e "Custos" no celular.
+
+---
+
+## Rodada 6: acesso, liberação e sessão de preparação (2026-11-11)
+
+Branch `redesign/escola-ia`. **Nada foi mergeado nem enviado para a `main`.**
+
+### O que mudou
+
+1. **Acesso:** "1 ano de acesso, a contar da data do pagamento" no hero (fato "1 ano"), em "O que está incluso", na seção Comunidade, no card da Turma 1, no FAQ "Por quanto tempo tenho acesso?", na chamada final e nos termos §2. O placeholder "da compra ou do início da turma" saiu da home e dos termos.
+2. **Liberação:** "acesso liberado logo após a compra" em "O que está incluso", no card da Turma 1 (novo campo "Liberação"), no FAQ "Por quanto tempo tenho acesso?" (cita gravações, cartilha e kit de agentes) e nos termos §4 (gravações, cartilha em PDF e Notion, kit e projeto de referência, na Hotmart, assim que a compra é confirmada). O placeholder "quando o material é liberado" saiu.
+3. **Sessão de preparação** (online, antes do início da turma, para criar as contas e preparar o computador, incluída no curso):
+   - Volta ao card da Turma 1 (novo campo), a "O que está incluso", ao FAQ "O que preciso instalar?", a "Para participar" e aos termos §2.
+   - A data e o horário ficam no placeholder `[MARCOS: inserir data e horário da sessão de preparação:  2 dias antes do inicio]` no card, em "Para participar", no FAQ e nos termos. Em "O que está incluso" o item não tem data, porque ali só se lista o que o curso inclui.
+   - O card da Turma 1 tem agora 10 campos: Início, Formato, Dias e horários, Duração de cada aula, Gravações, Vagas, Sessão de preparação, Acesso ao curso, Liberação e Comunidade.
+4. **Não mexi** no apoio para a verificação do Railway, no custo das ferramentas de vídeo, nem no texto sobre a chave de API. A política de privacidade não cita o prazo de acesso nem a liberação, então ficou igual.
+
+### Placeholders `[MARCOS: ...]` (situação atual)
+
+Resultado de `grep -rn "MARCOS" index.html termos-e-garantia.html politica-de-privacidade.html`: **7 ocorrências**, 4 assuntos.
+
+| O que falta | Onde | Ocorrências |
+|---|---|---|
+| Data e horário da sessão de preparação (2 dias antes do início, ou seja, antes de 23/11/2026) | Home: card da Turma 1, "Para participar", FAQ "O que preciso instalar?". Termos §2 | 4 |
+| Se o apoio para a verificação do Railway continua | Home: "O que está incluso" | 1 |
+| Se as ferramentas de vídeo têm custo | Home: "Custos por sua conta" | 1 |
+| Preço, forma de pagamento e se o checkout é pela Hotmart | Termos §3 | 1 |
+
+Resolvidos nesta rodada: o início do 1 ano de acesso (data do pagamento) e a liberação do material (logo após a compra).
+
+### Pendências fora de placeholder
+
+1. **API do agente de WhatsApp** (ver rodada 5): a página diz que o aluno paga só o plano do Claude e o Railway, mas o agente chama a API da Anthropic, cobrada à parte. Texto mantido como está, a pedido.
+2. **Link de inscrição final** (hoje os 5 botões `data-compra` levam ao WhatsApp).
+3. As pendências fora da página listadas na rodada 4 (og:image, ID do Pixel, canonical com ou sem www, política para `/contrate/`, revisão por advogado, sitemap e robots, logo não usado).
+
+### Verificação feita (Chrome real via playwright-core, servidor local)
+
+- Home, termos e política em 360, 390, 820, 1280 e 1440px: sem rolagem horizontal e sem erros de JavaScript.
+- Capturas conferidas: fatos do hero (o item de acesso quebra bem em 360 e 1440), card da Turma 1 com 10 campos em 2 colunas no desktop e "O que está incluso" no celular.
+
+---
+
+## Rodada 7: preparação com data, hospedagem sem nome, pagamento e próxima turma (2026-11-11)
+
+Branch `redesign/escola-ia`. **Nada foi mergeado nem enviado para a `main`.**
+
+### O que mudou
+
+1. **Sessão de preparação:** os 4 placeholders (card da Turma 1, "Para participar", FAQ "O que preciso instalar?" e termos §2) viraram "sexta e sábado, 20 e 21/11/2026, em horário a agendar (horário de Brasília)", online e incluída no curso. Conferido: 23/11/2026 é segunda-feira, então 20/11 é sexta e 21/11 é sábado.
+   - ⚠️ **20/11 é feriado nacional** (Dia da Consciência Negra, desde a Lei 14.759/2023). Pode ajudar ou atrapalhar a presença; vale considerar ao agendar o horário.
+2. **Railway → "hospedagem na nuvem":**
+   - Saiu de "O que está incluso" o item "Apoio para a verificação do Railway" (com o placeholder).
+   - Etapa 1: "Evolution API em hospedagem na nuvem, na sua conta". Etapa 3: "Publicação do app em hospedagem na nuvem".
+   - "Custos por sua conta" e FAQ de custos: "A hospedagem do seu agente na nuvem pode ter custo mensal depois do período de teste do provedor." Saíram o nome, os 30 dias de teste e o valor (US$ 5, plano Hobby).
+   - Termos §8: "Serviços de terceiros (Anthropic, hospedagem na nuvem, GitHub, Zoom e outros)" e "a hospedagem na nuvem depois do período de teste do provedor".
+   - **Rodapé da home:** Railway saiu da lista de não afiliação ("Meta, WhatsApp, Anthropic ou Evolution API"). Não troquei por "hospedagem na nuvem" porque não faz sentido declarar não afiliação a uma categoria genérica.
+   - **Política de privacidade:** o Railway **não consta** como operador nem como provedor de dados. Ela cita Hotmart, Meta, Zoom e o "provedor de hospedagem desta página" (o GitHub Pages, que hospeda o site, não o projeto do aluno). Nada a alterar.
+3. **Vídeo:** o placeholder de custo virou "Não é preciso pagar por ferramenta de edição de vídeo." em "Custos por sua conta". A mesma frase entrou no fim do FAQ "Preciso pagar alguma coisa além do curso?".
+4. **Pagamento (termos §3):** "Valores e condições são informados no atendimento pelo WhatsApp. O pagamento é feito no checkout da Hotmart." Os botões continuam no WhatsApp. Sem preço, parcelamento ou link de checkout.
+5. **API:** saiu dos termos §8 a frase "O curso não fornece chave de API da Anthropic." Não entrou texto novo sobre API ou chave. Nenhum texto de custos usa "apenas", "somente" ou "só" para listar o que o aluno paga (os "só" que restam na home são "É só chamar", "Só é preciso saber usar o computador", "não só de aulas" e o aviso de cookies).
+6. **Próxima turma:** novo FAQ "E se eu comprar depois do início da Turma 1?". O mesmo texto aparece em um parágrafo no card da Turma 1, antes do botão, e nos termos §2. Sem data da próxima turma.
+
+### Pendências abertas
+
+1. **API do agente de WhatsApp (decisão aberta).** O agente responde com o Claude pela API da Anthropic, que exige chave e é cobrada por uso, à parte dos planos Pro e Max. A página não diz quem fornece a chave nem quem paga esse uso. Os textos de custos foram escritos sem "apenas", "somente" ou "só", para não afirmar que a lista está completa. Falta decidir: (a) o curso fornece a chave, (b) o aluno cria e paga a própria, ou (c) o projeto muda.
+2. **Horário da sessão de preparação** (20 e 21/11): está como "a agendar" na página.
+3. **Link do checkout da Hotmart:** os termos já dizem que o pagamento é pela Hotmart, mas os 5 botões `data-compra` ainda levam ao WhatsApp, como pedido.
+4. **Data da próxima turma:** a página manda consultar pelo WhatsApp.
+5. As pendências fora da página da rodada 4 (og:image, ID do Pixel, canonical com ou sem www, política para `/contrate/`, revisão por advogado, sitemap e robots, logo não usado).
+
+### Conferência por busca (repositório inteiro)
+
+- **`[MARCOS`**: **nenhum** em páginas, scripts ou `worker/`. Só aparece neste CHANGELOG, como histórico.
+- **Railway**: **nenhum** em `index.html`, termos, política, `assets/`, `contrate/` e `worker/`. Só aparece neste CHANGELOG, como histórico (inclui a Evolution API da ArcaLabs hospedada no Railway, rodada 3).
+- **"chave"**:
+  - Páginas do curso (home, termos, política): **nenhum**.
+  - `assets/app.js`: `CHAVE`, o nome da variável que guarda a escolha de cookies no `localStorage`. Não tem relação com API.
+  - `worker/README.md` (linhas 7 e 33): a chave da Evolution API do formulário de `/contrate/`, guardada como segredo do Worker. Não tem relação com o curso.
+  - Este CHANGELOG, como histórico.
+
+### Verificação feita (Chrome real via playwright-core, servidor local)
+
+- Home, termos e política em 360, 390, 820, 1280 e 1440px: sem rolagem horizontal, sem erros de JavaScript e sem nenhum placeholder visível.
+- Capturas conferidas: card da Turma 1 no celular (sessão com data e parágrafo da próxima turma antes do botão) e "Para participar" e "Custos" no desktop.
