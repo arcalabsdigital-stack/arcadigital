@@ -474,3 +474,48 @@ Resolvidos nesta rodada: o início do 1 ano de acesso (data do pagamento) e a li
 
 - Home, termos e política em 360, 390, 820, 1280 e 1440px: sem rolagem horizontal e sem erros de JavaScript.
 - Capturas conferidas: fatos do hero (o item de acesso quebra bem em 360 e 1440), card da Turma 1 com 10 campos em 2 colunas no desktop e "O que está incluso" no celular.
+
+---
+
+## Rodada 7: preparação com data, hospedagem sem nome, pagamento e próxima turma (2026-11-11)
+
+Branch `redesign/escola-ia`. **Nada foi mergeado nem enviado para a `main`.**
+
+### O que mudou
+
+1. **Sessão de preparação:** os 4 placeholders (card da Turma 1, "Para participar", FAQ "O que preciso instalar?" e termos §2) viraram "sexta e sábado, 20 e 21/11/2026, em horário a agendar (horário de Brasília)", online e incluída no curso. Conferido: 23/11/2026 é segunda-feira, então 20/11 é sexta e 21/11 é sábado.
+   - ⚠️ **20/11 é feriado nacional** (Dia da Consciência Negra, desde a Lei 14.759/2023). Pode ajudar ou atrapalhar a presença; vale considerar ao agendar o horário.
+2. **Railway → "hospedagem na nuvem":**
+   - Saiu de "O que está incluso" o item "Apoio para a verificação do Railway" (com o placeholder).
+   - Etapa 1: "Evolution API em hospedagem na nuvem, na sua conta". Etapa 3: "Publicação do app em hospedagem na nuvem".
+   - "Custos por sua conta" e FAQ de custos: "A hospedagem do seu agente na nuvem pode ter custo mensal depois do período de teste do provedor." Saíram o nome, os 30 dias de teste e o valor (US$ 5, plano Hobby).
+   - Termos §8: "Serviços de terceiros (Anthropic, hospedagem na nuvem, GitHub, Zoom e outros)" e "a hospedagem na nuvem depois do período de teste do provedor".
+   - **Rodapé da home:** Railway saiu da lista de não afiliação ("Meta, WhatsApp, Anthropic ou Evolution API"). Não troquei por "hospedagem na nuvem" porque não faz sentido declarar não afiliação a uma categoria genérica.
+   - **Política de privacidade:** o Railway **não consta** como operador nem como provedor de dados. Ela cita Hotmart, Meta, Zoom e o "provedor de hospedagem desta página" (o GitHub Pages, que hospeda o site, não o projeto do aluno). Nada a alterar.
+3. **Vídeo:** o placeholder de custo virou "Não é preciso pagar por ferramenta de edição de vídeo." em "Custos por sua conta". A mesma frase entrou no fim do FAQ "Preciso pagar alguma coisa além do curso?".
+4. **Pagamento (termos §3):** "Valores e condições são informados no atendimento pelo WhatsApp. O pagamento é feito no checkout da Hotmart." Os botões continuam no WhatsApp. Sem preço, parcelamento ou link de checkout.
+5. **API:** saiu dos termos §8 a frase "O curso não fornece chave de API da Anthropic." Não entrou texto novo sobre API ou chave. Nenhum texto de custos usa "apenas", "somente" ou "só" para listar o que o aluno paga (os "só" que restam na home são "É só chamar", "Só é preciso saber usar o computador", "não só de aulas" e o aviso de cookies).
+6. **Próxima turma:** novo FAQ "E se eu comprar depois do início da Turma 1?". O mesmo texto aparece em um parágrafo no card da Turma 1, antes do botão, e nos termos §2. Sem data da próxima turma.
+
+### Pendências abertas
+
+1. **API do agente de WhatsApp (decisão aberta).** O agente responde com o Claude pela API da Anthropic, que exige chave e é cobrada por uso, à parte dos planos Pro e Max. A página não diz quem fornece a chave nem quem paga esse uso. Os textos de custos foram escritos sem "apenas", "somente" ou "só", para não afirmar que a lista está completa. Falta decidir: (a) o curso fornece a chave, (b) o aluno cria e paga a própria, ou (c) o projeto muda.
+2. **Horário da sessão de preparação** (20 e 21/11): está como "a agendar" na página.
+3. **Link do checkout da Hotmart:** os termos já dizem que o pagamento é pela Hotmart, mas os 5 botões `data-compra` ainda levam ao WhatsApp, como pedido.
+4. **Data da próxima turma:** a página manda consultar pelo WhatsApp.
+5. As pendências fora da página da rodada 4 (og:image, ID do Pixel, canonical com ou sem www, política para `/contrate/`, revisão por advogado, sitemap e robots, logo não usado).
+
+### Conferência por busca (repositório inteiro)
+
+- **`[MARCOS`**: **nenhum** em páginas, scripts ou `worker/`. Só aparece neste CHANGELOG, como histórico.
+- **Railway**: **nenhum** em `index.html`, termos, política, `assets/`, `contrate/` e `worker/`. Só aparece neste CHANGELOG, como histórico (inclui a Evolution API da ArcaLabs hospedada no Railway, rodada 3).
+- **"chave"**:
+  - Páginas do curso (home, termos, política): **nenhum**.
+  - `assets/app.js`: `CHAVE`, o nome da variável que guarda a escolha de cookies no `localStorage`. Não tem relação com API.
+  - `worker/README.md` (linhas 7 e 33): a chave da Evolution API do formulário de `/contrate/`, guardada como segredo do Worker. Não tem relação com o curso.
+  - Este CHANGELOG, como histórico.
+
+### Verificação feita (Chrome real via playwright-core, servidor local)
+
+- Home, termos e política em 360, 390, 820, 1280 e 1440px: sem rolagem horizontal, sem erros de JavaScript e sem nenhum placeholder visível.
+- Capturas conferidas: card da Turma 1 no celular (sessão com data e parágrafo da próxima turma antes do botão) e "Para participar" e "Custos" no desktop.
