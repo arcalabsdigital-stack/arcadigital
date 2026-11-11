@@ -285,3 +285,84 @@ nunca gravado em arquivo do repositório.
 5. ~~Fornecer credenciais da Evolution API~~ — feito. Worker deployado, segredos configurados, bug de Redis na Evolution API (Railway) diagnosticado e corrigido pelo Marcos, teste de ponta a ponta confirmado com sucesso (ver Rodada 3 acima).
 6. **Novo commit local pendente de push:** a branch `redesign/2026-09` recebeu commits novos nesta rodada (Worker + novo passo do quiz + URL real do endpoint) que ainda não foram enviados ao GitHub — repetir `git push origin redesign/2026-09`.
 7. Nenhum merge feito na `main`, nenhum deploy do site em produção — aguardando autorização explícita, conforme instrução. **O Worker do Cloudflare já está ativo em produção** (é um serviço separado do site, e o deploy dele já foi confirmado e autorizado por mensagem antes de rodar `wrangler deploy`).
+
+
+---
+
+## Rodada 4 — Reposicionamento como escola de IA (2026-11-11)
+
+Branch `redesign/escola-ia`, criada a partir da `main` em `d0f58fd`. **Nada foi mergeado nem enviado para a `main`.**
+
+### O que mudou
+
+1. **Site de serviços preservado em `/contrate/`** (`contrate/index.html`, cópia literal de `main:index.html`, commit próprio). Ajustes depois da cópia:
+   - title, meta description, canonical e og tags próprios (`https://arcalabs.com.br/contrate/`). Sem og:image, porque o site de serviços nunca teve uma.
+   - Item **"← Escola de IA"** (→ `../`) no início do menu, em azul, também no menu móvel.
+   - Os 8 links fixos de WhatsApp agora levam a frase "Vim pela página de serviços do site." Os que não tinham mensagem receberam "Olá! Vim pela página de serviços do site."
+   - **Quiz e Worker intocados.** A mensagem do WhatsApp que o quiz monta no JavaScript também ficou como estava, porque a instrução era não alterar o quiz. Se quiser a origem marcada também ali, é uma linha.
+   - Todos os recursos do site antigo são URLs absolutas (Cloudinary, Google Fonts, Font Awesome, Formspree, Worker), então nada quebra na subpasta. O Worker aceita a origem `https://www.arcalabs.com.br`, que é a mesma em `/contrate/`.
+2. **A home virou a página do curso Do Zero ao App.** Base: `C:/Projetos/Treinamento_ClaudeCode/pagina-de-vendas/` (a cópia em `C:\AI_FACTORY\projects\Treinamento_ClaudeCode\` é idêntica, exceto pelas capturas em `_testes/`). Foram copiados `index.html`, `assets/`, `termos-e-garantia.html` e `politica-de-privacidade.html`, primeiro sem alteração (commit próprio) e depois editados. **Não** foram copiados `README.md`, `_testes/` nem `assets/og-image.png` (a imagem fala em "3 dias").
+3. **Conteúdo removido:** 6, 7 e 8 de novembro, "3 dias", "24 h ao vivo", "30 vagas", R$ 697, "Vendas até", sessão de preparação de 4/5 de novembro, grade por dia/horário, bloco de preço e a chamada final "Em 3 dias…". Todos os `{{...}}` saíram da página e do `app.js`.
+4. **Seções novas ou reescritas**, nesta ordem: Hero (selo "Próxima turma: 23/11" → `#turmas`) → Para quem é → **O que você vai aprender** (Apps com Claude Code, Meta Ads com IA, Vídeos com IA) → **Seu primeiro projeto** (agente de WhatsApp + mini CRM, com os tópicos da programação antiga em 3 etapas, sem dias nem horários) → O que está incluso → **Comunidade** → Quem ensina → **Próximas turmas** (card da Turma 1) → **Como garantir sua vaga** (no lugar do bloco de investimento, com a garantia de 7 dias) → Requisitos e custos (com o aviso de bloqueio do número) → FAQ → Chamada final ("primeiro app funcionando") → **Ou a gente constrói pra você** (→ `/contrate/`) → Rodapé (`id="contato"`, dados da empresa e link para `/contrate/`) → banner de cookies.
+5. **Inscrição:** os 5 botões `data-compra` (topo, hero, card da turma, "Como garantir", chamada final) apontam para `https://wa.me/5547992291756?text=Quero%20garantir%20minha%20vaga%20na%20Turma%201%20do%20curso%20Do%20Zero%20ao%20App`. Quando houver o link da Hotmart, basta trocar esse `href` nos 5 botões.
+6. **Menu no topo:** O Curso, O que você vai aprender, Comunidade, Próximas turmas, FAQ, **Contrate a ArcaLabs** (botão de contorno ciano, → `contrate/`), Contato, mais o botão "Quero minha vaga". Abaixo de 1280px vira hambúrguer (fecha ao tocar num item ou com Esc, `aria-expanded` atualizado). Sem JavaScript, os links aparecem em linha. O corte em 1279px foi medido: com 7 itens, o menu completo não cabe abaixo disso.
+7. **`assets/app.js`:**
+   - O consentimento do Pixel ficou igual: nada do Meta carrega antes de "Aceitar".
+   - `PIXEL_ID` agora é `""`, e o Pixel só carrega com um ID numérico. Isso substitui a trava antiga baseada em `{{`.
+   - Os parâmetros UTM continuam sendo repassados aos links `data-compra`, **exceto** quando o link é do WhatsApp, para não sujar a mensagem.
+   - Entrou o código do menu móvel.
+8. **SEO da home:** novos title, description e og tags. Canonical e og:url passam a `https://arcalabs.com.br/`. og:image e twitter:image saíram, e `twitter:card` virou `summary`.
+9. **Sitemap e robots:** não existem no repositório, então não havia o que atualizar. Não criei.
+10. **Páginas legais:** saíram datas, horas, 30 alunos e R$ 697. Entraram 1 ano de acesso, comunidade na Hotmart, Meta Ads com conta e orçamento do aluno, e "não prometemos desempenho de anúncios". Data de atualização: 11/11/2026. O aviso "Rascunho a revisar por advogado" continua.
+
+### Decisões tomadas sem dado explícito (revisar)
+
+- **Mantido da página de vendas, por não ter sido contradito:** Zoom como plataforma das aulas, cartilha (PDF e Notion), kit de agentes, projeto de referência, chave da Anthropic durante o curso (Sonnet, com limite), apoio à verificação do Railway, custos do Railway e a garantia de 7 dias (CDC, art. 49). **Confirme se tudo isso continua valendo no formato novo.**
+- **"E mais"** (pilares): só com o que está nos materiais. Não há material de Meta Ads nem de vídeo em `Treinamento_ClaudeCode` (a pasta `criativos-meta-ads` é a divulgação do curso, não conteúdo), então o card de vídeo ficou com placeholder, e o "e mais" cita só prompts, boas práticas e solução de problemas, que são capítulos da cartilha.
+- **"Inscrições abertas"** no card da Turma 1: decorre de os botões já levarem à inscrição. Não há contador de vagas nem urgência.
+- **Evento do Pixel:** os botões de inscrição continuam disparando `InitiateCheckout`, mesmo indo para o WhatsApp. Quando o checkout for a Hotmart, isso volta a ser exato. Até lá, dá para trocar por `Contact` se preferir.
+- O rodapé da home mantém o aviso de não afiliação (Meta, WhatsApp, Anthropic, Evolution API, Railway).
+
+### Placeholders visíveis `[MARCOS: ...]` (aparecem em amarelo na página)
+
+| # | O que falta | Onde |
+|---|---|---|
+| 1 | Dias e horários das aulas ao vivo | Home: card da Turma 1 e FAQ "Quando começa". Termos §2 |
+| 2 | Duração e carga horária | Home: card da Turma 1. Termos §2 |
+| 3 | Número de vagas | Home: card da Turma 1 e FAQ "Quantas pessoas participam?". Termos §2 |
+| 4 | Se haverá sessão de preparação antes de 23/11, e quando | Home: requisitos e FAQ "O que preciso instalar?". Termos §2 |
+| 5 | Ferramentas de vídeo usadas e o que o aluno produz | Home: card "Vídeos com IA" |
+| 6 | Se as ferramentas de vídeo têm custo | Home: requisitos e custos |
+| 7 | Até quando vale a chave da Anthropic do curso | Home: requisitos e custos. Termos §8 |
+| 8 | O 1 ano de acesso conta da compra ou do início da turma? | Home: FAQ "Por quanto tempo tenho acesso?". Termos §2 |
+| 9 | Formato e frequência do acompanhamento na comunidade | Home: seção Comunidade e FAQ "Como funciona a comunidade?" |
+| 10 | Se as aulas ficam gravadas na Hotmart e por quanto tempo | Home: FAQ "E se eu perder uma aula?" |
+| 11 | Preço, forma de pagamento e se o checkout é pela Hotmart | Termos §3 (na home o preço não aparece, de propósito) |
+| 12 | Quando o material (cartilha, kit) é liberado | Termos §4 |
+
+Para achar todos: `grep -rn "MARCOS:" index.html termos-e-garantia.html`.
+
+### Pendências fora da página
+
+1. **Imagem de compartilhamento (og:image) nova**, sem "3 dias". Depois é só adicionar `og:image`, `og:image:width/height/alt` e voltar `twitter:card` para `summary_large_image`.
+2. **ID do Pixel do Meta** em `assets/app.js` (`PIXEL_ID`, só números).
+3. **Link da Hotmart**, quando existir: trocar o `href` dos 5 botões `data-compra`.
+4. **Canonical sem www, domínio servido com www.** O pedido foi `https://arcalabs.com.br/`, mas o `CNAME` publica `www.arcalabs.com.br`, então o GitHub Pages redireciona o endereço sem www para o com www, e o canonical aponta para uma URL que redireciona. Recomendo alinhar os dois. Se o domínio principal mudar para sem www, atualize também o `ALLOWED_ORIGIN` do Worker (`worker/src/index.js`), senão o quiz deixa de mandar o WhatsApp automático.
+5. **A política de privacidade não cobre `/contrate/`.** Ela diz que a página do curso não tem formulários, o que é verdade, mas `/contrate/` coleta nome, e-mail e WhatsApp (Formspree, Worker e Evolution API) e não tem link para nenhuma política. Precisa de revisão jurídica.
+6. **Revisão por advogado** dos termos e da política (o aviso de rascunho continua na página).
+7. **Sitemap e robots.txt** não existem. Vale criar com `/` e `/contrate/`.
+8. `assets/logo-arcalabs-claro.png` (170 KB) veio junto com `assets/` e não é usado. Pode ser apagado.
+
+### Verificação feita (Chrome real via playwright-core, servidor local)
+
+- **Sintaxe:** `node --check` em `assets/app.js` e no script inline de `/contrate/`, os dois sem erro.
+- **Home:** sem `{{`; 5 botões de inscrição com o link certo; 9 links de WhatsApp com o número certo; todas as âncoras existem; links internos respondem 200; imagens carregam; sem erros de JS.
+- **Restos do formato antigo:** nenhum "R$ 697", "30 vagas", "24 h", "6, 7 e 8" ou "em 3 dias" no texto da home nem das páginas legais.
+- **Cookies:** o aviso aparece; aceitar não carrega o Meta (sem ID); a escolha é lembrada ao recarregar; recusar não carrega nada. UTMs não alteram o link do WhatsApp.
+- **Menu da home:** cada item rola até a seção certa sem ficar sob o cabeçalho. "Contrate a ArcaLabs" abre `/contrate/`, e "← Escola de IA" volta para `/` (desktop e celular).
+- **Larguras testadas:** 360, 390, 820, 1200, 1279 e 1280 (720 e 800 de altura) e 1366: sem rolagem horizontal e cabeçalho cabendo. O hambúrguer abre, fecha ao tocar num item e a página rola até "Próximas turmas". Sem JavaScript, o menu continua utilizável.
+- **`/contrate/`:**
+  - title, canonical e og:url próprios; as 8 mensagens de WhatsApp com a origem marcada; âncoras do menu existem.
+  - Quiz completo: Formspree e Worker recebem o POST em paralelo, o resultado aparece e o link do WhatsApp é montado. Os envios foram interceptados no teste, então nenhum lead nem mensagem real saiu.
+  - O menu cabe em uma linha de 1280 a 1440px e vira hambúrguer abaixo disso, como na `main`. O logo tem o mesmo tamanho da `main`.
+- **Falso positivo conhecido:** a checagem de imagens de `/contrate/` acusa logos duplicados do carrossel com `loading="lazy"` que ainda não tinham carregado. As 10 imagens únicas respondem 200 por requisição direta, e o código é idêntico ao da `main`.
