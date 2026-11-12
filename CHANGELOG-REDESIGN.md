@@ -519,3 +519,54 @@ Branch `redesign/escola-ia`. **Nada foi mergeado nem enviado para a `main`.**
 
 - Home, termos e política em 360, 390, 820, 1280 e 1440px: sem rolagem horizontal, sem erros de JavaScript e sem nenhum placeholder visível.
 - Capturas conferidas: card da Turma 1 no celular (sessão com data e parágrafo da próxima turma antes do botão) e "Para participar" e "Custos" no desktop.
+
+
+---
+
+## Ajuste: "curso" → "mentoria" (2026-11-12)
+
+Branch `ajuste/mentoria`, criada da `main` em `40fdaea` (que já inclui `ajuste/remocoes`). **Nada foi mergeado nem enviado para a `main`.** O texto anterior deste CHANGELOG não foi alterado; esta seção só acrescenta.
+
+### O que mudou
+
+- 51 linhas em `index.html` (32), `termos-e-garantia.html` (12) e `politica-de-privacidade.html` (7). `contrate/index.html` e `assets/app.js` não tinham "curso" como palavra.
+- Só a palavra inteira, com concordância: o/do/no/ao/este → a/da/na/à/esta. Menu "O Curso" → "A Mentoria". Title, description, og:title e og:description da home, alt da foto do Marcos, aria-labels e "Voltar ao curso" → "Voltar à mentoria" nas páginas legais.
+- Mensagens dos links wa.me: "…na Turma 1 da mentoria Do Zero ao App" (7 links) e "Olá! Tenho uma dúvida sobre a mentoria Do Zero ao App." (1 link), com a URL codificada (`da%20mentoria`, `a%20mentoria`).
+- Ajustes de concordância além do artigo: rodapé "Esta mentoria não é afiliada, patrocinada ou endossada…" e termos §1 "A mentoria Do Zero ao App é oferecida pela marca…".
+- **Mantidos:** `id="curso"` do hero e os dois `href="#curso"` (logo e item de menu), para não quebrar links. "cursor" no CSS de `/contrate/`. O nome "Do Zero ao App". O `worker/` não tinha a palavra.
+
+### Trechos jurídicos alterados (revisar)
+
+**Termos e garantia** (`termos-e-garantia.html`)
+
+| Onde | Antes | Depois |
+|---|---|---|
+| meta description | "…garantia de 7 dias do curso Do Zero ao App…" | "…da mentoria Do Zero ao App…" |
+| §1 Vendedor | "O curso Do Zero ao App é oferecido pela marca ArcaLabs…" | "A mentoria Do Zero ao App é oferecida pela marca ArcaLabs…" |
+| §2 título | "O que é o curso" | "O que é a mentoria" |
+| §2 | "Curso online, com aulas ao vivo pelo Zoom." | "Mentoria online, com aulas ao vivo pelo Zoom." |
+| §2 | "sessão de preparação online, incluída no curso" | "incluída na mentoria" |
+| §7 título | "Natureza do curso e resultados" | "Natureza da mentoria e resultados" |
+| §7 | "O curso ensina a construir projetos…" | "A mentoria ensina a construir projetos…" |
+| §8 | "A conexão do WhatsApp usada no curso é não oficial…" | "usada na mentoria" |
+| §8 | "…pago por ele diretamente na Anthropic, à parte do curso." | "à parte da mentoria" |
+| §8 | "As campanhas de Meta Ads criadas no curso…" | "criadas na mentoria" |
+| §9 | "O conteúdo do curso pertence à ArcaLabs." | "O conteúdo da mentoria pertence à ArcaLabs." |
+
+**Política de privacidade** (`politica-de-privacidade.html`)
+
+| Onde | Antes | Depois |
+|---|---|---|
+| meta description | "…na página do curso Do Zero ao App…" | "na página da mentoria" |
+| §2 | "A página do curso não tem formulários…" | "A página da mentoria não tem formulários…" |
+| §3 Dados da compra | "…liberar o acesso ao curso e prestar suporte." | "liberar o acesso à mentoria" |
+| §3 Conta do Claude | "o plano do Claude que você usa no curso…" | "que você usa na mentoria" |
+| §6 Compartilhamento | "Hotmart (pagamento, entrega do curso e comunidade de alunos)" | "entrega da mentoria" |
+
+Ponto para o advogado: "mentoria" pode sugerir acompanhamento individual. O texto descreve aulas em grupo ao vivo (turma de 10), gravações e comunidade; vale conferir se a natureza do serviço nos termos (§2 e §7) continua precisa com o novo nome.
+
+### Conferência
+
+- Busca por "curso" como palavra inteira (maiúsculas ou minúsculas) no repositório: sobram **3 em `index.html`** (`href="#curso"` ×2 e `id="curso"`, mantidos de propósito) e **28 neste CHANGELOG** (histórico). Nenhuma em `contrate/`, `assets/`, `worker/`, termos ou política.
+- Chrome real (playwright-core), 360 a 1920px: sem rolagem horizontal e sem erros de JavaScript. O menu completo cabe em uma linha a partir de 1280px. A 1280px o espaço entre o logo e "A Mentoria" caiu de 24px para 16px (igual ao espaço entre os itens), sem sobreposição. Abaixo disso entra o hambúrguer, como antes.
+- Os 8 links do WhatsApp com mensagem decodificam certo, e o clique em "Tirar dúvidas no WhatsApp" gerou a URL com "…sobre a mentoria Do Zero ao App." (requisição interceptada, nada foi enviado).
